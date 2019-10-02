@@ -64,7 +64,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         gameImg = findViewById(R.id.galgeImage);
         guessedLetter = findViewById(R.id.guessedLetter);
         letter = guessedLetter.getText();
-
     }
 
     @Override
@@ -93,19 +92,16 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 gameImg.setImageResource(resID);
             }
             if(logik.erSpilletTabt()) {
-                timer.stop();
-                restartButton.setVisibility(View.VISIBLE);
-                homeButton.setVisibility(View.VISIBLE);
+                gameEnded();
                 guessedWord.setText(showWordAfterLoss(guessedWord.toString(), logik.getOrdet()));
             }
             if(logik.erSpilletVundet()) {
-                timer.stop();
-                restartButton.setVisibility(View.VISIBLE);
-                homeButton.setVisibility(View.VISIBLE);
+                gameEnded();
             }
 
         } else if(view == homeButton) {
             Intent i = new Intent(this, MainActivity.class);
+            i.putExtra("time", timePassed);
             startActivity(i);
         } else if(view == restartButton) {
             Intent i = new Intent(this, Game.class);
@@ -122,6 +118,14 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
             }
         }
         return ss.toString();
+    }
+
+    public void gameEnded() {
+        timer.stop();
+        timePassed = SystemClock.elapsedRealtime() - timer.getBase();
+        System.out.println(timePassed);
+        restartButton.setVisibility(View.VISIBLE);
+        homeButton.setVisibility(View.VISIBLE);
     }
 
 }

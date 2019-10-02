@@ -6,10 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button startGame;
+    long timeMillisec;
+    TextView showTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +22,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startGame = findViewById(R.id.startGame);
 
         startGame.setOnClickListener(this);
+
+        showTime = findViewById(R.id.test);
+        timeMillisec = getIntent().getLongExtra("time", 0);
+
+
     }
 
     @Override
