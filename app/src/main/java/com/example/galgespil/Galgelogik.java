@@ -1,4 +1,4 @@
-package galgeleg;
+package com.example.galgespil;
 
 import java.io.BufferedReader;
 import java.io.IOException;

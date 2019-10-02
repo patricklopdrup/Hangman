@@ -1,4 +1,4 @@
-package galgeleg;
+package com.example.galgespil;
 
 public class BenytGalgelogik {
 
