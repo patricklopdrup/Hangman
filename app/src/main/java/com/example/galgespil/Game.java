@@ -2,6 +2,7 @@ package com.example.galgespil;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -26,7 +27,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     ImageView gameImg;
     TextView guessedWord;
     EditText guessedLetter;
-    Button playButton;
+    Button playButton, restartButton, homeButton;
     String visibleWord = logik.getSynligtOrd();
     Editable letter;
     String imgName = "forkert";
@@ -52,6 +53,13 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
 
         playButton = findViewById(R.id.playButton);
         playButton.setOnClickListener(this);
+        //starting 'restart-' and 'homebutton' hidden(GONE)
+        restartButton = findViewById(R.id.playAgain);
+        restartButton.setVisibility(View.GONE);
+        restartButton.setOnClickListener(this);
+        homeButton = findViewById(R.id.home);
+        homeButton.setVisibility(View.GONE);
+        homeButton.setOnClickListener(this);
 
         gameImg = findViewById(R.id.galgeImage);
         guessedLetter = findViewById(R.id.guessedLetter);
@@ -75,8 +83,9 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
             guessedLetter.getText().clear();
 
             logik.logStatus();
+            //playButton.setVisibility(View.GONE);
 
-
+            //if the user guess a wrong letter we show next img
             if(!logik.erSidsteBogstavKorrekt()) {
                 String imgToShow = imgName + logik.getAntalForkerteBogstaver();
                 //gets the exact id for the img
@@ -85,12 +94,22 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
             }
             if(logik.erSpilletTabt()) {
                 timer.stop();
+                restartButton.setVisibility(View.VISIBLE);
+                homeButton.setVisibility(View.VISIBLE);
                 guessedWord.setText(showWordAfterLoss(guessedWord.toString(), logik.getOrdet()));
             }
             if(logik.erSpilletVundet()) {
                 timer.stop();
+                restartButton.setVisibility(View.VISIBLE);
+                homeButton.setVisibility(View.VISIBLE);
             }
 
+        } else if(view == homeButton) {
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+        } else if(view == restartButton) {
+            Intent i = new Intent(this, Game.class);
+            startActivity(i);
         }
     }
 
