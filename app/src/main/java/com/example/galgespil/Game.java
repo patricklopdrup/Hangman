@@ -32,7 +32,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     Editable letter;
     String imgName = "forkert";
     Chronometer timer;
-    Boolean firstLetterGuessed = false;
+    boolean firstLetterGuessed = false;
     long timePassed;
 
     TextView ged;
@@ -82,7 +82,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
             guessedLetter.getText().clear();
 
             logik.logStatus();
-            //playButton.setVisibility(View.GONE);
 
             //if the user guess a wrong letter we show next img
             if(!logik.erSidsteBogstavKorrekt()) {
@@ -96,10 +95,14 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 guessedWord.setText(showWordAfterLoss(guessedWord.toString(), logik.getOrdet()));
             }
             if(logik.erSpilletVundet()) {
+                timer.stop();
+                timePassed = SystemClock.elapsedRealtime() - timer.getBase();
+                System.out.println(timePassed);
                 gameEnded();
             }
 
         } else if(view == homeButton) {
+            //sending the time via intent
             Intent i = new Intent(this, MainActivity.class);
             i.putExtra("time", timePassed);
             startActivity(i);
@@ -107,8 +110,11 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
             Intent i = new Intent(this, Game.class);
             startActivity(i);
         }
+
+        // TODO: 02-10-2019 lav progressbar der tæller ned fra highscore, så man kan se om man kan nå 1. pladsen
     }
 
+    // TODO: 02-10-2019 fix denne metode
     public String showWordAfterLoss(String lossWord, String correctWord) {
         SpannableString ss = new SpannableString(correctWord);
         ForegroundColorSpan red = new ForegroundColorSpan(Color.RED);
@@ -121,9 +127,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     }
 
     public void gameEnded() {
-        timer.stop();
-        timePassed = SystemClock.elapsedRealtime() - timer.getBase();
-        System.out.println(timePassed);
         restartButton.setVisibility(View.VISIBLE);
         homeButton.setVisibility(View.VISIBLE);
     }
