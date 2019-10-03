@@ -5,11 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.text.Editable;
-import android.text.Html;
 import android.text.SpannableString;
-import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
@@ -17,9 +16,8 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 public class Game extends AppCompatActivity implements View.OnClickListener {
     Galgelogik logik = new Galgelogik();
@@ -35,7 +33,8 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     boolean firstLetterGuessed = false;
     long timePassed;
 
-    TextView ged;
+    ProgressBar progressLeft, progressRight;
+    int highScoreMilisec = 10000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +47,9 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         guessedWord.setLetterSpacing((float)0.5);
 
         timer = findViewById(R.id.timer);
+
+        progressLeft = findViewById(R.id.progressBarLeft);
+        progressRight = findViewById(R.id.progressBarRight);
 
         logik.logStatus();
 
@@ -74,6 +76,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 timer.setBase(SystemClock.elapsedRealtime());
                 timer.start();
                 firstLetterGuessed = true;
+                progressBarThread();
             }
 
             logik.gætBogstav(letter.toString());
@@ -95,7 +98,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 guessedWord.setText(showWordAfterLoss(guessedWord.toString(), logik.getOrdet()));
             }
             if(logik.erSpilletVundet()) {
-                timer.stop();
                 timePassed = SystemClock.elapsedRealtime() - timer.getBase();
                 System.out.println(timePassed);
                 gameEnded();
@@ -127,8 +129,37 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     }
 
     public void gameEnded() {
+        timer.stop();
         restartButton.setVisibility(View.VISIBLE);
         homeButton.setVisibility(View.VISIBLE);
+    }
+
+    public void progressBarThread() {
+        //progressBars in another thread
+        final Handler handler = new Handler();
+        new Thread(new Runnable() {
+            int secToRun = highScoreMilisec / 100;
+            int pgStatus = 0;
+            @Override
+            public void run() {
+                while (pgStatus < 100) {
+                    pgStatus++;
+                    try {
+                        Thread.sleep(secToRun);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    //update processBars
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressLeft.setProgress(pgStatus);
+                            progressRight.setProgress(pgStatus);
+                        }
+                    });
+                }
+            }
+        }).start();
     }
 
 }
