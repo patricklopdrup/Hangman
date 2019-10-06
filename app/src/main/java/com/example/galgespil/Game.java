@@ -21,26 +21,37 @@ import android.widget.TextView;
 
 public class Game extends AppCompatActivity implements View.OnClickListener {
     Galgelogik logik = new Galgelogik();
+    Keyboard keyboard = new Keyboard();
 
     ImageView gameImg;
     TextView guessedWord;
-    EditText guessedLetter;
-    Button playButton, restartButton, homeButton;
+    Button restartButton, homeButton;
+    Button[] keys;
     String visibleWord = logik.getSynligtOrd();
-    Editable letter;
     String imgName = "forkert";
     Chronometer timer;
     boolean firstLetterGuessed = false;
     long timePassed;
 
     ProgressBar progressLeft, progressRight;
+    // TODO: 03-10-2019 her skal der i onCreate tages fra highscore listen nr. 1 som tid
     int highScoreMilisec = 10000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_game);
+
+        //gets all the key values for the keyboard from the Keyboard.java class
+        keys = new Button[keyboard.getKeys().length];
+        for(int i = 0; i < keyboard.getKeys().length; i++) {
+            String buttonToFind = "button" + (i+1);
+            int buttonID = getResources().getIdentifier(buttonToFind, "id", getPackageName());
+            String key = keyboard.getKeys()[i];
+            keys[i] = findViewById(buttonID);
+            keys[i].setText(key);
+            keys[i].setOnClickListener(this);
+        }
 
         guessedWord = findViewById(R.id.guessWord);
         guessedWord.setText(visibleWord);
@@ -53,8 +64,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
 
         logik.logStatus();
 
-        playButton = findViewById(R.id.playButton);
-        playButton.setOnClickListener(this);
         //starting 'restart-' and 'homebutton' hidden(GONE)
         restartButton = findViewById(R.id.playAgain);
         restartButton.setVisibility(View.GONE);
@@ -64,56 +73,58 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         homeButton.setOnClickListener(this);
 
         gameImg = findViewById(R.id.galgeImage);
-        guessedLetter = findViewById(R.id.guessedLetter);
-        letter = guessedLetter.getText();
     }
 
     @Override
     public void onClick(View view) {
-        if(view == playButton) {
-            //starting the timer the first time, and only the first time, playButton(gæt bogstav) is clicked
-            if(!firstLetterGuessed) {
-                timer.setBase(SystemClock.elapsedRealtime());
-                timer.start();
-                firstLetterGuessed = true;
-                progressBarThread();
+        int keyNumber = 0;
+        for (Button b : keys) {
+            if (b.getId() == view.getId()) {
+                //starting the timer the first time, and only the first time, a key is pressed
+                if (!firstLetterGuessed) {
+                    timer.setBase(SystemClock.elapsedRealtime());
+                    timer.start();
+                    firstLetterGuessed = true;
+                    progressBarThread();
+                }
+
+                logik.gætBogstav(b.getText().toString());
+                guessedWord.setText(logik.getSynligtOrd());
+
+                logik.logStatus();
+
+                //if the user guess a wrong letter we show next img
+                if (!logik.erSidsteBogstavKorrekt()) {
+                    String imgToShow = imgName + logik.getAntalForkerteBogstaver();
+                    //gets the exact id for the img
+                    int resID = getResources().getIdentifier(imgToShow, "drawable", getPackageName());
+                    gameImg.setImageResource(resID);
+                    b.setTextColor(Color.RED);
+                    b.setClickable(false);
+                }
+                if(logik.erSidsteBogstavKorrekt()) {
+                    b.setTextColor(Color.parseColor("#08A026"));
+                    b.setClickable(false);
+                }
+                if (logik.erSpilletTabt()) {
+                    gameEnded();
+                    guessedWord.setText(showWordAfterLoss(guessedWord.toString(), logik.getOrdet()));
+                }
+                if (logik.erSpilletVundet()) {
+                    timePassed = SystemClock.elapsedRealtime() - timer.getBase();
+                    System.out.println(timePassed);
+                    gameEnded();
+                }
+            } else if (view == homeButton) {
+                //sending the time via intent
+                Intent i = new Intent(this, MainActivity.class);
+                i.putExtra("time", timePassed);
+                startActivity(i);
+            }  else if (view == restartButton) {
+                Intent i = new Intent(this, Game.class);
+                startActivity(i);
             }
-
-            logik.gætBogstav(letter.toString());
-
-            guessedWord.setText(logik.getSynligtOrd());
-            guessedLetter.getText().clear();
-
-            logik.logStatus();
-
-            //if the user guess a wrong letter we show next img
-            if(!logik.erSidsteBogstavKorrekt()) {
-                String imgToShow = imgName + logik.getAntalForkerteBogstaver();
-                //gets the exact id for the img
-                int resID = getResources().getIdentifier(imgToShow, "drawable", getPackageName());
-                gameImg.setImageResource(resID);
-            }
-            if(logik.erSpilletTabt()) {
-                gameEnded();
-                guessedWord.setText(showWordAfterLoss(guessedWord.toString(), logik.getOrdet()));
-            }
-            if(logik.erSpilletVundet()) {
-                timePassed = SystemClock.elapsedRealtime() - timer.getBase();
-                System.out.println(timePassed);
-                gameEnded();
-            }
-
-        } else if(view == homeButton) {
-            //sending the time via intent
-            Intent i = new Intent(this, MainActivity.class);
-            i.putExtra("time", timePassed);
-            startActivity(i);
-        } else if(view == restartButton) {
-            Intent i = new Intent(this, Game.class);
-            startActivity(i);
         }
-
-        // TODO: 02-10-2019 lav progressbar der tæller ned fra highscore, så man kan se om man kan nå 1. pladsen
     }
 
     // TODO: 02-10-2019 fix denne metode
@@ -132,6 +143,9 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         timer.stop();
         restartButton.setVisibility(View.VISIBLE);
         homeButton.setVisibility(View.VISIBLE);
+        for(Button b: keys) {
+            b.setClickable(false);
+        }
     }
 
     public void progressBarThread() {

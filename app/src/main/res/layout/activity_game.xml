@@ -8,106 +8,79 @@
 
     <ImageView
         android:id="@+id/galgeImage"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="170dp"
-        android:layout_marginBottom="170dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="406dp"
+        android:layout_height="320dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintTop_toBottomOf="@+id/guessWord"
         app:srcCompat="@drawable/galge" />
 
     <Chronometer
         android:id="@+id/timer"
-        android:layout_width="99dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="37dp"
+        android:layout_width="120dp"
+        android:layout_height="66dp"
+        android:paddingVertical="14dp"
         android:textAlignment="center"
-        android:textSize="20dp"
+        android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/title"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_width="291dp"
+        android:layout_height="66dp"
+        android:textAlignment="center"
         android:text="Galgespil"
         android:textSize="45sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/guessWord"
-        android:layout_width="408dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="108dp"
-        android:layout_marginBottom="27dp"
+        android:layout_width="410dp"
+        android:layout_height="54dp"
         android:hint="Ordet du skal gætte"
         android:text="Gæt ordet"
         android:textAlignment="center"
-        android:textSize="25dp"
-        app:layout_constraintBottom_toTopOf="@+id/galgeImage"
+        android:paddingVertical="5dp"
+        android:textSize="30dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.058"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/guessedLetter"
-        android:layout_width="266dp"
-        android:layout_height="45dp"
-        android:ems="10"
-        android:hint="Gæt bogstav"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/playButton"
-        android:layout_width="266dp"
-        android:layout_height="45dp"
-        android:text="Gæt bogstav"
-        app:layout_constraintBottom_toTopOf="@+id/guessedLetter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/timer" />
 
     <Button
         android:id="@+id/playAgain"
         android:layout_width="122dp"
         android:layout_height="57dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginBottom="150dp"
         android:text="Spil igen"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/galgeImage"
-        app:layout_constraintHorizontal_bias="0.311"
+        app:layout_constraintBottom_toBottomOf="@+id/galgeImage"
         app:layout_constraintStart_toStartOf="@+id/galgeImage"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/galgeImage"
+        app:layout_constraintVertical_bias="0.571" />
 
     <Button
         android:id="@+id/home"
         android:layout_width="122dp"
         android:layout_height="57dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="150dp"
         android:text="Hoved menu"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/galgeImage"
         app:layout_constraintEnd_toEndOf="@+id/galgeImage"
-        app:layout_constraintHorizontal_bias="0.733"
-        app:layout_constraintStart_toStartOf="@+id/galgeImage"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/galgeImage" />
 
     <ProgressBar
         android:id="@+id/progressBarLeft"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="206dp"
         android:layout_height="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ProgressBar
         android:id="@+id/progressBarRight"
@@ -115,7 +88,358 @@
         android:layout_width="206dp"
         android:layout_height="20dp"
         android:rotation="180"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="37dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#ededed"
+        android:text="Q"
+        android:textAlignment="center"
+        android:textSize="17dp"
+        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintTop_toBottomOf="@+id/galgeImage" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="37dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#ededed"
+        android:text="Q"
+        android:textAlignment="center"
+        android:textSize="17dp"
+        app:layout_constraintEnd_toStartOf="@+id/button3"
+        app:layout_constraintTop_toBottomOf="@+id/galgeImage" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="37dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#ededed"
+        android:text="Q"
+        android:textAlignment="center"
+        android:textSize="17dp"
+        app:layout_constraintEnd_toStartOf="@+id/button4"
+        app:layout_constraintTop_toBottomOf="@+id/galgeImage" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="37dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#ededed"
+        android:text="Q"
+        android:textAlignment="center"
+        android:textSize="17dp"
+        app:layout_constraintEnd_toStartOf="@+id/button5"
+        app:layout_constraintTop_toBottomOf="@+id/galgeImage" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="37dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#ededed"
+        android:text="Q"
+        android:textAlignment="center"
+        android:textSize="17dp"
+        app:layout_constraintEnd_toStartOf="@+id/button6"
+        app:layout_constraintTop_toBottomOf="@+id/galgeImage" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="37dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#ededed"
+        android:text="Q"
+        android:textAlignment="center"
+        android:textSize="17dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/galgeImage" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="37dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#ededed"
+        android:text="Q"
+        android:textAlignment="center"
+        android:textSize="17dp"
+        app:layout_constraintStart_toEndOf="@+id/button6"
+        app:layout_constraintTop_toBottomOf="@+id/galgeImage" />
+
+    <Button
+        android:id="@+id/button8"
+        android:layout_width="37dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#ededed"
+        android:text="Q"
+        android:textAlignment="center"
+        android:textSize="17dp"
+        app:layout_constraintStart_toEndOf="@+id/button7"
+        app:layout_constraintTop_toBottomOf="@+id/galgeImage" />
+
+    <Button
+        android:id="@+id/button9"
+        android:layout_width="37dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#ededed"
+        android:text="Q"
+        android:textAlignment="center"
+        android:textSize="17dp"
+        app:layout_constraintStart_toEndOf="@+id/button8"
+        app:layout_constraintTop_toBottomOf="@+id/galgeImage" />
+
+    <Button
+        android:id="@+id/button10"
+        android:layout_width="37dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#ededed"
+        android:text="Q"
+        android:textAlignment="center"
+        android:textSize="17dp"
+        app:layout_constraintStart_toEndOf="@+id/button9"
+        app:layout_constraintTop_toBottomOf="@+id/galgeImage" />
+
+    <Button
+        android:id="@+id/button11"
+        android:layout_width="37dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#ededed"
+        android:text="Q"
+        android:textAlignment="center"
+        android:textSize="17dp"
+        app:layout_constraintStart_toEndOf="@+id/button10"
+        app:layout_constraintTop_toBottomOf="@+id/galgeImage" />
+
+    <Button
+        android:id="@+id/button12"
+        android:layout_width="37dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#ededed"
+        android:text="Q"
+        android:textAlignment="center"
+        android:textSize="17dp"
+        app:layout_constraintEnd_toStartOf="@+id/button13"
+        app:layout_constraintTop_toBottomOf="@+id/button1" />
+
+    <Button
+        android:id="@+id/button13"
+        android:layout_width="37dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#ededed"
+        android:text="Q"
+        android:textAlignment="center"
+        android:textSize="17dp"
+        app:layout_constraintEnd_toStartOf="@+id/button14"
+        app:layout_constraintTop_toBottomOf="@+id/button2" />
+
+    <Button
+        android:id="@+id/button14"
+        android:layout_width="37dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#ededed"
+        android:text="Q"
+        android:textAlignment="center"
+        android:textSize="17dp"
+        app:layout_constraintEnd_toStartOf="@+id/button15"
+        app:layout_constraintTop_toBottomOf="@+id/button3" />
+
+    <Button
+        android:id="@+id/button15"
+        android:layout_width="37dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#ededed"
+        android:text="Q"
+        android:textAlignment="center"
+        android:textSize="17dp"
+        app:layout_constraintEnd_toStartOf="@+id/button16"
+        app:layout_constraintTop_toBottomOf="@+id/button4" />
+
+    <Button
+        android:id="@+id/button16"
+        android:layout_width="37dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#ededed"
+        android:text="Q"
+        android:textAlignment="center"
+        android:textSize="17dp"
+        app:layout_constraintEnd_toStartOf="@+id/button17"
+        app:layout_constraintTop_toBottomOf="@+id/button5" />
+
+    <Button
+        android:id="@+id/button17"
+        android:layout_width="37dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#ededed"
+        android:text="Q"
+        android:textAlignment="center"
+        android:textSize="17dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button6" />
+
+    <Button
+        android:id="@+id/button18"
+        android:layout_width="37dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#ededed"
+        android:text="Q"
+        android:textAlignment="center"
+        android:textSize="17dp"
+        app:layout_constraintStart_toEndOf="@+id/button17"
+        app:layout_constraintTop_toBottomOf="@+id/button7" />
+
+    <Button
+        android:id="@+id/button19"
+        android:layout_width="37dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#ededed"
+        android:text="Q"
+        android:textAlignment="center"
+        android:textSize="17dp"
+        app:layout_constraintStart_toEndOf="@+id/button18"
+        app:layout_constraintTop_toBottomOf="@+id/button8" />
+
+    <Button
+        android:id="@+id/button20"
+        android:layout_width="37dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#ededed"
+        android:text="Q"
+        android:textAlignment="center"
+        android:textSize="17dp"
+        app:layout_constraintStart_toEndOf="@+id/button19"
+        app:layout_constraintTop_toBottomOf="@+id/button9" />
+
+    <Button
+        android:id="@+id/button21"
+        android:layout_width="37dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#ededed"
+        android:text="Q"
+        android:textAlignment="center"
+        android:textSize="17dp"
+        app:layout_constraintStart_toEndOf="@+id/button20"
+        app:layout_constraintTop_toBottomOf="@+id/button10" />
+
+    <Button
+        android:id="@+id/button22"
+        android:layout_width="37dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#ededed"
+        android:text="Q"
+        android:textAlignment="center"
+        android:textSize="17dp"
+        app:layout_constraintStart_toEndOf="@+id/button21"
+        app:layout_constraintTop_toBottomOf="@+id/button11" />
+
+    <Button
+        android:id="@+id/button23"
+        android:layout_width="37dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#ededed"
+        android:text="Q"
+        android:textAlignment="center"
+        android:textSize="17dp"
+        app:layout_constraintEnd_toStartOf="@+id/button24"
+        app:layout_constraintTop_toBottomOf="@+id/button14" />
+
+    <Button
+        android:id="@+id/button24"
+        android:layout_width="37dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#ededed"
+        android:text="Q"
+        android:textAlignment="center"
+        android:textSize="17dp"
+        app:layout_constraintEnd_toStartOf="@+id/button25"
+        app:layout_constraintTop_toBottomOf="@+id/button15" />
+
+    <Button
+        android:id="@+id/button25"
+        android:layout_width="37dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#ededed"
+        android:text="Q"
+        android:textAlignment="center"
+        android:textSize="17dp"
+        app:layout_constraintEnd_toStartOf="@+id/button26"
+        app:layout_constraintTop_toBottomOf="@+id/button16" />
+
+    <Button
+        android:id="@+id/button26"
+        android:layout_width="37dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#ededed"
+        android:text="Q"
+        android:textAlignment="center"
+        android:textSize="17dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button17" />
+
+    <Button
+        android:id="@+id/button27"
+        android:layout_width="37dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#ededed"
+        android:text="Q"
+        android:textAlignment="center"
+        android:textSize="17dp"
+        app:layout_constraintStart_toEndOf="@+id/button26"
+        app:layout_constraintTop_toBottomOf="@+id/button18" />
+
+    <Button
+        android:id="@+id/button28"
+        android:layout_width="37dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#ededed"
+        android:text="Q"
+        android:textAlignment="center"
+        android:textSize="17dp"
+        app:layout_constraintStart_toEndOf="@+id/button27"
+        app:layout_constraintTop_toBottomOf="@+id/button19" />
+
+    <Button
+        android:id="@+id/button29"
+        android:layout_width="37dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#ededed"
+        android:text="Q"
+        android:textAlignment="center"
+        android:textSize="17dp"
+        app:layout_constraintStart_toEndOf="@+id/button28"
+        app:layout_constraintTop_toBottomOf="@+id/button20" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
