@@ -1,7 +1,7 @@
 package com.example.galgespil;
 
 public class Keyboard {
-    String[] keys = {"q","w","e","r","t","y","u","i","o","p","å",
+    String[] qwerty = {"q","w","e","r","t","y","u","i","o","p","å",
                    "a","s","d","f","g","h","j","k","l","æ","ø",
                            "z","x","c","v","b","n","m"};
 
@@ -14,16 +14,15 @@ public class Keyboard {
         temp[26] = "æ";
         temp[27] = "ø";
         temp[28] = "å";
-
         return temp;
     }
 
     public String[] getKeys(int i) {
         if(i == 0) {
-            return keys;
+            return qwerty;
         } else if(i == 1) {
             return abc();
         }
-        return keys;
+        return qwerty;
     }
 }

@@ -21,6 +21,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
+    <Button
+        android:id="@+id/highscore"
+        android:layout_width="252dp"
+        android:layout_height="84dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="54dp"
+        android:layout_marginEnd="33dp"
+        android:text="Highscore"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/startGame" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"

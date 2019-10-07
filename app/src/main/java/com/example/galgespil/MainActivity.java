@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button startGame;
+    Button startGame, highscore;
     long timeMillisec;
     TextView showTime;
 
@@ -20,8 +20,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         startGame = findViewById(R.id.startGame);
+        highscore = findViewById(R.id.highscore);
 
         startGame.setOnClickListener(this);
+        highscore.setOnClickListener(this);
 
         showTime = findViewById(R.id.test);
         timeMillisec = getIntent().getLongExtra("time", 0);
@@ -33,6 +35,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if(v == startGame) {
             Intent i = new Intent(this, Game.class);
+            startActivity(i);
+        } else if(v == highscore) {
+            Intent i = new Intent(this, Highscore.class);
             startActivity(i);
         }
     }
