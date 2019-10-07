@@ -36,6 +36,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     ProgressBar progressLeft, progressRight;
     // TODO: 03-10-2019 her skal der i onCreate tages fra highscore listen nr. 1 som tid
     int highScoreMilisec = 10000;
+    int keyboardChoise = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +44,11 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_game);
 
         //gets all the key values for the keyboard from the Keyboard.java class
-        keys = new Button[keyboard.getKeys().length];
-        for(int i = 0; i < keyboard.getKeys().length; i++) {
+        keys = new Button[keyboard.getKeys(keyboardChoise).length];
+        for(int i = 0; i < keyboard.getKeys(keyboardChoise).length; i++) {
             String buttonToFind = "button" + (i+1);
             int buttonID = getResources().getIdentifier(buttonToFind, "id", getPackageName());
-            String key = keyboard.getKeys()[i];
+            String key = keyboard.getKeys(keyboardChoise)[i];
             keys[i] = findViewById(buttonID);
             keys[i].setText(key);
             keys[i].setOnClickListener(this);
@@ -77,7 +78,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        int keyNumber = 0;
         for (Button b : keys) {
             if (b.getId() == view.getId()) {
                 //starting the timer the first time, and only the first time, a key is pressed
