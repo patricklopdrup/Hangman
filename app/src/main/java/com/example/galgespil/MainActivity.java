@@ -27,8 +27,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         showTime = findViewById(R.id.test);
         timeMillisec = getIntent().getLongExtra("time", 0);
-
-
     }
 
     @Override
