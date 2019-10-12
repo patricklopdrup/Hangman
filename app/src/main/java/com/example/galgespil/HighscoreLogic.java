@@ -15,15 +15,14 @@ import com.google.gson.reflect.TypeToken;
 
 public class HighscoreLogic {
 
-    private List<Long> highscoreList = new ArrayList<>();
     private static boolean isSorted = false;
     private String highscoreKey = "highscore";
 
     public void addScore(long score, String key, Context context) {
         List<Long> temp = getSavedHighscore(key, context);
         temp.add(score);
-        saveHighscore(temp, key, context);
         isSorted = false;
+        saveHighscore(temp, key, context);
     }
 
     public List<Long> getSortedHighscoreList(String key, Context context) {
@@ -32,6 +31,7 @@ public class HighscoreLogic {
             Collections.sort(listToReturn);
             isSorted = true;
         }
+        isSorted = false;
         return listToReturn;
     }
 
@@ -58,7 +58,7 @@ public class HighscoreLogic {
     }
 
     //for testing only. To overwrite the highscorelist with nothing. This empty the list completely
-    private boolean iWantToEmptyHighscoreList = true;
+    private boolean iWantToEmptyHighscoreList = false;
 
     public void emptyHighscoreList(String key, Context context) {
         if(iWantToEmptyHighscoreList) {

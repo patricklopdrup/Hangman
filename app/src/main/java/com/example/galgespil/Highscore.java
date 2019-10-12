@@ -19,7 +19,7 @@ public class Highscore extends AppCompatActivity {
     //"match_parent" does not work!
 
     HighscoreLogic highscoreLogic = new HighscoreLogic();
-    List<Long> highscore;
+    List<Long> highscoreSorted;
     RecyclerView recyclerView;
 
     @Override
@@ -27,7 +27,7 @@ public class Highscore extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_highscore);
 
-        highscore = highscoreLogic.getSortedHighscoreList(highscoreLogic.getHighscoreKey(), this);
+        highscoreSorted = highscoreLogic.getSortedHighscoreList(highscoreLogic.getHighscoreKey(), this);
 
         recyclerView = new RecyclerView(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -50,13 +50,13 @@ public class Highscore extends AppCompatActivity {
             ImageView image = holder.itemView.findViewById(R.id.image);
 
             title.setText(""+(position + 1));
-            desc.setText("Tid: "+ (((float)highscore.get(position)/1000)) + " sek");
+            desc.setText("Tid: "+ (((float)highscoreSorted.get(position)/1000)) + " sek");
             image.setImageResource(android.R.drawable.sym_action_chat);
         }
 
         @Override
         public int getItemCount() {
-            return highscore.size();
+            return highscoreSorted.size();
         }
     };
 
