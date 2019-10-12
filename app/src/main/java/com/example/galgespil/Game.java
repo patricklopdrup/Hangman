@@ -22,6 +22,7 @@ import android.widget.TextView;
 public class Game extends AppCompatActivity implements View.OnClickListener {
     Galgelogik logik = new Galgelogik();
     Keyboard keyboard = new Keyboard();
+    HighscoreLogic highscoreLogic = new HighscoreLogic();
 
     ImageView gameImg;
     TextView guessedWord;
@@ -35,7 +36,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
 
     ProgressBar progressLeft, progressRight;
     // TODO: 03-10-2019 her skal der i onCreate tages fra highscore listen nr. 1 som tid
-    int highScoreMilisec = 10000;
+    int highScoreMilisec;
     int keyboardChoise = 0;
 
     @Override
@@ -43,7 +44,10 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        highScoreMilisec = highscoreLogic.getSortedHighscoreList(highscoreLogic.getHighscoreKey(), this).get(0).intValue();
+
         //gets all the key values for the keyboard from the Keyboard.java class
+        //and set onClickListener
         keys = new Button[keyboard.getKeys(keyboardChoise).length];
         for(int i = 0; i < keyboard.getKeys(keyboardChoise).length; i++) {
             String buttonToFind = "button" + (i+1);
@@ -78,8 +82,8 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        for (Button b : keys) {
-            if (b.getId() == view.getId()) {
+        for (Button btn : keys) {
+            if (btn.getId() == view.getId()) {
                 //starting the timer the first time, and only the first time, a key is pressed
                 if (!firstLetterGuessed) {
                     timer.setBase(SystemClock.elapsedRealtime());
@@ -88,7 +92,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                     progressBarThread();
                 }
 
-                logik.gætBogstav(b.getText().toString());
+                logik.gætBogstav(btn.getText().toString());
                 guessedWord.setText(logik.getSynligtOrd());
 
                 logik.logStatus();
@@ -99,12 +103,12 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                     //gets the exact id for the img
                     int resID = getResources().getIdentifier(imgToShow, "drawable", getPackageName());
                     gameImg.setImageResource(resID);
-                    b.setTextColor(Color.RED);
-                    b.setClickable(false);
+                    btn.setTextColor(Color.RED);
+                    btn.setClickable(false);
                 }
                 if(logik.erSidsteBogstavKorrekt()) {
-                    b.setTextColor(Color.parseColor("#08A026"));
-                    b.setClickable(false);
+                    btn.setTextColor(Color.parseColor("#08A026"));
+                    btn.setClickable(false);
                 }
                 if (logik.erSpilletTabt()) {
                     gameEnded();
@@ -112,7 +116,8 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 }
                 if (logik.erSpilletVundet()) {
                     timePassed = SystemClock.elapsedRealtime() - timer.getBase();
-                    System.out.println(timePassed);
+                    System.out.println("her er tiden: " + timePassed);
+                    highscoreLogic.addScore(timePassed, highscoreLogic.getHighscoreKey(), this);
                     gameEnded();
                 }
             } else if (view == homeButton) {

@@ -8,8 +8,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    HighscoreLogic highscoreLogic = new HighscoreLogic();
     Button startGame, highscore;
     long timeMillisec;
     TextView showTime;
@@ -27,6 +31,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         showTime = findViewById(R.id.test);
         timeMillisec = getIntent().getLongExtra("time", 0);
+
+        List<Long> hej = new ArrayList<>();
+        for(int i = 0; i < 10; i++) {
+            hej.add((long)i);
+        }
     }
 
     @Override
