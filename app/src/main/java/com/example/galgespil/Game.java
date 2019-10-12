@@ -19,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class Game extends AppCompatActivity implements View.OnClickListener {
     Galgelogik logik = new Galgelogik();
     Keyboard keyboard = new Keyboard();
@@ -44,7 +46,12 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        highScoreMilisec = highscoreLogic.getSortedHighscoreList(highscoreLogic.getHighscoreKey(), this).get(0).intValue();
+        List<Long> temp = highscoreLogic.getSortedHighscoreList(highscoreLogic.getHighscoreKey(), this);
+        if(!temp.isEmpty()) {
+            highScoreMilisec = temp.get(0).intValue();
+        } else {
+            highScoreMilisec = 10000;
+        }
 
         //gets all the key values for the keyboard from the Keyboard.java class
         //and set onClickListener

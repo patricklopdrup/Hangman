@@ -31,11 +31,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         showTime = findViewById(R.id.test);
         timeMillisec = getIntent().getLongExtra("time", 0);
-
-        List<Long> hej = new ArrayList<>();
-        for(int i = 0; i < 10; i++) {
-            hej.add((long)i);
-        }
     }
 
     @Override

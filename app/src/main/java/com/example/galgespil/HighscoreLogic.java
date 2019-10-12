@@ -27,17 +27,15 @@ public class HighscoreLogic {
     }
 
     public List<Long> getSortedHighscoreList(String key, Context context) {
+        List<Long> listToReturn = getSavedHighscore(key, context);
         if(!isSorted) {
-            List<Long> temp = getSavedHighscore(key, context);
-            Collections.sort(temp);
+            Collections.sort(listToReturn);
             isSorted = true;
-            return temp;
-        } else {
-            return getSavedHighscore(key, context);
         }
+        return listToReturn;
     }
 
-    public void saveHighscore(List<Long> list, String key, Context context) {
+    private void saveHighscore(List<Long> list, String key, Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
         Gson gson = new Gson();
@@ -47,7 +45,7 @@ public class HighscoreLogic {
         editor.commit();
     }
 
-    public List<Long> getSavedHighscore(String key, Context context) {
+    private List<Long> getSavedHighscore(String key, Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         Gson gson = new Gson();
         String json = prefs.getString(key, "not found");
@@ -58,4 +56,18 @@ public class HighscoreLogic {
     public String getHighscoreKey() {
         return highscoreKey;
     }
+
+    //for testing only. To overwrite the highscorelist with nothing. This empty the list completely
+    private boolean iWantToEmptyHighscoreList = true;
+
+    public void emptyHighscoreList(String key, Context context) {
+        if(iWantToEmptyHighscoreList) {
+            List<Long> emptyList = new ArrayList<>();
+            saveHighscore(emptyList, key, context);
+        } else {
+            System.out.println("Private boolean has to be true");
+        }
+
+    }
+
 }
