@@ -50,7 +50,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         if(!temp.isEmpty()) {
             highScoreMilisec = temp.get(0).intValue();
         } else {
-            highScoreMilisec = 10000;
+            highScoreMilisec = 30000;
         }
 
         //gets all the key values for the keyboard from the Keyboard.java class

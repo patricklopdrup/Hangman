@@ -15,23 +15,17 @@ import com.google.gson.reflect.TypeToken;
 
 public class HighscoreLogic {
 
-    private static boolean isSorted = false;
     private String highscoreKey = "highscore";
 
     public void addScore(long score, String key, Context context) {
         List<Long> temp = getSavedHighscore(key, context);
         temp.add(score);
-        isSorted = false;
         saveHighscore(temp, key, context);
     }
 
     public List<Long> getSortedHighscoreList(String key, Context context) {
         List<Long> listToReturn = getSavedHighscore(key, context);
-        if(!isSorted) {
-            Collections.sort(listToReturn);
-            isSorted = true;
-        }
-        isSorted = false;
+        Collections.sort(listToReturn);
         return listToReturn;
     }
 
