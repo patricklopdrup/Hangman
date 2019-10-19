@@ -17,12 +17,9 @@ public class Keyboard {
         return temp;
     }
 
-    public String[] getKeys(int i) {
-        if(i == 0) {
-            return qwerty;
-        } else if(i == 1) {
-            return abc();
-        }
-        return qwerty;
+    public String[] getKeys(int keyboardChoice) {
+        if(keyboardChoice == 0)
+            return this.qwerty;
+        return this.abc();
     }
 }

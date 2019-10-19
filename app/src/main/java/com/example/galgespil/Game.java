@@ -2,19 +2,20 @@ package com.example.galgespil;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
-import android.text.Editable;
+import android.preference.PreferenceManager;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -38,23 +39,28 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
 
     private ProgressBar progressLeft, progressRight;
     private int highScoreMilisec;
-    private int keyboardChoise = 0;
+
+    private String keyboardKey = "keyboard";
+    private int keyboardChoice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        keyboardChoice = getKeyboardChoise(keyboardKey, this);
+
+        //if there is a highscore the timer is set to that time
         List<Long> temp = highscoreLogic.getSortedHighscoreList(highscoreLogic.getHighscoreKey(), this);
         highScoreMilisec = (!temp.isEmpty()) ? temp.get(0).intValue() : 30000;
 
         //gets all the key values for the keyboard from the Keyboard.java class
         //and set onClickListener
-        keys = new Button[keyboard.getKeys(keyboardChoise).length];
-        for(int i = 0; i < keyboard.getKeys(keyboardChoise).length; i++) {
+        keys = new Button[keyboard.getKeys(keyboardChoice).length];
+        for(int i = 0; i < keyboard.getKeys(keyboardChoice).length; i++) {
             String buttonToFind = "button" + (i+1);
             int buttonID = getResources().getIdentifier(buttonToFind, "id", getPackageName());
-            String key = keyboard.getKeys(keyboardChoise)[i];
+            String key = keyboard.getKeys(keyboardChoice)[i];
             keys[i] = findViewById(buttonID);
             keys[i].setText(key);
             keys[i].setOnClickListener(this);
@@ -183,4 +189,17 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         }).start();
     }
 
+    public void saveKeyboardChoise(String key, int keyboardChoice, Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt(key, keyboardChoice);
+        editor.commit();
+    }
+    public int getKeyboardChoise(String key, Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getInt(key, -1);
+    }
+    public String getKeyboardKey() {
+        return keyboardKey;
+    }
 }
