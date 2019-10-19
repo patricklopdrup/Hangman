@@ -13,10 +13,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    HighscoreLogic highscoreLogic = new HighscoreLogic();
-    Button startGame, highscore;
-    long timeMillisec;
-    TextView showTime;
+    private Button startGame, highscore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +25,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         startGame.setOnClickListener(this);
         highscore.setOnClickListener(this);
-
-        showTime = findViewById(R.id.test);
-        timeMillisec = getIntent().getLongExtra("time", 0);
     }
 
     @Override

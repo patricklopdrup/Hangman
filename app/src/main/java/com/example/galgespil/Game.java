@@ -22,24 +22,23 @@ import android.widget.TextView;
 import java.util.List;
 
 public class Game extends AppCompatActivity implements View.OnClickListener {
-    Galgelogik logik = new Galgelogik();
-    Keyboard keyboard = new Keyboard();
-    HighscoreLogic highscoreLogic = new HighscoreLogic();
+    private Galgelogik logik = new Galgelogik();
+    private Keyboard keyboard = new Keyboard();
+    private HighscoreLogic highscoreLogic = new HighscoreLogic();
 
-    ImageView gameImg;
-    TextView guessedWord;
-    Button restartButton, homeButton;
-    Button[] keys;
-    String visibleWord = logik.getSynligtOrd();
-    String imgName = "forkert";
-    Chronometer timer;
-    boolean firstLetterGuessed = false;
-    long timePassed;
+    private ImageView gameImg;
+    private TextView guessedWord;
+    private Button restartButton, homeButton;
+    private Button[] keys;
+    private String visibleWord = logik.getSynligtOrd();
+    private String imgName = "forkert";
+    private Chronometer timer;
+    private boolean firstLetterGuessed = false;
+    private long timePassed;
 
-    ProgressBar progressLeft, progressRight;
-    // TODO: 03-10-2019 her skal der i onCreate tages fra highscore listen nr. 1 som tid
-    int highScoreMilisec;
-    int keyboardChoise = 0;
+    private ProgressBar progressLeft, progressRight;
+    private int highScoreMilisec;
+    private int keyboardChoise = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +46,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_game);
 
         List<Long> temp = highscoreLogic.getSortedHighscoreList(highscoreLogic.getHighscoreKey(), this);
-        if(!temp.isEmpty()) {
-            highScoreMilisec = temp.get(0).intValue();
-        } else {
-            highScoreMilisec = 30000;
-        }
+        highScoreMilisec = (!temp.isEmpty()) ? temp.get(0).intValue() : 30000;
 
         //gets all the key values for the keyboard from the Keyboard.java class
         //and set onClickListener

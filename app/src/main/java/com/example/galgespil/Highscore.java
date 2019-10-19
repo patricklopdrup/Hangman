@@ -18,9 +18,9 @@ public class Highscore extends AppCompatActivity {
     //for this to work the "template" made in "list_element.xml" has to be "android:layout_height = "wrap_content"
     //"match_parent" does not work!
 
-    HighscoreLogic highscoreLogic = new HighscoreLogic();
-    List<Long> highscoreSorted;
-    RecyclerView recyclerView;
+    private HighscoreLogic highscoreLogic = new HighscoreLogic();
+    private List<Long> highscoreSorted;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -42,8 +42,11 @@ public class HighscoreLogic {
     private List<Long> getSavedHighscore(String key, Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         Gson gson = new Gson();
-        String json = prefs.getString(key, "not found");
+        String json = prefs.getString(key, "empty");
         Type type = new TypeToken<List<Long>>(){}.getType();
+        //check if array is empty and return empty List
+        if(json.equals("empty"))
+            return new ArrayList<>();
         return gson.fromJson(json, type);
     }
 
