@@ -28,7 +28,7 @@ public class EndGame extends AppCompatActivity {
 
         //putting data in the bundle
         Bundle bundle = new Bundle();
-        bundle.putLong("time", timePassed);
+        bundle.putLong("time2", timePassed);
         bundle.putInt("guesses", guesses);
 
         //passing the data from the bundle to our fragment

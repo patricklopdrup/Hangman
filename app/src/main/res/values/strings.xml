@@ -3,7 +3,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="display_end_time">Det tog %.2f sekunder</string>
+    <string name="display_end_time_in_sec">Det tog %.2f sek</string>
+    <string name="display_end_time_in_min">Det tog %d min %d sek</string>
     <string name="display_end_guesses">Du brugte %d forsøg</string>
     <string name="winner">Winner</string>
     <string name="loser">Loser</string>

@@ -31,6 +31,8 @@ public class Winner_loser extends Fragment {
 
 
         System.out.println("winner i frag er: " + winner);
+        //disse tager ligenu det som bliver sendt afsted fra Game.java og ikke fra EndGame,
+        //som jeg gerne vil. Jeg vil gerne overfører dataen via fragmenter og ikke aktiviteter
         amountOfGuesses = getActivity().getIntent().getIntExtra("guesses", -1);
         //timeInMs = getArguments().getLong("time", 1000L);
         timeInMs = getActivity().getIntent().getLongExtra("time", 1000L);
@@ -46,7 +48,12 @@ public class Winner_loser extends Fragment {
             title.setText(getString(R.string.winner));
             guesses.setText(getString(R.string.display_end_guesses, amountOfGuesses));
             float timeInSec = ((float)timeInMs / 1000);
-            time.setText(getString(R.string.display_end_time, timeInSec));
+            if(timeInSec >= 60.0) {
+                time.setText(getString(R.string.display_end_time_in_min, (int)(timeInSec)/60, (int)(timeInSec)%60));
+            } else {
+                time.setText(getString(R.string.display_end_time_in_sec, timeInSec));
+            }
+
         } else {
             img.setImageResource(R.drawable.loser);
             title.setText(getString(R.string.loser));
