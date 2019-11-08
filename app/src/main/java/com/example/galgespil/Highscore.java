@@ -48,10 +48,32 @@ public class Highscore extends AppCompatActivity {
             TextView title = holder.itemView.findViewById(R.id.title);
             TextView desc = holder.itemView.findViewById(R.id.description);
             ImageView image = holder.itemView.findViewById(R.id.image);
+            TextView pos = holder.itemView.findViewById(R.id.placement);
 
-            title.setText(""+(position + 1));
+
+            switch (position) {
+                case 0:
+                    image.setVisibility(View.VISIBLE);
+                    pos.setVisibility(View.GONE);
+                    image.setImageResource(R.drawable.gold);
+                    break;
+                case 1:
+                    image.setVisibility(View.VISIBLE);
+                    pos.setVisibility(View.GONE);
+                    image.setImageResource(R.drawable.silver);
+                    break;
+                case 2:
+                    image.setVisibility(View.VISIBLE);
+                    pos.setVisibility(View.GONE);
+                    image.setImageResource(R.drawable.bronze);
+                    break;
+                default:
+                    pos.setVisibility(View.VISIBLE);
+                    image.setVisibility(View.GONE);
+                    pos.setText("" + (position+1));
+                    break;
+            }
             desc.setText("Tid: "+ (((float)highscoreSorted.get(position)/1000)) + " sek");
-            image.setImageResource(android.R.drawable.sym_action_chat);
         }
 
         @Override
