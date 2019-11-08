@@ -53,26 +53,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        keyboardChoice = getKeyboardChoise(keyboardKey, this);
-
-        //if there is a highscore the timer is set to that time
-        List<Long> temp = highscoreLogic.getSortedHighscoreList(highscoreLogic.getHighscoreKey(), this);
-        highScoreMilisec = (!temp.isEmpty()) ? temp.get(0).intValue() : 30000;
-
-        //gets all the key values for the keyboard from the Keyboard.java class
-        //and set onClickListener
-        keys = new Button[keyboard.getKeys(keyboardChoice).length];
-        for (int i = 0; i < keyboard.getKeys(keyboardChoice).length; i++) {
-            String buttonToFind = "button" + (i + 1);
-            int buttonID = getResources().getIdentifier(buttonToFind, "id", getPackageName());
-            String key = keyboard.getKeys(keyboardChoice)[i];
-            keys[i] = findViewById(buttonID);
-            keys[i].setText(key);
-            keys[i].setOnClickListener(this);
-        }
-
-        guessedWord = findViewById(R.id.guessWord);
-
         // TODO: 04-11-2019 lav loading, når den er ved at hente ord fra dr
         //gets word from dr.dk. Uses the same Galgelogik logik as above (global variable)
         new AsyncTask() {
@@ -95,6 +75,28 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
             }
         }.execute();
 
+        keyboardChoice = getKeyboardChoise(keyboardKey, this);
+
+        //if there is a highscore the timer is set to that time
+        List<Long> temp = highscoreLogic.getSortedHighscoreList(highscoreLogic.getHighscoreKey(), this);
+        highScoreMilisec = (!temp.isEmpty()) ? temp.get(0).intValue() : 30000;
+
+        //gets all the key values for the keyboard from the Keyboard.java class
+        //and set onClickListener
+        keys = new Button[keyboard.getKeys(keyboardChoice).length];
+        for (int i = 0; i < keyboard.getKeys(keyboardChoice).length; i++) {
+            String buttonToFind = "button" + (i + 1);
+            int buttonID = getResources().getIdentifier(buttonToFind, "id", getPackageName());
+            String key = keyboard.getKeys(keyboardChoice)[i];
+            keys[i] = findViewById(buttonID);
+            keys[i].setText(key);
+            keys[i].setOnClickListener(this);
+        }
+
+        guessedWord = findViewById(R.id.guessWord);
+
+
+
         guessedWord.setLetterSpacing((float) 0.5);
 
         timer = findViewById(R.id.timer);
@@ -103,7 +105,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         progressRight = findViewById(R.id.progressBarRight);
 
 
-        //starting 'restart-' and 'homebutton' hidden(GONE)
+        //starting 'restart-' and 'homebutton' hidden/(GONE)
         restartButton = findViewById(R.id.playAgain);
         restartButton.setVisibility(View.GONE);
         restartButton.setOnClickListener(this);
@@ -145,14 +147,14 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                     btn.setClickable(false);
                 }
                 if (logik.erSpilletTabt()) {
-                    gameEnded();
+                    gameEnded(false);
                     guessedWord.setText(showWordAfterLoss(guessedWord.toString(), logik.getOrdet()));
                 }
                 if (logik.erSpilletVundet()) {
                     timePassed = SystemClock.elapsedRealtime() - timer.getBase();
                     System.out.println("her er tiden: " + timePassed);
                     highscoreLogic.addScore(timePassed, highscoreLogic.getHighscoreKey(), this);
-                    gameEnded();
+                    gameEnded(true);
                 }
             } else if (view == homeButton) {
                 //sending the time via intent
@@ -178,13 +180,21 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         return ss.toString();
     }
 
-    public void gameEnded() {
+    public void gameEnded(boolean winner) {
         timer.stop();
         restartButton.setVisibility(View.VISIBLE);
         homeButton.setVisibility(View.VISIBLE);
         for (Button b : keys) {
             b.setClickable(false);
         }
+        Intent i = new Intent(this, EndGame.class);
+        i.putExtra("winner", winner);
+        i.putExtra("guesses", logik.getBrugteBogstaver().size());
+        if(winner) {
+            i.putExtra("time", timePassed);
+        }
+        System.out.println("winner er: " + winner);
+        startActivity(i);
     }
 
     public void progressBarThread() {
