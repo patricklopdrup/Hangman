@@ -6,13 +6,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Debug;
 import android.os.Handler;
+import android.os.StrictMode;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
@@ -21,6 +25,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 public class Game extends AppCompatActivity implements View.OnClickListener {
     private Galgelogik logik = new Galgelogik();
@@ -31,7 +36,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     private TextView guessedWord;
     private Button restartButton, homeButton;
     private Button[] keys;
-    private String visibleWord = logik.getSynligtOrd();
+    private String visibleWord;
     private String imgName = "forkert";
     private Chronometer timer;
     private boolean firstLetterGuessed = false;
@@ -57,8 +62,8 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         //gets all the key values for the keyboard from the Keyboard.java class
         //and set onClickListener
         keys = new Button[keyboard.getKeys(keyboardChoice).length];
-        for(int i = 0; i < keyboard.getKeys(keyboardChoice).length; i++) {
-            String buttonToFind = "button" + (i+1);
+        for (int i = 0; i < keyboard.getKeys(keyboardChoice).length; i++) {
+            String buttonToFind = "button" + (i + 1);
             int buttonID = getResources().getIdentifier(buttonToFind, "id", getPackageName());
             String key = keyboard.getKeys(keyboardChoice)[i];
             keys[i] = findViewById(buttonID);
@@ -67,15 +72,36 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         }
 
         guessedWord = findViewById(R.id.guessWord);
-        guessedWord.setText(visibleWord);
-        guessedWord.setLetterSpacing((float)0.5);
+
+        // TODO: 04-11-2019 lav loading, når den er ved at hente ord fra dr
+        //gets word from dr.dk. Uses the same Galgelogik logik as above (global variable)
+        new AsyncTask() {
+
+            @Override
+            protected Object doInBackground(Object[] objects) {
+                try {
+                    logik.hentOrdFraDr();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return logik.getSynligtOrd();
+            }
+
+            @Override
+            protected void onPostExecute(Object o) {
+                visibleWord = o.toString();
+                guessedWord.setText(visibleWord);
+                logik.logStatus();
+            }
+        }.execute();
+
+        guessedWord.setLetterSpacing((float) 0.5);
 
         timer = findViewById(R.id.timer);
 
         progressLeft = findViewById(R.id.progressBarLeft);
         progressRight = findViewById(R.id.progressBarRight);
 
-        logik.logStatus();
 
         //starting 'restart-' and 'homebutton' hidden(GONE)
         restartButton = findViewById(R.id.playAgain);
@@ -114,7 +140,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                     btn.setTextColor(Color.RED);
                     btn.setClickable(false);
                 }
-                if(logik.erSidsteBogstavKorrekt()) {
+                if (logik.erSidsteBogstavKorrekt()) {
                     btn.setTextColor(Color.parseColor("#08A026"));
                     btn.setClickable(false);
                 }
@@ -133,7 +159,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 Intent i = new Intent(this, MainActivity.class);
                 i.putExtra("time", timePassed);
                 startActivity(i);
-            }  else if (view == restartButton) {
+            } else if (view == restartButton) {
                 Intent i = new Intent(this, Game.class);
                 startActivity(i);
             }
@@ -144,9 +170,9 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     public String showWordAfterLoss(String lossWord, String correctWord) {
         SpannableString ss = new SpannableString(correctWord);
         ForegroundColorSpan red = new ForegroundColorSpan(Color.RED);
-        for(int i = 0; i < correctWord.length(); i++) {
-            if(lossWord.charAt(i) == '*') {
-                ss.setSpan(red, i, i+1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        for (int i = 0; i < correctWord.length(); i++) {
+            if (lossWord.charAt(i) == '*') {
+                ss.setSpan(red, i, i + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
         }
         return ss.toString();
@@ -156,7 +182,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         timer.stop();
         restartButton.setVisibility(View.VISIBLE);
         homeButton.setVisibility(View.VISIBLE);
-        for(Button b: keys) {
+        for (Button b : keys) {
             b.setClickable(false);
         }
     }
@@ -167,6 +193,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         new Thread(new Runnable() {
             int secToRun = highScoreMilisec / 100;
             int pgStatus = 0;
+
             @Override
             public void run() {
                 while (pgStatus < 100) {
@@ -195,10 +222,12 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         editor.putInt(key, keyboardChoice);
         editor.commit();
     }
+
     public int getKeyboardChoise(String key, Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         return prefs.getInt(key, -1);
     }
+
     public String getKeyboardKey() {
         return keyboardKey;
     }
