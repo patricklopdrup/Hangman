@@ -19,7 +19,7 @@ public class Highscore extends AppCompatActivity {
     //"match_parent" does not work!
 
     private HighscoreLogic highscoreLogic = new HighscoreLogic();
-    private List<Long> highscoreSorted;
+    private List<HighscoreObject> highscoreSorted;
     private RecyclerView recyclerView;
 
     @Override
@@ -68,12 +68,13 @@ public class Highscore extends AppCompatActivity {
                     image.setImageResource(R.drawable.bronze);
                     break;
                 default:
-                    pos.setVisibility(View.VISIBLE);
                     image.setVisibility(View.GONE);
+                    pos.setVisibility(View.VISIBLE);
                     pos.setText("" + (position+1));
                     break;
             }
-            desc.setText("Tid: "+ (((float)highscoreSorted.get(position)/1000)) + " sek");
+            desc.setText("Tid: "+ (((float)highscoreSorted.get(position).getTime()/1000)) + " sek");
+            System.out.println("pos " + position + ":" + highscoreSorted.get(position));
         }
 
         @Override

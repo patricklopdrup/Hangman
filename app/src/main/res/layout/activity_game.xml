@@ -49,30 +49,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timer" />
 
-    <Button
-        android:id="@+id/playAgain"
-        android:layout_width="122dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="130dp"
-        android:layout_marginBottom="130dp"
-        android:text="Spil igen"
-        app:layout_constraintBottom_toBottomOf="@+id/galgeImage"
-        app:layout_constraintStart_toStartOf="@+id/galgeImage"
-        app:layout_constraintTop_toTopOf="@+id/galgeImage" />
-
-    <Button
-        android:id="@+id/home"
-        android:layout_width="122dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="130dp"
-        android:layout_marginEnd="72dp"
-        android:layout_marginBottom="130dp"
-        android:text="Hoved menu"
-        app:layout_constraintBottom_toBottomOf="@+id/galgeImage"
-        app:layout_constraintEnd_toEndOf="@+id/galgeImage"
-        app:layout_constraintTop_toTopOf="@+id/galgeImage" />
-
     <ProgressBar
         android:id="@+id/progressBarLeft"
         style="?android:attr/progressBarStyleHorizontal"

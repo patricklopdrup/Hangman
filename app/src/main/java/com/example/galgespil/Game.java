@@ -34,7 +34,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
 
     private ImageView gameImg;
     private TextView guessedWord;
-    private Button restartButton, homeButton;
     private Button[] keys;
     private String visibleWord;
     private String imgName = "forkert";
@@ -78,8 +77,8 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         keyboardChoice = getKeyboardChoise(keyboardKey, this);
 
         //if there is a highscore the timer is set to that time
-        List<Long> temp = highscoreLogic.getSortedHighscoreList(highscoreLogic.getHighscoreKey(), this);
-        highScoreMilisec = (!temp.isEmpty()) ? temp.get(0).intValue() : 30000;
+        List<HighscoreObject> temp = highscoreLogic.getSortedHighscoreList(highscoreLogic.getHighscoreKey(), this);
+        highScoreMilisec = (!temp.isEmpty()) ? (int)temp.get(0).getTime() : 30000;
 
         //gets all the key values for the keyboard from the Keyboard.java class
         //and set onClickListener
@@ -94,24 +93,12 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         }
 
         guessedWord = findViewById(R.id.guessWord);
-
-
-
         guessedWord.setLetterSpacing((float) 0.5);
 
         timer = findViewById(R.id.timer);
 
         progressLeft = findViewById(R.id.progressBarLeft);
         progressRight = findViewById(R.id.progressBarRight);
-
-
-        //starting 'restart-' and 'homebutton' hidden/(GONE)
-        restartButton = findViewById(R.id.playAgain);
-        restartButton.setVisibility(View.GONE);
-        restartButton.setOnClickListener(this);
-        homeButton = findViewById(R.id.home);
-        homeButton.setVisibility(View.GONE);
-        homeButton.setOnClickListener(this);
 
         gameImg = findViewById(R.id.galgeImage);
     }
@@ -153,17 +140,9 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 if (logik.erSpilletVundet()) {
                     timePassed = SystemClock.elapsedRealtime() - timer.getBase();
                     System.out.println("her er tiden: " + timePassed);
-                    highscoreLogic.addScore(timePassed, highscoreLogic.getHighscoreKey(), this);
+                    highscoreLogic.addScore(timePassed, logik.getBrugteBogstaver().size(), logik.getOrdet(), highscoreLogic.getHighscoreKey(), this);
                     gameEnded(true);
                 }
-            } else if (view == homeButton) {
-                //sending the time via intent
-                Intent i = new Intent(this, MainActivity.class);
-                i.putExtra("time", timePassed);
-                startActivity(i);
-            } else if (view == restartButton) {
-                Intent i = new Intent(this, Game.class);
-                startActivity(i);
             }
         }
     }
@@ -182,8 +161,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
 
     public void gameEnded(boolean winner) {
         timer.stop();
-        restartButton.setVisibility(View.VISIBLE);
-        homeButton.setVisibility(View.VISIBLE);
         for (Button b : keys) {
             b.setClickable(false);
         }
@@ -201,7 +178,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         //progressBars in another thread
         final Handler handler = new Handler();
         new Thread(new Runnable() {
-            int secToRun = highScoreMilisec / 100;
+            int secToRun = (highScoreMilisec / 100);
             int pgStatus = 0;
 
             @Override

@@ -39,7 +39,6 @@ public class EndGame extends AppCompatActivity {
         //go to the fragment
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.endGameFramelayout, new Winner_loser(winner))
-                .addToBackStack(null)
                 .commit();
     }
 }

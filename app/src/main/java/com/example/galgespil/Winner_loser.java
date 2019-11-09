@@ -1,9 +1,11 @@
 package com.example.galgespil;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,10 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class Winner_loser extends Fragment {
+public class Winner_loser extends Fragment implements View.OnClickListener {
     private boolean winner;
     private ImageView img;
     private TextView title, time, guesses;
+    private Button restart, home;
 
     private long timeInMs;
     private int amountOfGuesses;
@@ -42,6 +45,11 @@ public class Winner_loser extends Fragment {
         title = layout.findViewById(R.id.title_endgame);
         time = layout.findViewById(R.id.time_endgame);
         guesses = layout.findViewById(R.id.guesses_endgame);
+        restart = layout.findViewById(R.id.restart);
+        home = layout.findViewById(R.id.home);
+
+        restart.setOnClickListener(this);
+        home.setOnClickListener(this);
 
         if(winner) {
             img.setImageResource(R.drawable.winner);
@@ -62,5 +70,16 @@ public class Winner_loser extends Fragment {
         }
 
         return layout;
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view == restart) {
+            Intent i = new Intent(getActivity(), Game.class);
+            startActivity(i);
+        } else if(view == home) {
+            Intent i = new Intent(getActivity(), MainActivity.class);
+            startActivity(i);
+        }
     }
 }
