@@ -8,4 +8,21 @@
     <string name="display_end_guesses">Du brugte %d forsøg</string>
     <string name="winner">Winner</string>
     <string name="loser">Loser</string>
+    <string name="showTheWord">Ordet var: %s</string>
+    <string name="help">Hjælp</string>
+    <string name="game_title">Galgespil</string>
+    <string name="highscore">Highscore</string>
+    <string name="start_game">Start spil</string>
+    <string name="showHelp_english">Click on \"START GAME\" and try to guess the word hidden in asterisk(stars).
+            \n\nSee if you can beat the timer in the bottom of your screen and become number 1!!
+            \n\nYou can also see your highscores in \"HIGHSCORE\"</string>
+    <string name="showHelp_danish">Klik på \"START SPIL\" og gæt det hemmelige ord gemt i stjernerne.
+            \n\nSe om du kan være hurtigere end timeren i bunden af skærmen og bliv nummer 1!!
+            \n\nDu kan se din highscore i \"HIGHSCORE\"</string>
+    <string name="keyboard_layout">Tastatur</string>
+    <string name="abc">ABC</string>
+    <string name="qwerty">QWERTY</string>
+    <string name="setting">Indstillinger</string>
+    <string name="cancel">Fortryd</string>
+    <string name="ok">OK</string>
 </resources>

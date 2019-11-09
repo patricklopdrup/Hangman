@@ -34,7 +34,7 @@ public class EndGame extends AppCompatActivity {
         //passing the data from the bundle to our fragment
         Winner_loser winner_loser = new Winner_loser();
         winner_loser.setArguments(bundle);
-        System.out.println("min bungle: "+bundle.toString());
+        System.out.println("min bundle: "+bundle.toString());
 
         //go to the fragment
         getSupportFragmentManager().beginTransaction()

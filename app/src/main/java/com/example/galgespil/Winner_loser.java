@@ -16,11 +16,12 @@ import androidx.fragment.app.Fragment;
 public class Winner_loser extends Fragment implements View.OnClickListener {
     private boolean winner;
     private ImageView img;
-    private TextView title, time, guesses;
+    private TextView title, time, guesses, word;
     private Button restart, home;
 
     private long timeInMs;
     private int amountOfGuesses;
+    private String theWord;
 
     public Winner_loser() {}
     public Winner_loser(boolean winner) {
@@ -30,7 +31,7 @@ public class Winner_loser extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.frag_winner, container, false);
+        View layout = inflater.inflate(R.layout.frag_winner_loser, container, false);
 
 
         System.out.println("winner i frag er: " + winner);
@@ -40,11 +41,15 @@ public class Winner_loser extends Fragment implements View.OnClickListener {
         //timeInMs = getArguments().getLong("time", 1000L);
         timeInMs = getActivity().getIntent().getLongExtra("time", 1000L);
 
+        theWord = getActivity().getIntent().getStringExtra("word");
+
 
         img = layout.findViewById(R.id.img_endgame);
         title = layout.findViewById(R.id.title_endgame);
         time = layout.findViewById(R.id.time_endgame);
         guesses = layout.findViewById(R.id.guesses_endgame);
+        word = layout.findViewById(R.id.word_endgame);
+
         restart = layout.findViewById(R.id.restart);
         home = layout.findViewById(R.id.home);
 
@@ -52,6 +57,8 @@ public class Winner_loser extends Fragment implements View.OnClickListener {
         home.setOnClickListener(this);
 
         if(winner) {
+            word.setVisibility(View.GONE);
+            time.setVisibility(View.VISIBLE);
             img.setImageResource(R.drawable.winner);
             title.setText(getString(R.string.winner));
             guesses.setText(getString(R.string.display_end_guesses, amountOfGuesses));
@@ -61,12 +68,13 @@ public class Winner_loser extends Fragment implements View.OnClickListener {
             } else {
                 time.setText(getString(R.string.display_end_time_in_sec, timeInSec));
             }
-
         } else {
+            word.setVisibility(View.VISIBLE);
+            time.setVisibility(View.GONE);
             img.setImageResource(R.drawable.loser);
+            word.setText(getString(R.string.showTheWord, theWord));
             title.setText(getString(R.string.loser));
             guesses.setText(getString(R.string.display_end_guesses, amountOfGuesses));
-            time.setVisibility(View.GONE);
         }
 
         return layout;

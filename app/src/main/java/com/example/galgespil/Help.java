@@ -20,6 +20,6 @@ public class Help extends AppCompatActivity {
 
         helpText = findViewById(R.id.helpText);
 
-        helpText.setText(text);
+        helpText.setText(R.string.showHelp_danish);
     }
 }

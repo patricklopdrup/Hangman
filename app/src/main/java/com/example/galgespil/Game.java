@@ -167,9 +167,8 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         Intent i = new Intent(this, EndGame.class);
         i.putExtra("winner", winner);
         i.putExtra("guesses", logik.getBrugteBogstaver().size());
-        if(winner) {
-            i.putExtra("time", timePassed);
-        }
+        if(winner) i.putExtra("time", timePassed);
+        else i.putExtra("word", logik.getOrdet());
         System.out.println("winner er: " + winner);
         startActivity(i);
     }

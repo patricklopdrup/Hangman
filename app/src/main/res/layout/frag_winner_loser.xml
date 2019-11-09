@@ -58,23 +58,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guesses_endgame" />
 
+    <TextView
+        android:id="@+id/word_endgame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="80dp"
+        android:layout_marginTop="20dp"
+        android:text="word"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guesses_endgame" />
+
     <Button
         android:id="@+id/restart"
         android:layout_width="100dp"
         android:layout_height="60dp"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="95dp"
         android:text="Restart"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/time_endgame" />
+        app:layout_constraintTop_toBottomOf="@+id/guesses_endgame" />
 
     <Button
         android:id="@+id/home"
         android:layout_width="100dp"
         android:layout_height="60dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="95dp"
         android:layout_marginEnd="80dp"
         android:text="Home"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/time_endgame" />
+        app:layout_constraintTop_toBottomOf="@+id/guesses_endgame" />
 </androidx.constraintlayout.widget.ConstraintLayout>
