@@ -1,13 +1,13 @@
 <resources>
-    <string name="app_name">Galgespil</string>
+    <string name="app_name">s185092 Patricks Galgespil</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="display_end_time_in_sec">Det tog %.2f sek</string>
     <string name="display_end_time_in_min">Det tog %d min %d sek</string>
     <string name="display_end_guesses">Du brugte %d forsøg</string>
-    <string name="winner">Winner</string>
-    <string name="loser">Loser</string>
+    <string name="winner">Vinder</string>
+    <string name="loser">Taber</string>
     <string name="showTheWord">Ordet var: %s</string>
     <string name="help">Hjælp</string>
     <string name="game_title">Galgespil</string>
@@ -25,4 +25,10 @@
     <string name="setting">Indstillinger</string>
     <string name="cancel">Fortryd</string>
     <string name="ok">OK</string>
+    <string name="restart">Spil igen</string>
+    <string name="home">Hjem</string>
+    <string name="word">ordet</string>
+    <string name="guesses">forsøg</string>
+    <string name="number">999</string>
+    <string name="time_used">tiden</string>
 </resources>

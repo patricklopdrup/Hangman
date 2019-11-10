@@ -45,10 +45,11 @@ public class Highscore extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-            TextView title = holder.itemView.findViewById(R.id.title);
-            TextView desc = holder.itemView.findViewById(R.id.description);
+            TextView timeUsed = holder.itemView.findViewById(R.id.time_used);
+            TextView word = holder.itemView.findViewById(R.id.the_word);
             ImageView image = holder.itemView.findViewById(R.id.image);
             TextView pos = holder.itemView.findViewById(R.id.placement);
+            TextView guesses = holder.itemView.findViewById(R.id.guesses);
 
 
             switch (position) {
@@ -73,7 +74,10 @@ public class Highscore extends AppCompatActivity {
                     pos.setText("" + (position+1));
                     break;
             }
-            desc.setText("Tid: "+ (((float)highscoreSorted.get(position).getTime()/1000)) + " sek");
+            timeUsed.setText("Tid: "+ (((float)highscoreSorted.get(position).getTime()/1000)) + " sek");
+            word.setText(highscoreSorted.get(position).getWord());
+            guesses.setText("" + highscoreSorted.get(position).getGuesses());
+
             System.out.println("pos " + position + ":" + highscoreSorted.get(position));
         }
 
