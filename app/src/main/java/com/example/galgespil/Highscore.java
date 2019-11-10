@@ -27,6 +27,7 @@ public class Highscore extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_highscore);
 
+        //getting my sorted highscoreList
         highscoreSorted = highscoreLogic.getSortedHighscoreList(highscoreLogic.getHighscoreKey(), this);
 
         recyclerView = new RecyclerView(this);
@@ -37,21 +38,24 @@ public class Highscore extends AppCompatActivity {
     }
 
     RecyclerView.Adapter adapter = new RecyclerView.Adapter() {
+        //this inflate the "template" for how one element in the list looks like
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View itemView = getLayoutInflater().inflate(R.layout.list_element, parent, false);
             return new RecyclerView.ViewHolder(itemView) {};
         }
 
+        //here we add data to the "template" for every element in our array. We use "int position" for this
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+            //getting the views
             TextView timeUsed = holder.itemView.findViewById(R.id.time_used);
             TextView word = holder.itemView.findViewById(R.id.the_word);
             ImageView image = holder.itemView.findViewById(R.id.image);
             TextView pos = holder.itemView.findViewById(R.id.placement);
             TextView guesses = holder.itemView.findViewById(R.id.guesses);
 
-
+            //switch for number 1,2 and 3. They have there own medal image.
             switch (position) {
                 case 0:
                     image.setVisibility(View.VISIBLE);
@@ -76,11 +80,13 @@ public class Highscore extends AppCompatActivity {
             }
             long timeInMs = highscoreSorted.get(position).getTime();
             float timeInSec = ((float)timeInMs / 1000);
+            //if time is more than 60 sec, we write fx "1 min 14 sek"
             if(timeInSec >= 60.0) {
                 timeUsed.setText(getString(R.string.show_time_used_min, (int)(timeInSec)/60, (int)(timeInSec)%60));
             } else {
                 timeUsed.setText(getString(R.string.show_time_used, timeInSec));
             }
+            //setting the specific word and amount of guesses
             word.setText(getString(R.string.show_word, highscoreSorted.get(position).getWord()));
             guesses.setText(getString(R.string.show_guesses, highscoreSorted.get(position).getGuesses()));
         }

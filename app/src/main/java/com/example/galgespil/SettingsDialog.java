@@ -22,12 +22,12 @@ public class SettingsDialog extends AppCompatDialogFragment {
         View view = inflater.inflate(R.layout.frag_setting_dialog, null);
         toggle = view.findViewById(R.id.toggleButton);
 
-        int hej = game.getKeyboardChoise(game.getKeyboardKey(), getContext());
-        System.out.println("valgt: " + hej);
-        if(hej == 0) {
+        int keyboardChoise = game.getKeyboardChoise(game.getKeyboardKey(), getContext());
+        System.out.println("valgt: " + keyboardChoise);
+        if(keyboardChoise == 0) {
             System.out.println("qwerty");
             toggle.setChecked(true);
-        } else if(hej == 1) {
+        } else if(keyboardChoise == 1) {
             System.out.println("abc");
             toggle.setChecked(false);
         }

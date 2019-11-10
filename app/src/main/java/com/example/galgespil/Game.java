@@ -25,7 +25,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 public class Game extends AppCompatActivity implements View.OnClickListener {
     private Galgelogik logik = new Galgelogik();
@@ -41,6 +40,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     private boolean firstLetterGuessed = false;
     private long timePassed;
 
+    //two progressionbars. The right one is rotated 180 degrees
     private ProgressBar progressLeft, progressRight;
     private int highScoreMilisec;
 
@@ -92,9 +92,11 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
             keys[i].setOnClickListener(this);
         }
 
+        //more spacing between letters in the word that's about to be guessed
         guessedWord = findViewById(R.id.guessWord);
         guessedWord.setLetterSpacing((float) 0.5);
 
+        //this is the clock in the upper right corner
         timer = findViewById(R.id.timer);
 
         progressLeft = findViewById(R.id.progressBarLeft);
@@ -105,6 +107,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
+        //looping all buttons to see which one is pressed
         for (Button btn : keys) {
             if (btn.getId() == view.getId()) {
                 //starting the timer the first time, and only the first time, a key is pressed
@@ -112,6 +115,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                     timer.setBase(SystemClock.elapsedRealtime());
                     timer.start();
                     firstLetterGuessed = true;
+                    //starting the progressbar in another thread
                     progressBarThread();
                 }
 
@@ -126,10 +130,12 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                     //gets the exact id for the img
                     int resID = getResources().getIdentifier(imgToShow, "drawable", getPackageName());
                     gameImg.setImageResource(resID);
+                    //setting the button to color: red and make it unclickable
                     btn.setTextColor(Color.RED);
                     btn.setClickable(false);
                 }
                 if (logik.erSidsteBogstavKorrekt()) {
+                    //makes the button green and unclickable
                     btn.setTextColor(Color.parseColor("#08A026"));
                     btn.setClickable(false);
                 }
@@ -140,6 +146,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 if (logik.erSpilletVundet()) {
                     timePassed = SystemClock.elapsedRealtime() - timer.getBase();
                     System.out.println("her er tiden: " + timePassed);
+                    //adding the score to sharedPrefs manager
                     highscoreLogic.addScore(timePassed, logik.getBrugteBogstaver().size(), logik.getOrdet(), highscoreLogic.getHighscoreKey(), this);
                     gameEnded(true);
                 }
@@ -165,8 +172,10 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
             b.setClickable(false);
         }
         Intent i = new Intent(this, EndGame.class);
+        //send extra data over to intent
         i.putExtra("winner", winner);
         i.putExtra("guesses", logik.getBrugteBogstaver().size());
+        //we only send the time if the game were won and the word if lost
         if(winner) i.putExtra("time", timePassed);
         else i.putExtra("word", logik.getOrdet());
         System.out.println("winner er: " + winner);
@@ -202,6 +211,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         }).start();
     }
 
+    // TODO: 10-11-2019 add til Keyboard klasse
     public void saveKeyboardChoise(String key, int keyboardChoice, Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();

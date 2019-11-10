@@ -33,8 +33,6 @@ public class Winner_loser extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.frag_winner_loser, container, false);
 
-
-        System.out.println("winner i frag er: " + winner);
         //disse tager ligenu det som bliver sendt afsted fra Game.java og ikke fra EndGame,
         //som jeg gerne vil. Jeg vil gerne overfører dataen via fragmenter og ikke aktiviteter
         amountOfGuesses = getActivity().getIntent().getIntExtra("guesses", -1);
@@ -56,6 +54,7 @@ public class Winner_loser extends Fragment implements View.OnClickListener {
         restart.setOnClickListener(this);
         home.setOnClickListener(this);
 
+        //we use the same layout for both winner and loser
         if(winner) {
             word.setVisibility(View.GONE);
             time.setVisibility(View.VISIBLE);
@@ -80,6 +79,7 @@ public class Winner_loser extends Fragment implements View.OnClickListener {
         return layout;
     }
 
+    //can go back to main menu or take another game
     @Override
     public void onClick(View view) {
         if(view == restart) {
