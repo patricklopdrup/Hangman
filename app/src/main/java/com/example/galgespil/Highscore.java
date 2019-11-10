@@ -76,7 +76,11 @@ public class Highscore extends AppCompatActivity {
             }
             long timeInMs = highscoreSorted.get(position).getTime();
             float timeInSec = ((float)timeInMs / 1000);
-            timeUsed.setText(getString(R.string.show_time_used, timeInSec));
+            if(timeInSec >= 60.0) {
+                timeUsed.setText(getString(R.string.show_time_used_min, (int)(timeInSec)/60, (int)(timeInSec)%60));
+            } else {
+                timeUsed.setText(getString(R.string.show_time_used, timeInSec));
+            }
             word.setText(getString(R.string.show_word, highscoreSorted.get(position).getWord()));
             guesses.setText(getString(R.string.show_guesses, highscoreSorted.get(position).getGuesses()));
         }

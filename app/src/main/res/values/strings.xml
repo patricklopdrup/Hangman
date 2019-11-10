@@ -32,6 +32,7 @@
     <string name="number">999</string>
     <string name="time_used">tiden</string>
     <string name="show_time_used">%.2f sek</string>
+    <string name="show_time_used_min">%d min %d sek</string>
     <string name="show_guesses">%d forsøg</string>
     <string name="show_word">Ordet: %s</string>
     <string name="line">__________________________________________________</string>
