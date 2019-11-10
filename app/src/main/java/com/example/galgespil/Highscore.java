@@ -71,14 +71,14 @@ public class Highscore extends AppCompatActivity {
                 default:
                     image.setVisibility(View.GONE);
                     pos.setVisibility(View.VISIBLE);
-                    pos.setText("" + (position+1));
+                    pos.setText(getString(R.string.show_pos, (position+1)));
                     break;
             }
-            timeUsed.setText("Tid: "+ (((float)highscoreSorted.get(position).getTime()/1000)) + " sek");
-            word.setText(highscoreSorted.get(position).getWord());
-            guesses.setText("" + highscoreSorted.get(position).getGuesses());
-
-            System.out.println("pos " + position + ":" + highscoreSorted.get(position));
+            long timeInMs = highscoreSorted.get(position).getTime();
+            float timeInSec = ((float)timeInMs / 1000);
+            timeUsed.setText(getString(R.string.show_time_used, timeInSec));
+            word.setText(getString(R.string.show_word, highscoreSorted.get(position).getWord()));
+            guesses.setText(getString(R.string.show_guesses, highscoreSorted.get(position).getGuesses()));
         }
 
         @Override
