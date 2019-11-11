@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Game extends AppCompatActivity implements View.OnClickListener {
@@ -56,10 +57,12 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         //gets word from dr.dk. Uses the same Galgelogik logik as above (global variable)
         new AsyncTask() {
 
+            // TODO: 11-11-2019 lav en cache til ordene, så den ikke skal hente hver gang
             @Override
             protected Object doInBackground(Object[] objects) {
                 try {
                     logik.hentOrdFraDr();
+                    filterWordFromDr(5);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -106,6 +109,24 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         progressRight = findViewById(R.id.progressBarRight);
 
         gameImg = findViewById(R.id.galgeImage);
+    }
+
+    /**
+     * This filter the list of words in "muligeOrd" to be larger than minimumSize
+     * @param minimumSize the minimum length of a word
+     */
+    private void filterWordFromDr(int minimumSize) {
+        int arrSize = logik.muligeOrd.size();
+        //need to be called from the last element to the first because the size getting smaller when we remove
+        for(int i = arrSize-1; i >= 0; i--) {
+            if(logik.muligeOrd.get(i).length() < minimumSize) {
+                logik.muligeOrd.remove(i);
+            }
+        }
+        //we call "nulstil()" to get a word from our filtered list
+        logik.nulstil();
+        System.out.println("start str: " + arrSize + "\nsorteret str: " + logik.muligeOrd.size());
+        System.out.println("filtreret muligeord= " + logik.muligeOrd);
     }
 
     @Override
