@@ -8,15 +8,12 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Debug;
 import android.os.Handler;
-import android.os.StrictMode;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
@@ -24,7 +21,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Game extends AppCompatActivity implements View.OnClickListener {
@@ -112,24 +108,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         gameImg = findViewById(R.id.galgeImage);
     }
 
-    /**
-     * This filter the list of words in "muligeOrd" to be larger than minimumSize
-     * @param minimumSize the minimum length of a word
-     */
-    private void filterWordFromDr(int minimumSize) {
-        int arrSize = logik.muligeOrd.size();
-        //need to be called from the last element to the first because the size getting smaller when we remove
-        for(int i = arrSize-1; i >= 0; i--) {
-            if(logik.muligeOrd.get(i).length() < minimumSize) {
-                logik.muligeOrd.remove(i);
-            }
-        }
-        //we call "nulstil()" to get a word from our filtered list
-        logik.nulstil();
-        System.out.println("start str: " + arrSize + "\nsorteret str: " + logik.muligeOrd.size());
-        System.out.println("filtreret muligeord= " + logik.muligeOrd);
-    }
-
     @Override
     public void onClick(View view) {
         //looping all buttons to see which one is pressed
@@ -177,6 +155,24 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 }
             }
         }
+    }
+
+    /**
+     * This filter the list of words in "muligeOrd" to be larger than minimumSize
+     * @param minimumSize the minimum length of a word
+     */
+    private void filterWordFromDr(int minimumSize) {
+        int arrSize = logik.muligeOrd.size();
+        //need to be called from the last element to the first because the size getting smaller when we remove
+        for(int i = arrSize-1; i >= 0; i--) {
+            if(logik.muligeOrd.get(i).length() < minimumSize) {
+                logik.muligeOrd.remove(i);
+            }
+        }
+        //we call "nulstil()" to get a word from our filtered list
+        logik.nulstil();
+        System.out.println("start str: " + arrSize + "\nsorteret str: " + logik.muligeOrd.size());
+        System.out.println("filtreret muligeord= " + logik.muligeOrd);
     }
 
     // TODO: 02-10-2019 fix denne metode
