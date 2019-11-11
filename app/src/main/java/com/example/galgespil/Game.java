@@ -71,6 +71,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 visibleWord = o.toString();
                 guessedWord.setText(visibleWord);
                 logik.logStatus();
+                for(Button btn : keys) btn.setClickable(true);
             }
         }.execute();
 
@@ -90,6 +91,8 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
             keys[i] = findViewById(buttonID);
             keys[i].setText(key);
             keys[i].setOnClickListener(this);
+            //start with keys unclickable
+            keys[i].setClickable(false);
         }
 
         //more spacing between letters in the word that's about to be guessed
