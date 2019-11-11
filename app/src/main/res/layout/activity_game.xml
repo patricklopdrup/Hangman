@@ -21,7 +21,7 @@
         android:layout_height="66dp"
         android:paddingVertical="14dp"
         android:textAlignment="center"
-        android:textSize="25dp"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,7 +30,7 @@
         android:layout_width="291dp"
         android:layout_height="66dp"
         android:textAlignment="center"
-        android:text="Galgespil"
+        android:text="@string/game_title"
         android:textSize="45sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -39,11 +39,11 @@
         android:id="@+id/guessWord"
         android:layout_width="410dp"
         android:layout_height="54dp"
-        android:hint="Ordet du skal gætte"
-        android:text="Gæt ordet"
+        android:hint="@string/word_to_guess"
+        android:text="@string/guess_word_field"
         android:textAlignment="center"
         android:paddingVertical="5dp"
-        android:textSize="30dp"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.058"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +74,7 @@
         android:backgroundTint="#ededed"
         android:text="Q"
         android:textAlignment="center"
-        android:textSize="17dp"
+        android:textSize="17sp"
         app:layout_constraintEnd_toStartOf="@+id/button2"
         app:layout_constraintTop_toBottomOf="@+id/galgeImage" />
 
@@ -86,7 +86,7 @@
         android:backgroundTint="#ededed"
         android:text="Q"
         android:textAlignment="center"
-        android:textSize="17dp"
+        android:textSize="17sp"
         app:layout_constraintEnd_toStartOf="@+id/button3"
         app:layout_constraintTop_toBottomOf="@+id/galgeImage" />
 
@@ -98,7 +98,7 @@
         android:backgroundTint="#ededed"
         android:text="Q"
         android:textAlignment="center"
-        android:textSize="17dp"
+        android:textSize="17sp"
         app:layout_constraintEnd_toStartOf="@+id/button4"
         app:layout_constraintTop_toBottomOf="@+id/galgeImage" />
 
@@ -110,7 +110,7 @@
         android:backgroundTint="#ededed"
         android:text="Q"
         android:textAlignment="center"
-        android:textSize="17dp"
+        android:textSize="17sp"
         app:layout_constraintEnd_toStartOf="@+id/button5"
         app:layout_constraintTop_toBottomOf="@+id/galgeImage" />
 
@@ -122,7 +122,7 @@
         android:backgroundTint="#ededed"
         android:text="Q"
         android:textAlignment="center"
-        android:textSize="17dp"
+        android:textSize="17sp"
         app:layout_constraintEnd_toStartOf="@+id/button6"
         app:layout_constraintTop_toBottomOf="@+id/galgeImage" />
 
@@ -134,7 +134,7 @@
         android:backgroundTint="#ededed"
         android:text="Q"
         android:textAlignment="center"
-        android:textSize="17dp"
+        android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/galgeImage" />
@@ -147,7 +147,7 @@
         android:backgroundTint="#ededed"
         android:text="Q"
         android:textAlignment="center"
-        android:textSize="17dp"
+        android:textSize="17sp"
         app:layout_constraintStart_toEndOf="@+id/button6"
         app:layout_constraintTop_toBottomOf="@+id/galgeImage" />
 
@@ -159,7 +159,7 @@
         android:backgroundTint="#ededed"
         android:text="Q"
         android:textAlignment="center"
-        android:textSize="17dp"
+        android:textSize="17sp"
         app:layout_constraintStart_toEndOf="@+id/button7"
         app:layout_constraintTop_toBottomOf="@+id/galgeImage" />
 
@@ -171,7 +171,7 @@
         android:backgroundTint="#ededed"
         android:text="Q"
         android:textAlignment="center"
-        android:textSize="17dp"
+        android:textSize="17sp"
         app:layout_constraintStart_toEndOf="@+id/button8"
         app:layout_constraintTop_toBottomOf="@+id/galgeImage" />
 
@@ -183,7 +183,7 @@
         android:backgroundTint="#ededed"
         android:text="Q"
         android:textAlignment="center"
-        android:textSize="17dp"
+        android:textSize="17sp"
         app:layout_constraintStart_toEndOf="@+id/button9"
         app:layout_constraintTop_toBottomOf="@+id/galgeImage" />
 
@@ -195,7 +195,7 @@
         android:backgroundTint="#ededed"
         android:text="Q"
         android:textAlignment="center"
-        android:textSize="17dp"
+        android:textSize="17sp"
         app:layout_constraintStart_toEndOf="@+id/button10"
         app:layout_constraintTop_toBottomOf="@+id/galgeImage" />
 
@@ -207,7 +207,7 @@
         android:backgroundTint="#ededed"
         android:text="Q"
         android:textAlignment="center"
-        android:textSize="17dp"
+        android:textSize="17sp"
         app:layout_constraintEnd_toStartOf="@+id/button13"
         app:layout_constraintTop_toBottomOf="@+id/button1" />
 
@@ -219,7 +219,7 @@
         android:backgroundTint="#ededed"
         android:text="Q"
         android:textAlignment="center"
-        android:textSize="17dp"
+        android:textSize="17sp"
         app:layout_constraintEnd_toStartOf="@+id/button14"
         app:layout_constraintTop_toBottomOf="@+id/button2" />
 
@@ -231,7 +231,7 @@
         android:backgroundTint="#ededed"
         android:text="Q"
         android:textAlignment="center"
-        android:textSize="17dp"
+        android:textSize="17sp"
         app:layout_constraintEnd_toStartOf="@+id/button15"
         app:layout_constraintTop_toBottomOf="@+id/button3" />
 
@@ -243,7 +243,7 @@
         android:backgroundTint="#ededed"
         android:text="Q"
         android:textAlignment="center"
-        android:textSize="17dp"
+        android:textSize="17sp"
         app:layout_constraintEnd_toStartOf="@+id/button16"
         app:layout_constraintTop_toBottomOf="@+id/button4" />
 
@@ -255,7 +255,7 @@
         android:backgroundTint="#ededed"
         android:text="Q"
         android:textAlignment="center"
-        android:textSize="17dp"
+        android:textSize="17sp"
         app:layout_constraintEnd_toStartOf="@+id/button17"
         app:layout_constraintTop_toBottomOf="@+id/button5" />
 
@@ -267,7 +267,7 @@
         android:backgroundTint="#ededed"
         android:text="Q"
         android:textAlignment="center"
-        android:textSize="17dp"
+        android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button6" />
@@ -280,7 +280,7 @@
         android:backgroundTint="#ededed"
         android:text="Q"
         android:textAlignment="center"
-        android:textSize="17dp"
+        android:textSize="17sp"
         app:layout_constraintStart_toEndOf="@+id/button17"
         app:layout_constraintTop_toBottomOf="@+id/button7" />
 
@@ -292,7 +292,7 @@
         android:backgroundTint="#ededed"
         android:text="Q"
         android:textAlignment="center"
-        android:textSize="17dp"
+        android:textSize="17sp"
         app:layout_constraintStart_toEndOf="@+id/button18"
         app:layout_constraintTop_toBottomOf="@+id/button8" />
 
@@ -304,7 +304,7 @@
         android:backgroundTint="#ededed"
         android:text="Q"
         android:textAlignment="center"
-        android:textSize="17dp"
+        android:textSize="17sp"
         app:layout_constraintStart_toEndOf="@+id/button19"
         app:layout_constraintTop_toBottomOf="@+id/button9" />
 
@@ -316,7 +316,7 @@
         android:backgroundTint="#ededed"
         android:text="Q"
         android:textAlignment="center"
-        android:textSize="17dp"
+        android:textSize="17sp"
         app:layout_constraintStart_toEndOf="@+id/button20"
         app:layout_constraintTop_toBottomOf="@+id/button10" />
 
@@ -328,7 +328,7 @@
         android:backgroundTint="#ededed"
         android:text="Q"
         android:textAlignment="center"
-        android:textSize="17dp"
+        android:textSize="17sp"
         app:layout_constraintStart_toEndOf="@+id/button21"
         app:layout_constraintTop_toBottomOf="@+id/button11" />
 
@@ -340,7 +340,7 @@
         android:backgroundTint="#ededed"
         android:text="Q"
         android:textAlignment="center"
-        android:textSize="17dp"
+        android:textSize="17sp"
         app:layout_constraintEnd_toStartOf="@+id/button24"
         app:layout_constraintTop_toBottomOf="@+id/button14" />
 
@@ -352,7 +352,7 @@
         android:backgroundTint="#ededed"
         android:text="Q"
         android:textAlignment="center"
-        android:textSize="17dp"
+        android:textSize="17sp"
         app:layout_constraintEnd_toStartOf="@+id/button25"
         app:layout_constraintTop_toBottomOf="@+id/button15" />
 
@@ -364,7 +364,7 @@
         android:backgroundTint="#ededed"
         android:text="Q"
         android:textAlignment="center"
-        android:textSize="17dp"
+        android:textSize="17sp"
         app:layout_constraintEnd_toStartOf="@+id/button26"
         app:layout_constraintTop_toBottomOf="@+id/button16" />
 
@@ -376,7 +376,7 @@
         android:backgroundTint="#ededed"
         android:text="Q"
         android:textAlignment="center"
-        android:textSize="17dp"
+        android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button17" />
@@ -389,7 +389,7 @@
         android:backgroundTint="#ededed"
         android:text="Q"
         android:textAlignment="center"
-        android:textSize="17dp"
+        android:textSize="17sp"
         app:layout_constraintStart_toEndOf="@+id/button26"
         app:layout_constraintTop_toBottomOf="@+id/button18" />
 
@@ -401,7 +401,7 @@
         android:backgroundTint="#ededed"
         android:text="Q"
         android:textAlignment="center"
-        android:textSize="17dp"
+        android:textSize="17sp"
         app:layout_constraintStart_toEndOf="@+id/button27"
         app:layout_constraintTop_toBottomOf="@+id/button19" />
 
@@ -413,7 +413,7 @@
         android:backgroundTint="#ededed"
         android:text="Q"
         android:textAlignment="center"
-        android:textSize="17dp"
+        android:textSize="17sp"
         app:layout_constraintStart_toEndOf="@+id/button28"
         app:layout_constraintTop_toBottomOf="@+id/button20" />
 

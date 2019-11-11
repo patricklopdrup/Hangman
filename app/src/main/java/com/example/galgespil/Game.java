@@ -71,6 +71,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
 
             @Override
             protected void onPostExecute(Object o) {
+                //using the "getSynligtOrd" from return above
                 visibleWord = o.toString();
                 guessedWord.setText(visibleWord);
                 logik.logStatus();

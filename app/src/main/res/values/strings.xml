@@ -38,4 +38,6 @@
     <string name="line">__________________________________________________</string>
     <string name="show_pos">%d</string>
     <string name="set_toast">Tastatur er: %s</string>
+    <string name="guess_word_field">Henter ord...</string>
+    <string name="word_to_guess">Ordet du skal gætte</string>
 </resources>
