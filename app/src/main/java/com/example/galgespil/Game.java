@@ -183,6 +183,8 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         else i.putExtra("word", logik.getOrdet());
         System.out.println("winner er: " + winner);
         startActivity(i);
+        //when we go to winner/loser activity we delete the game from backstack
+        finish();
     }
 
     public void progressBarThread() {

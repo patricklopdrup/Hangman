@@ -37,4 +37,5 @@
     <string name="show_word">Ordet: %s</string>
     <string name="line">__________________________________________________</string>
     <string name="show_pos">%d</string>
+    <string name="set_toast">Tastatur er: %s</string>
 </resources>

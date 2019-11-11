@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AlertDialog;
@@ -22,7 +23,7 @@ public class SettingsDialog extends AppCompatDialogFragment {
         View view = inflater.inflate(R.layout.frag_setting_dialog, null);
         toggle = view.findViewById(R.id.toggleButton);
 
-        int keyboardChoise = game.getKeyboardChoise(game.getKeyboardKey(), getContext());
+        final int keyboardChoise = game.getKeyboardChoise(game.getKeyboardKey(), getContext());
         System.out.println("valgt: " + keyboardChoise);
         if(keyboardChoise == 0) {
             System.out.println("qwerty");
@@ -46,6 +47,13 @@ public class SettingsDialog extends AppCompatDialogFragment {
                         int keyboard = toggle.isChecked() ? 0 : 1;
                         System.out.println("her er den: " + keyboard);
                         game.saveKeyboardChoise(game.getKeyboardKey(), keyboard, getContext());
+
+                        //give toast to the user of the choice
+                        String keyboardName = "";
+                        if(keyboard == 0) keyboardName = "QWERTY";
+                        if(keyboard == 1) keyboardName = "ABC";
+                        Toast.makeText(getActivity(), getString(R.string.set_toast, keyboardName), Toast.LENGTH_SHORT).show();
+                        System.out.println("hej med diggg");
                     }
                 });
 
