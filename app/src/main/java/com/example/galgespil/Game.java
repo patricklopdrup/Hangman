@@ -244,7 +244,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
 
     public int getKeyboardChoise(String key, Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        return prefs.getInt(key, -1);
+        return prefs.getInt(key, 0);
     }
 
     public String getKeyboardKey() {
