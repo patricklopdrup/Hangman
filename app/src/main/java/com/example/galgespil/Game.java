@@ -27,6 +27,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     private Galgelogik logik = new Galgelogik();
     private Keyboard keyboard = new Keyboard();
     private HighscoreLogic highscoreLogic = new HighscoreLogic();
+    private GameStatLogic gameStatLogic = new GameStatLogic();
 
     private ImageView gameImg;
     private TextView guessedWord;
@@ -36,6 +37,8 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     private Chronometer timer;
     private boolean firstLetterGuessed = false;
     private long timePassed;
+    int rightGuesses = 0;
+    int wrongGuesses = 0;
 
     //two progressionbars. The right one is rotated 180 degrees
     private ProgressBar progressLeft, progressRight;
@@ -49,31 +52,8 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        // TODO: 04-11-2019 lav loading, når den er ved at hente ord fra dr
-        //gets word from dr.dk. Uses the same Galgelogik logik as above (global variable)
-        new AsyncTask() {
-
-            // TODO: 11-11-2019 lav en cache til ordene, så den ikke skal hente hver gang
-            @Override
-            protected Object doInBackground(Object[] objects) {
-                try {
-                    logik.hentOrdFraDr();
-                    filterWordFromDr(5);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                return logik.getSynligtOrd();
-            }
-
-            @Override
-            protected void onPostExecute(Object o) {
-                //using the "getSynligtOrd" from return above
-                visibleWord = o.toString();
-                guessedWord.setText(visibleWord);
-                logik.logStatus();
-                for(Button btn : keys) btn.setClickable(true);
-            }
-        }.execute();
+        //load word from the web via AsyncTask
+        getWordsFromDr();
 
         keyboardChoice = getKeyboardChoise(keyboardKey, this);
 
@@ -106,6 +86,9 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         progressRight = findViewById(R.id.progressBarRight);
 
         gameImg = findViewById(R.id.galgeImage);
+
+        System.out.println("hey: "+gameStatLogic.winLossRatio(this));
+        System.out.println("mæh " + gameStatLogic.avgRightGuesses(this));
     }
 
     @Override
@@ -134,15 +117,18 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                     int resID = getResources().getIdentifier(imgToShow, "drawable", getPackageName());
                     gameImg.setImageResource(resID);
                     //setting the button to color: red and make it unclickable
+                    wrongGuesses++;
                     btn.setTextColor(Color.RED);
                     btn.setClickable(false);
                 }
                 if (logik.erSidsteBogstavKorrekt()) {
                     //makes the button green and unclickable
+                    rightGuesses++;
                     btn.setTextColor(Color.parseColor("#08A026"));
                     btn.setClickable(false);
                 }
                 if (logik.erSpilletTabt()) {
+                    timePassed = SystemClock.elapsedRealtime() - timer.getBase();
                     gameEnded(false);
                     guessedWord.setText(showWordAfterLoss(guessedWord.toString(), logik.getOrdet()));
                 }
@@ -192,6 +178,14 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         for (Button b : keys) {
             b.setClickable(false);
         }
+
+        int wins = 0;
+        int losses = 0;
+
+        if(winner) wins++;
+        else losses++;
+        gameStatLogic.updateStats(gameStatLogic.getGameStats(this), gameStatLogic.getGAME_OBJECT_KEY(), wins, losses, rightGuesses, wrongGuesses, timePassed, this);
+
         Intent i = new Intent(this, EndGame.class);
         //send extra data over to intent
         i.putExtra("winner", winner);
@@ -203,6 +197,12 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         startActivity(i);
         //when we go to winner/loser activity we delete the game from backstack
         finish();
+    }
+
+    public void calcGameStats(Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+
     }
 
     public void progressBarThread() {
@@ -232,6 +232,33 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 }
             }
         }).start();
+    }
+
+    public void getWordsFromDr() {
+        //gets word from dr.dk. Uses the same Galgelogik logik as above (global variable)
+        new AsyncTask() {
+
+            // TODO: 11-11-2019 lav en cache til ordene, så den ikke skal hente hver gang
+            @Override
+            protected Object doInBackground(Object[] objects) {
+                try {
+                    logik.hentOrdFraDr();
+                    filterWordFromDr(5);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return logik.getSynligtOrd();
+            }
+
+            @Override
+            protected void onPostExecute(Object o) {
+                //using the "getSynligtOrd" from return above
+                visibleWord = o.toString();
+                guessedWord.setText(visibleWord);
+                logik.logStatus();
+                for(Button btn : keys) btn.setClickable(true);
+            }
+        }.execute();
     }
 
     // TODO: 10-11-2019 add til Keyboard klasse
