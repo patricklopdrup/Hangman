@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1053776644743",
+    "firebase_url": "https://hangman-b5e11.firebaseio.com",
+    "project_id": "hangman-b5e11",
+    "storage_bucket": "hangman-b5e11.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1053776644743:android:f3e448c3feb91a7f8d0622",
+        "android_client_info": {
+          "package_name": "com.example.galgespil"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1053776644743-rfknj7pqjadbj4aifdh9ouqk3fqu5p5d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEsyCtp0BX9VebnAhy-UvL55QIedjDyWI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1053776644743-rfknj7pqjadbj4aifdh9ouqk3fqu5p5d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
