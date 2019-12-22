@@ -56,11 +56,10 @@ public class Winner_loser extends Fragment implements View.OnClickListener {
 
         //we use the same layout for both winner and loser
         if(winner) {
-            word.setVisibility(View.GONE);
+            //layout for winner
             time.setVisibility(View.VISIBLE);
             img.setImageResource(R.drawable.winner);
             title.setText(getString(R.string.winner));
-            guesses.setText(getString(R.string.display_end_guesses, amountOfGuesses));
             float timeInSec = ((float)timeInMs / 1000);
             if(timeInSec >= 60.0) {
                 time.setText(getString(R.string.display_end_time_in_min, (int)(timeInSec)/60, (int)(timeInSec)%60));
@@ -68,13 +67,15 @@ public class Winner_loser extends Fragment implements View.OnClickListener {
                 time.setText(getString(R.string.display_end_time_in_sec, timeInSec));
             }
         } else {
-            word.setVisibility(View.VISIBLE);
+            //layout for looser
             time.setVisibility(View.GONE);
             img.setImageResource(R.drawable.loser);
-            word.setText(getString(R.string.showTheWord, theWord));
             title.setText(getString(R.string.loser));
-            guesses.setText(getString(R.string.display_end_guesses, amountOfGuesses));
         }
+        //layout for both
+        word.setVisibility(View.VISIBLE);
+        word.setText(getString(R.string.showTheWord, theWord));
+        guesses.setText(getString(R.string.display_end_guesses, amountOfGuesses));
 
         return layout;
     }

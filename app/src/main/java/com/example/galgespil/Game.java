@@ -190,9 +190,9 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         //send extra data over to intent
         i.putExtra("winner", winner);
         i.putExtra("guesses", logik.getBrugteBogstaver().size());
-        //we only send the time if the game were won and the word if lost
+        i.putExtra("word", logik.getOrdet());
+        //we only send the time if the game were won
         if(winner) i.putExtra("time", timePassed);
-        else i.putExtra("word", logik.getOrdet());
         System.out.println("winner er: " + winner);
         startActivity(i);
         //when we go to winner/loser activity we delete the game from backstack
