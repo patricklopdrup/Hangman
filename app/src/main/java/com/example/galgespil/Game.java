@@ -15,11 +15,14 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.github.jinatonic.confetti.CommonConfetti;
 
 import java.util.List;
 
@@ -147,11 +150,11 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
      * This filter the list of words in "muligeOrd" to be larger than minimumSize
      * @param minimumSize the minimum length of a word
      */
-    private void filterWordFromDr(int minimumSize) {
+    private void filterWordFromDr(int minimumSize, int maximumSize) {
         int arrSize = logik.muligeOrd.size();
         //need to be called from the last element to the first because the size getting smaller when we remove
         for(int i = arrSize-1; i >= 0; i--) {
-            if(logik.muligeOrd.get(i).length() < minimumSize) {
+            if(logik.muligeOrd.get(i).length() < minimumSize || logik.muligeOrd.get(i).length() >= maximumSize) {
                 logik.muligeOrd.remove(i);
             }
         }
@@ -243,7 +246,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
             protected Object doInBackground(Object[] objects) {
                 try {
                     logik.hentOrdFraDr();
-                    filterWordFromDr(5);
+                    filterWordFromDr(5, 14);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

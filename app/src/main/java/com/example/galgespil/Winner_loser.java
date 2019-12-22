@@ -1,7 +1,9 @@
 package com.example.galgespil;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.github.jinatonic.confetti.CommonConfetti;
+
 public class Winner_loser extends Fragment implements View.OnClickListener {
     private boolean winner;
     private ImageView img;
@@ -22,6 +26,9 @@ public class Winner_loser extends Fragment implements View.OnClickListener {
     private long timeInMs;
     private int amountOfGuesses;
     private String theWord;
+
+    private ViewGroup vgContainer;
+    private Handler confettiHandler;
 
     public Winner_loser() {}
     public Winner_loser(boolean winner) {
@@ -41,7 +48,6 @@ public class Winner_loser extends Fragment implements View.OnClickListener {
 
         theWord = getActivity().getIntent().getStringExtra("word");
 
-
         img = layout.findViewById(R.id.img_endgame);
         title = layout.findViewById(R.id.title_endgame);
         time = layout.findViewById(R.id.time_endgame);
@@ -50,6 +56,9 @@ public class Winner_loser extends Fragment implements View.OnClickListener {
 
         restart = layout.findViewById(R.id.restart);
         home = layout.findViewById(R.id.home);
+
+        vgContainer = layout.findViewById(R.id.container);
+        confettiHandler = new Handler();
 
         restart.setOnClickListener(this);
         home.setOnClickListener(this);
@@ -61,6 +70,8 @@ public class Winner_loser extends Fragment implements View.OnClickListener {
             img.setImageResource(R.drawable.winner);
             title.setText(getString(R.string.winner));
             float timeInSec = ((float)timeInMs / 1000);
+            //calling showConfetti after everything else is loaded
+            confettiHandler.post(run);
             if(timeInSec >= 60.0) {
                 time.setText(getString(R.string.display_end_time_in_min, (int)(timeInSec)/60, (int)(timeInSec)%60));
             } else {
@@ -78,6 +89,14 @@ public class Winner_loser extends Fragment implements View.OnClickListener {
         guesses.setText(getString(R.string.display_end_guesses, amountOfGuesses));
 
         return layout;
+    }
+
+    //a runnable for the confetti
+    Runnable run = () -> showConfetti();
+
+    private void showConfetti() {
+        CommonConfetti.rainingConfetti(vgContainer, new int[] { Color.BLACK })
+                .infinite();
     }
 
     //can go back to main menu or take another game
