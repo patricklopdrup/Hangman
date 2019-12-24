@@ -41,4 +41,13 @@
     <string name="guess_word_field">Henter ord...</string>
     <string name="word_to_guess">Ordet du skal gætte</string>
     <string name="log_out">Log ud</string>
+    <string name="createUser">Opret bruger</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="username">Brugernavn</string>
+    <string name="already_user_text"><u>Har du en bruger? Klik her!</u></string>
+    <string name="log_in_text">Log ind</string>
+    <string name="dont_have_user_text"><u>Har du ikke en bruger? Klik her!</u></string>
+    <string name="userName_key">userName</string>
+    <string name="repeat_password">Gentag password</string>
 </resources>

@@ -133,7 +133,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 if (logik.erSpilletTabt()) {
                     timePassed = SystemClock.elapsedRealtime() - timer.getBase();
                     gameEnded(false);
-                    guessedWord.setText(showWordAfterLoss(guessedWord.toString(), logik.getOrdet()));
                 }
                 if (logik.erSpilletVundet()) {
                     timePassed = SystemClock.elapsedRealtime() - timer.getBase();
@@ -162,18 +161,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         logik.nulstil();
         System.out.println("start str: " + arrSize + "\nsorteret str: " + logik.muligeOrd.size());
         System.out.println("filtreret muligeord= " + logik.muligeOrd);
-    }
-
-    // TODO: 02-10-2019 fix denne metode
-    public String showWordAfterLoss(String lossWord, String correctWord) {
-        SpannableString ss = new SpannableString(correctWord);
-        ForegroundColorSpan red = new ForegroundColorSpan(Color.RED);
-        for (int i = 0; i < correctWord.length(); i++) {
-            if (lossWord.charAt(i) == '*') {
-                ss.setSpan(red, i, i + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            }
-        }
-        return ss.toString();
     }
 
     public void gameEnded(boolean winner) {
