@@ -11,19 +11,19 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".EndGame"
+            android:name=".Game.EndGame"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Help"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Highscore"
+            android:name=".Highscore.Highscore"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Game"
+            android:name=".Game.Game"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainActivity"
+            android:name=".StartPage.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
