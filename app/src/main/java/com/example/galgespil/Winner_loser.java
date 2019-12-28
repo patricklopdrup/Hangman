@@ -15,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.github.jinatonic.confetti.CommonConfetti;
 
 public class Winner_loser extends Fragment implements View.OnClickListener {
@@ -69,6 +71,10 @@ public class Winner_loser extends Fragment implements View.OnClickListener {
             time.setVisibility(View.VISIBLE);
             img.setImageResource(R.drawable.winner);
             title.setText(getString(R.string.winner));
+
+            //animations for the winner page
+            animateWinner(layout);
+
             float timeInSec = ((float)timeInMs / 1000);
             //calling showConfetti after everything else is loaded
             confettiHandler.post(run);
@@ -82,6 +88,8 @@ public class Winner_loser extends Fragment implements View.OnClickListener {
             time.setVisibility(View.GONE);
             img.setImageResource(R.drawable.loser);
             title.setText(getString(R.string.loser));
+            //animation for the loser page
+            animateLoser(layout);
         }
         //layout for both
         word.setVisibility(View.VISIBLE);
@@ -89,6 +97,26 @@ public class Winner_loser extends Fragment implements View.OnClickListener {
         guesses.setText(getString(R.string.display_end_guesses, amountOfGuesses));
 
         return layout;
+    }
+
+    private void animateLoser(View layout) {
+        YoYo.with(Techniques.FadeIn)
+                .duration(3000)
+                .repeat(0)
+                .playOn(layout.findViewById(R.id.img_endgame));
+    }
+
+    //animation using YoYo library
+    public void animateWinner(View layout) {
+        YoYo.with(Techniques.RubberBand)
+                .duration(700)
+                .repeat(5)
+                .playOn(layout.findViewById(R.id.img_endgame));
+
+        YoYo.with(Techniques.Flash)
+                .duration(500)
+                .repeat(10)
+                .playOn(layout.findViewById(R.id.title_endgame));
     }
 
     //a runnable for the confetti
