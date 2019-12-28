@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.galgespil.Challenges.ChallengeLogic;
 import com.example.galgespil.GameStatistic.GameStatLogic;
 import com.example.galgespil.Highscore.HighscoreLogic;
 import com.example.galgespil.Highscore.HighscoreObject;
@@ -32,6 +33,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     private Keyboard keyboard = new Keyboard();
     private HighscoreLogic highscoreLogic = new HighscoreLogic();
     private GameStatLogic gameStatLogic = new GameStatLogic();
+    ChallengeLogic challengeLogic = new ChallengeLogic();
 
     private ImageView gameImg;
     private TextView guessedWord;
@@ -41,9 +43,11 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     private Chronometer timer;
     private boolean firstLetterGuessed = false;
     private long timePassed;
-    int rightGuesses = 0;
-    int wrongGuesses = 0;
-    int[] guessedLetters = new int[keyboard.qwerty.length];
+    private int rightGuesses = 0;
+    private int wrongGuesses = 0;
+    private boolean isFirstLetterCorrect;
+    private boolean isGameWon = false;
+    private int[] guessedLetters = new int[keyboard.qwerty.length];
 
     //two progressionbars. The right one is rotated 180 degrees
     private ProgressBar progressLeft, progressRight;
@@ -92,7 +96,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
 
         gameImg = findViewById(R.id.galgeImage);
 
-        System.out.println("hey: "+gameStatLogic.winLossRatio(this));
+        System.out.println("hey: "+ gameStatLogic.winLossRatio(this));
         System.out.println("mæh " + gameStatLogic.avgRightGuesses(this));
     }
 
@@ -101,17 +105,21 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         //looping all buttons to see which one is pressed
         for (Button btn : keys) {
             if (btn.getId() == view.getId()) {
+
+                String letter = btn.getText().toString();
+                logik.gætBogstav(letter);
                 //starting the timer the first time, and only the first time, a key is pressed
                 if (!firstLetterGuessed) {
                     timer.setBase(SystemClock.elapsedRealtime());
                     timer.start();
+                    //check if first letter is correct
+                    isFirstLetterCorrect = logik.erSidsteBogstavKorrekt();
+                    System.out.println("first letter: " + isFirstLetterCorrect);
                     firstLetterGuessed = true;
                     //starting the progressbar in another thread
                     progressBarThread();
                 }
 
-                String letter = btn.getText().toString();
-                logik.gætBogstav(letter);
                 //counting each time a letter is clicked
                 countLetters(letter);
 
@@ -138,14 +146,16 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 }
                 if (logik.erSpilletTabt()) {
                     timePassed = SystemClock.elapsedRealtime() - timer.getBase();
-                    gameEnded(false);
+                    isGameWon = false;
+                    gameEnded();
                 }
                 if (logik.erSpilletVundet()) {
                     timePassed = SystemClock.elapsedRealtime() - timer.getBase();
                     System.out.println("her er tiden: " + timePassed);
                     //adding the score to sharedPrefs manager
                     highscoreLogic.addScore(timePassed, logik.getBrugteBogstaver().size(), logik.getOrdet(), highscoreLogic.getHighscoreKey(), this);
-                    gameEnded(true);
+                    isGameWon = true;
+                    gameEnded();
                 }
             }
         }
@@ -188,7 +198,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         System.out.println("længde i game: " + this.guessedLetters.length);
     }
 
-    public void gameEnded(boolean winner) {
+    public void gameEnded() {
         timer.stop();
         for (Button b : keys) {
             b.setClickable(false);
@@ -197,21 +207,32 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         int wins = 0;
         int losses = 0;
 
-        if(winner) wins++;
+        if(isGameWon) wins++;
         else losses++;
         gameStatLogic.updateStats(gameStatLogic.getGameStats(this), gameStatLogic.getGAME_OBJECT_KEY(), wins, losses, rightGuesses, wrongGuesses, timePassed, guessedLetters, this);
 
+        checkChallenges(this);
+
         Intent i = new Intent(this, EndGame.class);
         //send extra data over to intent
-        i.putExtra("winner", winner);
+        i.putExtra("winner", isGameWon);
         i.putExtra("guesses", logik.getBrugteBogstaver().size());
         i.putExtra("word", logik.getOrdet());
         //we only send the time if the game were won
-        if(winner) i.putExtra("time", timePassed);
-        System.out.println("winner er: " + winner);
+        if(isGameWon) i.putExtra("time", timePassed);
+        System.out.println("winner er: " + isGameWon);
         startActivity(i);
         //when we go to winner/loser activity we delete the game from backstack
         finish();
+    }
+
+    private void checkChallenges(Context context) {
+        int winsUnder20 = challengeLogic.checkWinsUnder20(context, timePassed, isGameWon, challengeLogic.getWINS_UNDER_20_LIMIT());
+        int inARow = challengeLogic.checkInARow(context, isGameWon, challengeLogic.getIN_A_ROW_LIMIT());
+        int noMistake = challengeLogic.checkNoMistake(context, wrongGuesses, challengeLogic.getNO_MISTAKE_LIMIT());
+        int firstLetterCorrect = challengeLogic.checkFirstLetterCorrect(context, isFirstLetterCorrect, isGameWon, challengeLogic.getFIRST_LETTER_CORRECT_LIMIT());
+
+        challengeLogic.updateChallengeProgression(challengeLogic.getChallengeProgression(context), challengeLogic.getCHALLENGE_KEY(), winsUnder20, inARow, noMistake, firstLetterCorrect, context);
     }
 
     public void calcGameStats(Context context) {
