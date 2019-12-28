@@ -24,10 +24,10 @@ public class GameStatLogic {
         return gson.fromJson(json, type);
     }
 
-    public void updateStats(GameStatObject gameStatObject, String key, int wins, int losses, int rightGuesses, int wrongGuesses, long gameTime, Context context) {
+    public void updateStats(GameStatObject gameStatObject, String key, int wins, int losses, int rightGuesses, int wrongGuesses, long gameTime, int[] guessedLetters, Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
-        setStats(gameStatObject, wins, losses, rightGuesses, wrongGuesses, gameTime);
+        setStats(gameStatObject, wins, losses, rightGuesses, wrongGuesses, gameTime, guessedLetters);
         Gson gson = new Gson();
         String json = gson.toJson(gameStatObject);
         System.out.println("json gem: " + json);
@@ -35,12 +35,13 @@ public class GameStatLogic {
         editor.commit();
     }
 
-    private void setStats(GameStatObject gso, int wins, int losses, int rightGuesses, int wrongGuesses, long gameTime) {
+    private void setStats(GameStatObject gso, int wins, int losses, int rightGuesses, int wrongGuesses, long gameTime, int[] guessedLetters) {
         gso.setWins(gso.getWins() + wins);
         gso.setLosses(gso.getLosses() + losses);
         gso.setRightGuesses(gso.getRightGuesses() + rightGuesses);
         gso.setWrongGuesses(gso.getWrongGuesses() + wrongGuesses);
         gso.setGameTime(gso.getGameTime() + gameTime);
+        gso.updateGuessedLetters(guessedLetters);
     }
 
     public double winLossRatio(Context context) {

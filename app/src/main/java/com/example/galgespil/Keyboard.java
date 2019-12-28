@@ -1,7 +1,9 @@
 package com.example.galgespil;
 
 public class Keyboard {
-    String[] qwerty = {"q","w","e","r","t","y","u","i","o","p","å",
+    public Keyboard() {}
+
+    public String[] qwerty = {"q","w","e","r","t","y","u","i","o","p","å",
                        "a","s","d","f","g","h","j","k","l","æ","ø",
                                "z","x","c","v","b","n","m"};
 

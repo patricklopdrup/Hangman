@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import com.github.jinatonic.confetti.CommonConfetti;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Game extends AppCompatActivity implements View.OnClickListener {
@@ -42,6 +43,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     private long timePassed;
     int rightGuesses = 0;
     int wrongGuesses = 0;
+    int[] guessedLetters = new int[keyboard.qwerty.length];
 
     //two progressionbars. The right one is rotated 180 degrees
     private ProgressBar progressLeft, progressRight;
@@ -108,7 +110,11 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                     progressBarThread();
                 }
 
-                logik.gætBogstav(btn.getText().toString());
+                String letter = btn.getText().toString();
+                logik.gætBogstav(letter);
+                //counting each time a letter is clicked
+                countLetters(letter);
+
                 guessedWord.setText(logik.getSynligtOrd());
 
                 logik.logStatus();
@@ -119,7 +125,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                     //gets the exact id for the img
                     int resID = getResources().getIdentifier(imgToShow, "drawable", getPackageName());
                     gameImg.setImageResource(resID);
-                    //setting the button to color: red and make it unclickable
+                    //setting the button to "color: red" and make it unclickable
                     wrongGuesses++;
                     btn.setTextColor(Color.RED);
                     btn.setClickable(false);
@@ -146,14 +152,15 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     }
 
     /**
-     * This filter the list of words in "muligeOrd" to be larger than minimumSize
+     * This filter the list of words in "muligeOrd" to be larger than minimumSize and less than maximumSize
      * @param minimumSize the minimum length of a word
+     * @param maximumSize the maximum length of a word
      */
     private void filterWordFromDr(int minimumSize, int maximumSize) {
         int arrSize = logik.muligeOrd.size();
         //need to be called from the last element to the first because the size getting smaller when we remove
         for(int i = arrSize-1; i >= 0; i--) {
-            if(logik.muligeOrd.get(i).length() < minimumSize || logik.muligeOrd.get(i).length() >= maximumSize) {
+            if(logik.muligeOrd.get(i).length() < minimumSize || logik.muligeOrd.get(i).length() > maximumSize) {
                 logik.muligeOrd.remove(i);
             }
         }
@@ -161,6 +168,24 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         logik.nulstil();
         System.out.println("start str: " + arrSize + "\nsorteret str: " + logik.muligeOrd.size());
         System.out.println("filtreret muligeord= " + logik.muligeOrd);
+    }
+
+    /**
+     * counting up letters and putting them in an array. "a" is index 0 and "å" is index 28 (29 letters in total)
+     * @param letter the letter being clicked on
+     */
+    public void countLetters(String letter) {
+        switch(letter) {
+            case "æ": guessedLetters[26] += 1; break;
+            case "ø": guessedLetters[27] += 1; break;
+            case "å": guessedLetters[28] += 1; break;
+            default:
+                //97 is the offset from the ascii table. "a" is 97.
+                int letterInArray = (int)(letter.charAt(0)) - 97;
+                guessedLetters[letterInArray] += 1;
+        }
+        System.out.println("letterArray: " + Arrays.toString(guessedLetters));
+        System.out.println("længde i game: " + this.guessedLetters.length);
     }
 
     public void gameEnded(boolean winner) {
@@ -174,7 +199,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
 
         if(winner) wins++;
         else losses++;
-        gameStatLogic.updateStats(gameStatLogic.getGameStats(this), gameStatLogic.getGAME_OBJECT_KEY(), wins, losses, rightGuesses, wrongGuesses, timePassed, this);
+        gameStatLogic.updateStats(gameStatLogic.getGameStats(this), gameStatLogic.getGAME_OBJECT_KEY(), wins, losses, rightGuesses, wrongGuesses, timePassed, guessedLetters, this);
 
         Intent i = new Intent(this, EndGame.class);
         //send extra data over to intent
