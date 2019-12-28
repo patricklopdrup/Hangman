@@ -79,6 +79,7 @@ public class LogIn extends Fragment implements View.OnClickListener {
                             System.out.println("creation: " + creation);
                             System.out.println("lastSignIn: " + lastSignIn);
                             newUser = (creation == lastSignIn);
+                            System.out.println("er ny? " + newUser);
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -94,9 +95,15 @@ public class LogIn extends Fragment implements View.OnClickListener {
     private void updateUI(FirebaseUser user) {
         if(user != null) {
             if(user.isEmailVerified()) {
-                Intent i = new Intent(getActivity(), MainActivity.class);
-                i.putExtra("newUser", newUser);
-                startActivity(i);
+                //if(newUser) {
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.logIn_framelayout, new ChooseUsername())
+                            .commit();
+//                } else {
+//                    Intent i = new Intent(getActivity(), MainActivity.class);
+//                    i.putExtra("newUser", newUser);
+//                    startActivity(i);
+//                }
             } else {
                 Toast.makeText(getContext(), "Bekræft email.", Toast.LENGTH_SHORT).show();
             }

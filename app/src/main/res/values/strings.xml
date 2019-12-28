@@ -50,4 +50,7 @@
     <string name="dont_have_user_text"><u>Har du ikke en bruger? Klik her!</u></string>
     <string name="userName_key">userName</string>
     <string name="repeat_password">Gentag password</string>
+    <string name="choose_username_text">Vælg brugernavn</string>
+    <string name="choose">Vælg</string>
+    <string name="setUsername">Velkommen: %s</string>
 </resources>
