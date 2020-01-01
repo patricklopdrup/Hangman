@@ -50,4 +50,6 @@
     <string name="dont_have_user_text"><u>Har du ikke en bruger? Klik her!</u></string>
     <string name="userName_key">userName</string>
     <string name="repeat_password">Gentag password</string>
+    <string name="challenges">Udfordringer</string>
+    <string name="choose_skins">Vælg skins</string>
 </resources>

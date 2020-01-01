@@ -5,4 +5,6 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="blue_link">#0064bd</color>
+    <color name="purple_btn">#DCE174F8</color>
+    <color name="default_btn">#ededed</color>
 </resources>

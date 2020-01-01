@@ -14,7 +14,7 @@
         android:layout_marginEnd="33dp"
         android:layout_marginBottom="450dp"
         android:text="@string/start_game"
-        android:textSize="31sp"
+        android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,7 +29,7 @@
         android:layout_marginTop="54dp"
         android:layout_marginEnd="33dp"
         android:text="@string/highscore"
-        android:textSize="31sp"
+        android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
@@ -37,19 +37,32 @@
         app:layout_constraintTop_toBottomOf="@+id/startGame" />
 
     <Button
-        android:id="@+id/help"
+        android:id="@+id/challenge"
         android:layout_width="252dp"
         android:layout_height="84dp"
         android:layout_marginStart="33dp"
         android:layout_marginTop="54dp"
         android:layout_marginEnd="33dp"
-        android:text="@string/help"
-        android:textSize="31sp"
+        android:text="@string/challenges"
+        android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/highscore" />
+
+    <Button
+        android:id="@+id/help"
+        android:layout_width="81dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/help"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.239"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/challenge" />
 
     <TextView
         android:id="@+id/textView"
@@ -68,11 +81,11 @@
         android:id="@+id/settings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.786"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/help"
+        app:layout_constraintTop_toBottomOf="@+id/challenge"
         app:srcCompat="@drawable/ic_settings_black_36dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
