@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
         android:text="Name of challenge"
         android:textSize="22sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +21,7 @@
         android:id="@+id/checkBox_challenge"
         android:layout_width="84dp"
         android:layout_height="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="13dp"
         android:layout_marginEnd="20dp"
         android:text="Choose"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +32,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="15dp"
         android:text="Desription"
         android:textSize="14sp"
@@ -42,16 +42,17 @@
 
     <TextView
         android:id="@+id/challenge_linebreak"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="5dp"
         android:text="@string/line"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/challenge_progression" />
+        app:layout_constraintTop_toBottomOf="@+id/challenge_skin_name" />
 
     <params.com.stepprogressview.StepProgressView
         android:id="@+id/challenge_progression"
@@ -64,4 +65,18 @@
         app:layout_constraintTop_toBottomOf="@+id/challenge_desc"
         app:markers="10,60,120"
         app:progressColor="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/challenge_skin_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="20dp"
+        android:textSize="14sp"
+        android:textAlignment="center"
+        android:text="skin name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/challenge_progression" />
 </androidx.constraintlayout.widget.ConstraintLayout>

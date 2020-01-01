@@ -1,5 +1,6 @@
 package com.example.galgespil.Challenges;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,7 @@ public class mListAdapter extends RecyclerView.Adapter {
     ChallengePage challenge = new ChallengePage();
     ChallengeLogic challengeLogic = new ChallengeLogic();
 
-    TextView challengeName, challengeDesc;
+    TextView challengeName, challengeDesc, skinName;
     CheckBox checkBox;
     StepProgressView progressView;
 
@@ -36,22 +37,25 @@ public class mListAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         challengeName = holder.itemView.findViewById(R.id.challenge_name);
         challengeDesc = holder.itemView.findViewById(R.id.challenge_desc);
+        skinName = holder.itemView.findViewById(R.id.challenge_skin_name);
         checkBox = holder.itemView.findViewById(R.id.checkBox_challenge);
         progressView = holder.itemView.findViewById(R.id.challenge_progression);
 
-        setMarkers(position);
+        //setting progressionbar
+        setMarkers(holder.itemView.getContext(), position);
 
+        //setting text for textViews
         challengeName.setText(challengeLogic.getChallengeNames().get(position));
         challengeDesc.setText(challengeLogic.getChallengeDescriptions().get(position));
+        skinName.setText(holder.itemView.getResources().getString(R.string.unlock_skin, challengeLogic.getSkinNames().get(position)));
     }
 
     @Override
     public int getItemCount() {
-        System.out.println("return size: " + challengeLogic.getChallengeDescriptions().size());
         return challengeLogic.getChallengeDescriptions().size();
     }
 
-    public void setMarkers(int position) {
+    public void setMarkers(Context context, int position) {
         markers = new ArrayList<>();
         int limit = challengeLogic.getChallengeLimits().get(position);
         //if limit is more than 10 we don't show all numbers only every second
@@ -62,7 +66,7 @@ public class mListAdapter extends RecyclerView.Adapter {
         progressView.setTotalProgress(limit);
         progressView.setMarkers(markers);
 
-
-        progressView.setCurrentProgress(3);
+        //setting the progression from sharedprefs
+        progressView.setCurrentProgress(challengeLogic.getProgressionList(context).get(position));
     }
 }

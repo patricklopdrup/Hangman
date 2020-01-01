@@ -52,4 +52,5 @@
     <string name="repeat_password">Gentag password</string>
     <string name="challenges">Udfordringer</string>
     <string name="choose_skins">Vælg skins</string>
+    <string name="unlock_skin">Åbner for skin: %s</string>
 </resources>
