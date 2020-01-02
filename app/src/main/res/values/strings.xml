@@ -53,4 +53,6 @@
     <string name="challenges">Udfordringer</string>
     <string name="choose_skins">Vælg skins</string>
     <string name="unlock_skin">Åbner for skin: %s</string>
+    <string name="skin_locked">Lås</string>
+    <string name="skin_unlocked">Åben</string>
 </resources>
