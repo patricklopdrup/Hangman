@@ -1,6 +1,5 @@
 package com.example.galgespil.Challenges;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +9,8 @@ import android.widget.TextView;
 import com.example.galgespil.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,13 +29,18 @@ public class mListAdapter extends RecyclerView.Adapter {
     private ArrayList<Integer> markers;
 
     //holds the position on what checkbox is click in each group
-    private int selectedKeyboardSkin = -1;
-    private int selectedManSkin = -1;
+    private int[] skinList = new int[ChallengeObject.SkinGroup.values().length];
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.challenge_item_element, parent, false);
+
+        //setting default value of -1 at every index.
+        for (int i = 0; i < ChallengeObject.SkinGroup.values().length; i++) {
+            skinList[i] = -1;
+        }
+
         return new RecyclerView.ViewHolder(itemView) {
         };
     }
@@ -47,51 +53,46 @@ public class mListAdapter extends RecyclerView.Adapter {
         checkBox = holder.itemView.findViewById(R.id.checkBox_challenge);
         progressView = holder.itemView.findViewById(R.id.challenge_progression);
 
+        ChallengeObject curChallenge = challenges.get(position);
+
         //setting progressbar
         int progression = challengeLogic.getProgressionList(holder.itemView.getContext()).get(position);
-        int limit = challenges.get(position).getLimit();
+        int limit = curChallenge.getLimit();
         setMarkers(progression, limit);
 
         //setting text for textViews
-        challengeName.setText(challenges.get(position).getName());
-        challengeDesc.setText(challenges.get(position).getDesc());
+        challengeName.setText(curChallenge.getName());
+        challengeDesc.setText(curChallenge.getDesc());
         skinName.setText(holder.itemView.getResources().getString(R.string.unlock_skin, challenges.get(position).getSkinDesc()));
 
         //setting text for checkbox
         if (progression >= limit) {
             checkBox.setText(holder.itemView.getResources().getString(R.string.skin_unlocked));
             //flagging the boolean clicked in the challenge object
-            challenges.get(position).setClicked(true);
+            curChallenge.setClickable(true);
         } else {
             checkBox.setText(holder.itemView.getResources().getString(R.string.skin_locked));
-            challenges.get(position).setClicked(false);
+            curChallenge.setClickable(false);
         }
 
-        //making the first half the "keyboard skins" and the other half the "man skins"
-        if (position < getItemCount() / 2) {
-            checkBox.setChecked(position == selectedKeyboardSkin);
-        } else {
-            checkBox.setChecked(position == selectedManSkin);
-        }
-
+        //.ordinal return the index for the enum and we use that to find it in the array
+        int selectedSkin = skinList[curChallenge.getSkinGroup().ordinal()];
+        checkBox.setChecked(position == selectedSkin);
 
         //onclickListener so it's possible to group different checkboxes
         View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("pos er: " + position);
-                if (position < getItemCount() / 2) {
-                    //if already click on we set it to -1 (default) otherwise it's sat to "position"
-                    if (selectedKeyboardSkin == position || !challenges.get(position).isClicked()) selectedKeyboardSkin = -1;
-                        //challenges.get(position).setSkinChosen(false);
-                    else selectedKeyboardSkin = position;
-                        //challenges.get(position).setSkinChosen(true);
+                if(skinList[curChallenge.getSkinGroup().ordinal()] == position || !curChallenge.isClickable()) {
+                    skinList[curChallenge.getSkinGroup().ordinal()] = -1;
                 } else {
-                    if (selectedManSkin == position || !challenges.get(position).isClicked()) selectedManSkin = -1;
-                    else selectedManSkin = position;
+                    skinList[curChallenge.getSkinGroup().ordinal()] = position;
                 }
-                System.out.println("keyboard: " + selectedKeyboardSkin);
-                System.out.println("man: " + selectedManSkin);
+
+                System.out.println("pos er: " + position);
+                System.out.println("object: " + curChallenge);
+                System.out.println("keyboard: " + skinList[ChallengeObject.SkinGroup.KEYBOARD_SKIN.ordinal()]);
+                System.out.println("man: " + skinList[ChallengeObject.SkinGroup.MAN_SKIN.ordinal()]);
                 //recreating the list when something change
                 notifyDataSetChanged();
             }
@@ -119,5 +120,9 @@ public class mListAdapter extends RecyclerView.Adapter {
 
         //setting the progression from sharedprefs
         progressView.setCurrentProgress(progression);
+    }
+
+    public int[] getSkinList() {
+        return skinList;
     }
 }

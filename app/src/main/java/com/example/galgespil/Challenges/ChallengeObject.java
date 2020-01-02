@@ -1,13 +1,14 @@
 package com.example.galgespil.Challenges;
 
+import androidx.annotation.NonNull;
+
 public class ChallengeObject {
     private String name;
     private String desc;
     private int limit;
     private String skinDesc;
     private String skin;
-    private boolean isClicked;
-    private boolean isSkinChosen;
+    private boolean isClickable;
     private SkinGroup skinGroup;
 
     public enum SkinGroup {
@@ -21,11 +22,16 @@ public class ChallengeObject {
         this.skinDesc = skinDesc;
         this.skin = skin;
         this.skinGroup = skinGroup;
-        this.isClicked = false;
-        this.isSkinChosen = false;
+        this.isClickable = false;
     }
 
     public ChallengeObject() {}
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "name: " + this.name + " skinGroup: " + this.skinGroup + " isClickable: " + this.isClickable;
+    }
 
     public String getName() {
         return name;
@@ -42,16 +48,13 @@ public class ChallengeObject {
     public String getSkin() {
         return skin;
     }
-    public boolean isClicked() {
-        return isClicked;
+    public boolean isClickable() {
+        return isClickable;
     }
-    public void setClicked(boolean clicked) {
-        isClicked = clicked;
+    public void setClickable(boolean clickable) {
+        isClickable = clickable;
     }
-    public boolean isSkinChosen() {
-        return isSkinChosen;
-    }
-    public void setSkinChosen(boolean skinChosen) {
-        isSkinChosen = skinChosen;
+    public SkinGroup getSkinGroup() {
+        return skinGroup;
     }
 }
