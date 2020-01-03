@@ -24,8 +24,6 @@ public class ChallengeObject {
         KEYBOARD_SKIN, MAN_SKIN
     }
 
-    private final String SKIN_KEY = "mySkinKey";
-
     public ChallengeObject(String name, String desc, int limit, String skinDesc, String skin, SkinGroup skinGroup) {
         this.name = name;
         this.desc = desc;
@@ -42,31 +40,6 @@ public class ChallengeObject {
     @Override
     public String toString() {
         return "name: " + this.name + " skinGroup: " + this.skinGroup + " isClickable: " + this.isClickable;
-    }
-
-    public int[] getChosenSkinList(Context context) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        String json = prefs.getString(SKIN_KEY, "empty");
-        System.out.println("skin json: " + json);
-        Gson gson = new Gson();
-        Type type = new TypeToken<int[]>(){}.getType();
-        if(json.equals("empty"))
-            return new int[0];
-        return gson.fromJson(json, type);
-    }
-
-    public void saveSkinsToSharedPrefs(Context context, String key, int[] skinList) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences.Editor editor = prefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(skinList);
-        System.out.println("Skin gem: " + json);
-        editor.putString(key, json);
-        editor.commit();
-    }
-
-    public String getSKIN_KEY() {
-        return SKIN_KEY;
     }
 
     public String getName() {

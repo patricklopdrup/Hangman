@@ -40,9 +40,14 @@ public class mListAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.challenge_item_element, parent, false);
 
-        //setting default value of -1 at every index.
-        for (int i = 0; i < ChallengeObject.SkinGroup.values().length; i++) {
-            skinList[i] = -1;
+        int[] tempSkinList = challengeLogic.getChosenSkinList(itemView.getContext(), challengeLogic.getSKIN_KEY());
+        if(tempSkinList.length == 0) {
+            //setting default value of -1 at every index.
+            for (int i = 0; i < ChallengeObject.SkinGroup.values().length; i++) {
+                skinList[i] = -1;
+            }
+        } else {
+            skinList = tempSkinList;
         }
 
         return new RecyclerView.ViewHolder(itemView) {
@@ -94,7 +99,7 @@ public class mListAdapter extends RecyclerView.Adapter {
                 }
 
                 //saving the array in sharedprefs everytime something is pressed.
-                curChallenge.saveSkinsToSharedPrefs(holder.itemView.getContext(), curChallenge.getSKIN_KEY(), skinList);
+                challengeLogic.saveSkinsToSharedPrefs(holder.itemView.getContext(), challengeLogic.getSKIN_KEY(), skinList);
 
                 System.out.println("pos er: " + position);
                 System.out.println("object: " + curChallenge);
