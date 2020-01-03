@@ -41,7 +41,7 @@ public class mListAdapter extends RecyclerView.Adapter {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.challenge_item_element, parent, false);
 
         int[] tempSkinList = challengeLogic.getChosenSkinList(itemView.getContext(), challengeLogic.getSKIN_KEY());
-        if(tempSkinList.length == 0) {
+        if (tempSkinList.length == 0) {
             //setting default value of -1 at every index.
             for (int i = 0; i < ChallengeObject.SkinGroup.values().length; i++) {
                 skinList[i] = -1;
@@ -92,10 +92,16 @@ public class mListAdapter extends RecyclerView.Adapter {
         View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(skinList[curChallenge.getSkinGroup().ordinal()] == position || !curChallenge.isClickable()) {
+                //check if challenge is locked
+                if (!curChallenge.isClickable()) {
+                    System.out.println("ikke clickable");
+                    //check you click on challenge that is already checked
+                } else if (skinList[curChallenge.getSkinGroup().ordinal()] == position) {
                     skinList[curChallenge.getSkinGroup().ordinal()] = -1;
+                    //otherwise set which one is clicked
                 } else {
                     skinList[curChallenge.getSkinGroup().ordinal()] = position;
+
                 }
 
                 //saving the array in sharedprefs everytime something is pressed.
@@ -103,8 +109,6 @@ public class mListAdapter extends RecyclerView.Adapter {
 
                 System.out.println("pos er: " + position);
                 System.out.println("object: " + curChallenge);
-                System.out.println("keyboard: " + skinList[ChallengeObject.SkinGroup.KEYBOARD_SKIN.ordinal()]);
-                System.out.println("man: " + skinList[ChallengeObject.SkinGroup.MAN_SKIN.ordinal()]);
                 System.out.println("hele arrayet: " + Arrays.toString(skinList));
                 //recreating the list when something change
                 notifyDataSetChanged();

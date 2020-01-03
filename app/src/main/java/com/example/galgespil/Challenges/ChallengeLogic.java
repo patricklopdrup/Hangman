@@ -137,6 +137,9 @@ public class ChallengeLogic {
         return progressionList;
     }
 
+    /**
+     * to save and get skin list from sharedprefs
+     */
     private final String SKIN_KEY = "mySkinKey";
 
     public int[] getChosenSkinList(Context context, String key) {
@@ -160,12 +163,14 @@ public class ChallengeLogic {
         editor.commit();
     }
 
+    //getters for keys
     public String getSKIN_KEY() {
         return SKIN_KEY;
     }
     public String getCHALLENGE_KEY() {
         return CHALLENGE_KEY;
     }
+    //getters
     public int getWINS_UNDER_20_LIMIT() {
         return WINS_UNDER_20_LIMIT;
     }
