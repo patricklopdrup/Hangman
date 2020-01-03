@@ -1,5 +1,8 @@
 package com.example.galgespil.Challenges;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +10,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.example.galgespil.R;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +23,7 @@ import params.com.stepprogressview.StepProgressView;
 public class mListAdapter extends RecyclerView.Adapter {
 
     private ChallengeLogic challengeLogic = new ChallengeLogic();
-    ArrayList<ChallengeObject> challenges = challengeLogic.getChallenges();
+    private ArrayList<ChallengeObject> challenges = challengeLogic.getChallenges();
 
     private TextView challengeName, challengeDesc, skinName;
     private CheckBox checkBox;
@@ -89,10 +93,14 @@ public class mListAdapter extends RecyclerView.Adapter {
                     skinList[curChallenge.getSkinGroup().ordinal()] = position;
                 }
 
+                //saving the array in sharedprefs everytime something is pressed.
+                curChallenge.saveSkinsToSharedPrefs(holder.itemView.getContext(), curChallenge.getSKIN_KEY(), skinList);
+
                 System.out.println("pos er: " + position);
                 System.out.println("object: " + curChallenge);
                 System.out.println("keyboard: " + skinList[ChallengeObject.SkinGroup.KEYBOARD_SKIN.ordinal()]);
                 System.out.println("man: " + skinList[ChallengeObject.SkinGroup.MAN_SKIN.ordinal()]);
+                System.out.println("hele arrayet: " + Arrays.toString(skinList));
                 //recreating the list when something change
                 notifyDataSetChanged();
             }
