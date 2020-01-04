@@ -75,6 +75,12 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         keyboardChoice = getKeyboardChoise(keyboardKey, this);
 
         skinList = challengeLogic.getChosenSkinList(this, challengeLogic.getSKIN_KEY());
+        if(skinList.length == 0) {
+            //setting default value of -1 at every index if it's the first time getting the list
+            for (int i = 0; i < ChallengeObject.SkinGroup.values().length; i++) {
+                skinList[i] = -1;
+            }
+        }
         System.out.println("her er listen: " + Arrays.toString(skinList));
         manSkin = loadManSkin(skinList);
 
