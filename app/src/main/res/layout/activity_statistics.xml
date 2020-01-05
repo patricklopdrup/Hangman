@@ -4,14 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Challenges.ChallengePage">
+    tools:context=".GameStatistic.Statistics_act">
+
+    <Button
+        android:id="@+id/change_stats_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="120dp"
+        android:text="@string/more_stats"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/statistics_frame" />
 
     <TextView
-        android:id="@+id/challenge_title"
+        android:id="@+id/statistics_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="@string/challenges"
+        android:text="@string/statistics"
         android:textAlignment="center"
         android:textSize="45sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,7 +32,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <FrameLayout
-        android:id="@+id/challenge_framelayout"
+        android:id="@+id/statistics_frame"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
@@ -27,19 +40,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/challenge_title">
+        app:layout_constraintTop_toBottomOf="@+id/statistics_title">
 
     </FrameLayout>
-
-    <Button
-        android:id="@+id/challenge_save_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="120dp"
-        android:layout_marginEnd="120dp"
-        android:text="@string/choose_skins"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/challenge_framelayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

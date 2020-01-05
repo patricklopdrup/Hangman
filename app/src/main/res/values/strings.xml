@@ -55,4 +55,6 @@
     <string name="unlock_skin">Åbner for skin: %s</string>
     <string name="skin_locked">Lås</string>
     <string name="skin_unlocked">Åben</string>
+    <string name="statistics">Statistikker</string>
+    <string name="more_stats">Flere stats</string>
 </resources>

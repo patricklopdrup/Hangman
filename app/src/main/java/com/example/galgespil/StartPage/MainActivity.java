@@ -13,13 +13,14 @@ import android.widget.ImageView;
 
 import com.example.galgespil.Challenges.ChallengePage;
 import com.example.galgespil.Game.Game;
+import com.example.galgespil.GameStatistic.Statistics_act;
 import com.example.galgespil.Help;
 import com.example.galgespil.Highscore.Highscore;
 import com.example.galgespil.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button startGame, highscore, challenge, help;
+    private Button startGame, highscore, challenge, statistics, help;
     private ImageView settings;
 
     @Override
@@ -30,12 +31,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startGame = findViewById(R.id.startGame);
         highscore = findViewById(R.id.highscore);
         challenge = findViewById(R.id.challenge);
+        statistics = findViewById(R.id.statistics);
         help = findViewById(R.id.help);
         settings = findViewById(R.id.settings);
 
         startGame.setOnClickListener(this);
         highscore.setOnClickListener(this);
         challenge.setOnClickListener(this);
+        statistics.setOnClickListener(this);
         help.setOnClickListener(this);
         settings.setOnClickListener(this);
     }
@@ -50,6 +53,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(i);
         } else if(v == challenge) {
             Intent i = new Intent(this, ChallengePage.class);
+            startActivity(i);
+        } else if(v == statistics) {
+            Intent i = new Intent(this, Statistics_act.class);
             startActivity(i);
         } else if(v == help) {
             Intent i = new Intent(this, Help.class);

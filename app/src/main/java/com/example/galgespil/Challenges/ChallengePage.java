@@ -27,8 +27,6 @@ import java.util.Arrays;
 
 public class ChallengePage extends AppCompatActivity implements View.OnClickListener {
 
-    mListAdapter mListAdapter = new mListAdapter();
-    ChallengeObject challengeObject = new ChallengeObject();
     Button chooseSkinButton;
 
     @Override

@@ -118,8 +118,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
 
         gameImg = findViewById(R.id.galgeImage);
 
-        System.out.println("win/loss: "+ gameStatLogic.winLossRatio(this));
-        System.out.println("avgRight " + gameStatLogic.avgRightGuesses(this));
+        System.out.println("top 3: " + gameStatLogic.mostUsedLetters(gameStatLogic.getGameStats(this), 3));
     }
 
     @Override
