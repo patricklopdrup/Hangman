@@ -118,8 +118,8 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
 
         gameImg = findViewById(R.id.galgeImage);
 
-        System.out.println("hey: "+ gameStatLogic.winLossRatio(this));
-        System.out.println("mæh " + gameStatLogic.avgRightGuesses(this));
+        System.out.println("win/loss: "+ gameStatLogic.winLossRatio(this));
+        System.out.println("avgRight " + gameStatLogic.avgRightGuesses(this));
     }
 
     @Override
@@ -263,6 +263,24 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         System.out.println("længde i game: " + this.guessedLetters.length);
     }
 
+    @Override
+    //if the game is started, but stopped mid-game the user lose and stats is counted
+    protected void onPause() {
+        super.onPause();
+        if(firstLetterGuessed) {
+            timePassed = SystemClock.elapsedRealtime() - timer.getBase();
+            int wins = 0;
+            int losses = 1;
+
+            timer.stop();
+            System.out.println("on pause. Tid er: " + timePassed);
+
+            gameStatLogic.updateStats(gameStatLogic.getGameStats(this), gameStatLogic.getGAME_OBJECT_KEY(), wins, losses, rightGuesses, wrongGuesses, timePassed, guessedLetters, this);
+
+            checkChallenges(this);
+        }
+    }
+
     public void gameEnded() {
         timer.stop();
         for (Button b : keys) {
@@ -344,7 +362,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
             protected Object doInBackground(Object[] objects) {
                 try {
                     logik.hentOrdFraDr();
-                    filterWordFromDr(5, 14);
+                    filterWordFromDr(5, 12);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

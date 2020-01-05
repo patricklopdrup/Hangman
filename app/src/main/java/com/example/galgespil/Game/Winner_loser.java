@@ -87,7 +87,7 @@ public class Winner_loser extends Fragment implements View.OnClickListener {
                 time.setText(getString(R.string.display_end_time_in_sec, timeInSec));
             }
         } else {
-            //layout for looser
+            //layout for loser
             time.setVisibility(View.GONE);
             img.setImageResource(R.drawable.loser);
             title.setText(getString(R.string.loser));
@@ -100,6 +100,13 @@ public class Winner_loser extends Fragment implements View.OnClickListener {
         guesses.setText(getString(R.string.display_end_guesses, amountOfGuesses));
 
         return layout;
+    }
+
+    //when winner/loser page is not on the screen we finish the activity
+    @Override
+    public void onPause() {
+        super.onPause();
+        getActivity().finish();
     }
 
     private void animateLoser(View layout) {

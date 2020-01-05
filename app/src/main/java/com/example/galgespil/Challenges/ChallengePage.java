@@ -53,6 +53,8 @@ public class ChallengePage extends AppCompatActivity implements View.OnClickList
             //mListAdapter.saveSkinsToSharedPrefs(this, challengeObject.getSKIN_KEY());
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
+            //remove it from the backstack
+            finish();
         }
     }
 
