@@ -2,6 +2,7 @@ package com.example.galgespil.GameStatistic;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.preference.PreferenceManager;
 
 import com.google.gson.Gson;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class GameStatLogic {
     private List<StatDisplayObject> statObjectList = new ArrayList<>();
@@ -73,7 +75,7 @@ public class GameStatLogic {
     public List<StatDisplayObject> getStatValues(Context context) {
         GameStatObject obj = getGameStats(context);
 
-        statValues.add(new StatDisplayObject(totalGameTime(obj), null));
+        statValues.add(new StatDisplayObject(-1.0, totalGameTime(obj)));
 
         statValues.add(new StatDisplayObject(totalGames(obj), "spil"));
         statValues.add(new StatDisplayObject(winLossRatio(obj), null));
@@ -117,24 +119,25 @@ public class GameStatLogic {
     public double winLossRatio(GameStatObject obj) {
         double wins = (double)obj.getWins();
         double losses = (double)obj.getLosses();
-        return wins / losses;
+        double ratio = wins / losses;
+        //rounding to 2 decimal places and returning
+        ratio *= 100;
+        ratio = Math.round(ratio);
+        return ratio / 100;
     }
 
     public int totalGuesses(GameStatObject obj) {
         return obj.getRightGuesses() + obj.getWrongGuesses();
     }
 
-    public long totalGameTime(GameStatObject obj) {
-        return obj.getGameTime();
+    public String totalGameTime(GameStatObject obj) {
+        long milliseconds = obj.getGameTime();
+        int seconds = (int) (milliseconds / 1000) % 60 ;
+        int minutes = (int) ((milliseconds / (1000*60)) % 60);
+        int hours   = (int) ((milliseconds / (1000*60*60)) % 24);
 
+        return hours + " timer " + minutes + " min " + seconds + " sek";
     }
-
-
-//    long timeInMs = highscoreSorted.get(position).getTime();
-//    float timeInSec = ((float)timeInMs / 1000);
-//    //if time is more than 60 sec, we write fx "1 min 14 sek"
-//            if(timeInSec >= 60.0) {
-//        timeUsed.setText(getString(R.string.show_time_used_min, (int)(timeInSec)/60, (int)(timeInSec)%60));
 
     public double rightWrongRatio(GameStatObject obj) {
         double right = (double)obj.getRightGuesses();
