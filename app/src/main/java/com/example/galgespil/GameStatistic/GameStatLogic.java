@@ -63,10 +63,15 @@ public class GameStatLogic {
 
     public List<StatDisplayObject> getStatNames() {
         statObjectList.add(new StatDisplayObject("Tid spillet"));
-
         statObjectList.add(new StatDisplayObject("Antal spil spillet"));
         statObjectList.add(new StatDisplayObject("Vind/tab forhold"));
         statObjectList.add(new StatDisplayObject("Top 3 mest brugte bogstaver"));
+        statObjectList.add(new StatDisplayObject("Antal gæt i alt"));
+        statObjectList.add(new StatDisplayObject("Rigtige og forkerte gæt"));
+        statObjectList.add(new StatDisplayObject("Rigtig/forkert gæt forhold"));
+        statObjectList.add(new StatDisplayObject("Gennemsnitlige rigtige gæt"));
+        statObjectList.add(new StatDisplayObject("Gennemsnitlige forkerte gæt"));
+
 
         return statObjectList;
     }
@@ -76,10 +81,14 @@ public class GameStatLogic {
         GameStatObject obj = getGameStats(context);
 
         statValues.add(new StatDisplayObject(-1.0, totalGameTime(obj)));
-
         statValues.add(new StatDisplayObject(totalGames(obj), "spil"));
         statValues.add(new StatDisplayObject(winLossRatio(obj), null));
         statValues.add(new StatDisplayObject(-1.0, mostUsedLetters(obj, 3)));
+        statValues.add(new StatDisplayObject(totalGuesses(obj), "gæt"));
+        statValues.add(new StatDisplayObject(-1.0, rightAndWrongGuesses(obj)));
+        statValues.add(new StatDisplayObject(rightWrongRatio(obj), null));
+        statValues.add(new StatDisplayObject(avgRightGuesses(obj), "pr. spil"));
+        statValues.add(new StatDisplayObject(avgWrongGuesses(obj), "pr. spil"));
 
         return statValues;
     }
@@ -109,6 +118,9 @@ public class GameStatLogic {
         return numList.toString();
     }
 
+    public String rightAndWrongGuesses(GameStatObject obj) {
+        return obj.getRightGuesses() + " rigtige og " + obj.getWrongGuesses() + " forkerte";
+    }
 
     public double totalGames(GameStatObject obj) {
         double wins = (double)obj.getWins();
@@ -120,13 +132,18 @@ public class GameStatLogic {
         double wins = (double)obj.getWins();
         double losses = (double)obj.getLosses();
         double ratio = wins / losses;
-        //rounding to 2 decimal places and returning
-        ratio *= 100;
-        ratio = Math.round(ratio);
-        return ratio / 100;
+
+        return round2Decimal(ratio);
     }
 
-    public int totalGuesses(GameStatObject obj) {
+    //rounding to 2 decimal places and returning
+    private double round2Decimal(double num) {
+        num *= 100;
+        num = Math.round(num);
+        return num / 100;
+    }
+
+    public double totalGuesses(GameStatObject obj) {
         return obj.getRightGuesses() + obj.getWrongGuesses();
     }
 
@@ -142,19 +159,22 @@ public class GameStatLogic {
     public double rightWrongRatio(GameStatObject obj) {
         double right = (double)obj.getRightGuesses();
         double wrong = (double)obj.getWrongGuesses();
-        return right / wrong;
+        double ratio = right / wrong;
+        return round2Decimal(ratio);
     }
 
     public double avgRightGuesses(GameStatObject obj) {
         double right = (double)obj.getRightGuesses();
         double games = (double)(obj.getWins() + obj.getLosses());
-        return right / games;
+        double avg = right / games;
+        return round2Decimal(avg);
     }
 
     public double avgWrongGuesses(GameStatObject obj) {
         double wrong = (double)obj.getWrongGuesses();
         double games = (double)(obj.getWins() + obj.getLosses());
-        return wrong / games;
+        double avg = wrong / games;
+        return round2Decimal(avg);
     }
 
     public String getGAME_OBJECT_KEY() {

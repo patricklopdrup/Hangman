@@ -1,5 +1,6 @@
 package com.example.galgespil.GameStatistic;
 
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +44,11 @@ public class StatisticsListAdapter extends RecyclerView.Adapter {
         for (int i = 0; i < statObjectList.size(); i++) {
             statObjectList.get(i).statInfo = statValues.get(i).statInfo;
             statObjectList.get(i).statHelpInfo = statValues.get(i).statHelpInfo;
+        }
+
+        //setting the background color for every second one
+        if(position % 2 == 0) {
+            holder.itemView.setBackgroundColor(holder.itemView.getResources().getColor(R.color.default_btn));
         }
 
         statName.setText(statObjectList.get(position).statName);
