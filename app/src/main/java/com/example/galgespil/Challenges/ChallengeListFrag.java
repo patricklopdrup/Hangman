@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ListFragment extends Fragment {
+public class ChallengeListFrag extends Fragment {
 
     @Nullable
     @Override
@@ -22,7 +22,7 @@ public class ListFragment extends Fragment {
 
         RecyclerView recyclerView = layout.findViewById(R.id.recylerView_frag);
 
-        mListAdapter listAdapter = new mListAdapter();
+        ChallengeAdapter listAdapter = new ChallengeAdapter();
         recyclerView.setAdapter(listAdapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);

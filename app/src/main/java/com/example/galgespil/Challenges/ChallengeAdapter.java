@@ -20,7 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import params.com.stepprogressview.StepProgressView;
 
-public class mListAdapter extends RecyclerView.Adapter {
+public class ChallengeAdapter extends RecyclerView.Adapter {
 
     private ChallengeLogic challengeLogic = new ChallengeLogic();
     private ArrayList<ChallengeObject> challenges = challengeLogic.getChallenges();
@@ -33,7 +33,7 @@ public class mListAdapter extends RecyclerView.Adapter {
     private ArrayList<Integer> markers;
 
     //holds the position on what checkbox is click in each group
-    private int[] skinList = new int[ChallengeObject.SkinGroup.values().length];
+    private int[] skinList;
 
     @NonNull
     @Override
@@ -43,9 +43,11 @@ public class mListAdapter extends RecyclerView.Adapter {
         int[] tempSkinList = challengeLogic.getChosenSkinList(itemView.getContext(), challengeLogic.getSKIN_KEY());
         if (tempSkinList.length == 0) {
             //setting default value of -1 at every index.
+            skinList = new int[ChallengeObject.SkinGroup.values().length];
             for (int i = 0; i < ChallengeObject.SkinGroup.values().length; i++) {
                 skinList[i] = -1;
             }
+            System.out.println("skinlist i if: "+Arrays.toString(skinList));
         } else {
             skinList = tempSkinList;
         }

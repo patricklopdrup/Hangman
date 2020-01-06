@@ -1,8 +1,8 @@
-package com.example.galgespil.GameStatistic;
+package com.example.galgespil.Statistic;
 
 import java.util.Arrays;
 
-public class GameStatObject {
+public class StatObject {
     private int wins = 0;
     private int losses = 0;
     private int rightGuesses = 0;
@@ -10,9 +10,9 @@ public class GameStatObject {
     private long gameTime = 0;
     private int[] guessedLetters = new int[29];
 
-    public GameStatObject() {}
+    public StatObject() {}
 
-    public GameStatObject(int wins, int losses, int rightGuesses, int wrongGuesses, long gameTime, int[] guessedLetters) {
+    public StatObject(int wins, int losses, int rightGuesses, int wrongGuesses, long gameTime, int[] guessedLetters) {
         this.wins = wins;
         this.losses = losses;
         this.rightGuesses = rightGuesses;

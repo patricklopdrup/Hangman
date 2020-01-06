@@ -15,7 +15,7 @@ import com.example.galgespil.R;
 
 import java.util.List;
 
-public class Highscore extends AppCompatActivity {
+public class HighscoreAct extends AppCompatActivity {
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     //for this to work the "template" made in "list_element.xml" has to be "android:layout_height = "wrap_content"
     //"match_parent" does not work!

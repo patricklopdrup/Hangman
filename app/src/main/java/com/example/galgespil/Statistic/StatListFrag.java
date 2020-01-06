@@ -1,4 +1,4 @@
-package com.example.galgespil.GameStatistic;
+package com.example.galgespil.Statistic;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class StatisticsListFragment extends Fragment {
+public class StatListFrag extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -21,7 +21,7 @@ public class StatisticsListFragment extends Fragment {
 
         RecyclerView recyclerView = layout.findViewById(R.id.recylerView_frag);
 
-        StatisticsListAdapter listAdapter = new StatisticsListAdapter();
+        StatAdapter listAdapter = new StatAdapter();
         recyclerView.setAdapter(listAdapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);

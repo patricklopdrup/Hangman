@@ -7,12 +7,12 @@ import com.example.galgespil.R;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class EndGame extends AppCompatActivity {
+public class GameFinishAct extends AppCompatActivity {
     private boolean winner;
     private long timePassed;
     private int guesses = 0;
 
-    public EndGame() {}
+    public GameFinishAct() {}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +20,7 @@ public class EndGame extends AppCompatActivity {
         setContentView(R.layout.activity_end_game);
         Intent intent = getIntent();
 
-        //getting values from the Game class when the game ended
+        //getting values from the GameAct class when the game ended
         guesses = intent.getIntExtra("guesses", -1);
         winner = intent.getBooleanExtra("winner", false);
 
@@ -34,13 +34,13 @@ public class EndGame extends AppCompatActivity {
         bundle.putInt("guesses", guesses);
 
         //passing the data from the bundle to our fragment
-        Winner_loser winner_loser = new Winner_loser();
-        winner_loser.setArguments(bundle);
+        GameWinner_loser gameWinner_loser = new GameWinner_loser();
+        gameWinner_loser.setArguments(bundle);
         System.out.println("min bundle: "+bundle.toString());
 
         //go to the fragment
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.endGameFramelayout, new Winner_loser(winner))
+                .replace(R.id.endGameFramelayout, new GameWinner_loser(winner))
                 .commit();
     }
 }

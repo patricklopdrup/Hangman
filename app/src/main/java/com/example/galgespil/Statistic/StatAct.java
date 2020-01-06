@@ -1,4 +1,4 @@
-package com.example.galgespil.GameStatistic;
+package com.example.galgespil.Statistic;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -8,10 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.galgespil.Challenges.ListFragment;
 import com.example.galgespil.R;
 
-public class Statistics_act extends AppCompatActivity implements View.OnClickListener {
+public class StatAct extends AppCompatActivity implements View.OnClickListener {
 
     private Button moreStats;
 
@@ -20,7 +19,7 @@ public class Statistics_act extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
 
-        StatisticsListFragment fragment = new StatisticsListFragment();
+        StatListFrag fragment = new StatListFrag();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.statistics_frame, fragment);

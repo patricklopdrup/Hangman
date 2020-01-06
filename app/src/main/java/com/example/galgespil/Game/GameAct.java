@@ -21,7 +21,7 @@ import android.widget.TextView;
 
 import com.example.galgespil.Challenges.ChallengeLogic;
 import com.example.galgespil.Challenges.ChallengeObject;
-import com.example.galgespil.GameStatistic.GameStatLogic;
+import com.example.galgespil.Statistic.StatLogic;
 import com.example.galgespil.Highscore.HighscoreLogic;
 import com.example.galgespil.Highscore.HighscoreObject;
 import com.example.galgespil.Keyboard;
@@ -30,11 +30,11 @@ import com.example.galgespil.R;
 import java.util.Arrays;
 import java.util.List;
 
-public class Game extends AppCompatActivity implements View.OnClickListener {
+public class GameAct extends AppCompatActivity implements View.OnClickListener {
     private Galgelogik logik = new Galgelogik();
     private Keyboard keyboard = new Keyboard();
     private HighscoreLogic highscoreLogic = new HighscoreLogic();
-    private GameStatLogic gameStatLogic = new GameStatLogic();
+    private StatLogic statLogic = new StatLogic();
     private ChallengeLogic challengeLogic = new ChallengeLogic();
 
     private ImageView gameImg;
@@ -76,8 +76,12 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
 
         skinList = challengeLogic.getChosenSkinList(this, challengeLogic.getSKIN_KEY());
         if(skinList.length == 0) {
+            //getting amount of skins from enum in ChallengeObject
+            int amountOfSkins = ChallengeObject.SkinGroup.values().length;
+
+            skinList = new int[amountOfSkins];
             //setting default value of -1 at every index if it's the first time getting the list
-            for (int i = 0; i < ChallengeObject.SkinGroup.values().length; i++) {
+            for (int i = 0; i < amountOfSkins; i++) {
                 skinList[i] = -1;
             }
         }
@@ -117,7 +121,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
 
         gameImg = findViewById(R.id.galgeImage);
 
-        System.out.println("top 3: " + gameStatLogic.mostUsedLetters(gameStatLogic.getGameStats(this), 3));
+        System.out.println("top 3: " + statLogic.mostUsedLetters(statLogic.getGameStats(this), 3));
     }
 
     @Override
@@ -275,7 +279,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                 timer.stop();
                 System.out.println("on pause. Tid er: " + timePassed);
 
-                gameStatLogic.updateStats(gameStatLogic.getGameStats(this), gameStatLogic.getGAME_OBJECT_KEY(), wins, losses, rightGuesses, wrongGuesses, timePassed, guessedLetters, this);
+                statLogic.updateStats(statLogic.getGameStats(this), statLogic.getGAME_OBJECT_KEY(), wins, losses, rightGuesses, wrongGuesses, timePassed, guessedLetters, this);
 
                 checkChallenges(this);
             }
@@ -294,11 +298,11 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
 
         if(isGameWon) wins++;
         else losses++;
-        gameStatLogic.updateStats(gameStatLogic.getGameStats(this), gameStatLogic.getGAME_OBJECT_KEY(), wins, losses, rightGuesses, wrongGuesses, timePassed, guessedLetters, this);
+        statLogic.updateStats(statLogic.getGameStats(this), statLogic.getGAME_OBJECT_KEY(), wins, losses, rightGuesses, wrongGuesses, timePassed, guessedLetters, this);
 
         checkChallenges(this);
 
-        Intent i = new Intent(this, EndGame.class);
+        Intent i = new Intent(this, GameFinishAct.class);
         //send extra data over to intent
         i.putExtra("winner", isGameWon);
         i.putExtra("guesses", logik.getBrugteBogstaver().size());

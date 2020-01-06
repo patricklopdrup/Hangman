@@ -17,12 +17,11 @@ import androidx.fragment.app.Fragment;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
-import com.example.galgespil.Game.Game;
 import com.example.galgespil.R;
 import com.example.galgespil.StartPage.MainActivity;
 import com.github.jinatonic.confetti.CommonConfetti;
 
-public class Winner_loser extends Fragment implements View.OnClickListener {
+public class GameWinner_loser extends Fragment implements View.OnClickListener {
     private boolean winner;
     private ImageView img;
     private TextView title, time, guesses, word;
@@ -35,8 +34,8 @@ public class Winner_loser extends Fragment implements View.OnClickListener {
     private ViewGroup vgContainer;
     private Handler confettiHandler;
 
-    public Winner_loser() {}
-    public Winner_loser(boolean winner) {
+    public GameWinner_loser() {}
+    public GameWinner_loser(boolean winner) {
         this.winner = winner;
     }
 
@@ -45,7 +44,7 @@ public class Winner_loser extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.frag_winner_loser, container, false);
 
-        //disse tager ligenu det som bliver sendt afsted fra Game.java og ikke fra EndGame,
+        //disse tager ligenu det som bliver sendt afsted fra GameAct.java og ikke fra GameFinishAct,
         //som jeg gerne vil. Jeg vil gerne overfører dataen via fragmenter og ikke aktiviteter
         amountOfGuesses = getActivity().getIntent().getIntExtra("guesses", -1);
         //timeInMs = getArguments().getLong("time", 1000L);
@@ -141,7 +140,7 @@ public class Winner_loser extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if(view == restart) {
-            Intent i = new Intent(getActivity(), Game.class);
+            Intent i = new Intent(getActivity(), GameAct.class);
             startActivity(i);
         } else if(view == home) {
             Intent i = new Intent(getActivity(), MainActivity.class);

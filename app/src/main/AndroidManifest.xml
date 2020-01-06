@@ -10,19 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".GameStatistic.Statistics_act"></activity>
-        <activity android:name=".Challenges.ChallengePage" />
+        <activity android:name=".Statistic.StatAct"></activity>
+        <activity android:name=".Challenges.ChallengeAct" />
         <activity
-            android:name=".Game.EndGame"
+            android:name=".Game.GameFinishAct"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Help"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Highscore.Highscore"
+            android:name=".Highscore.HighscoreAct"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Game.Game"
+            android:name=".Game.GameAct"
             android:screenOrientation="portrait" />
         <activity
             android:name=".StartPage.MainActivity"

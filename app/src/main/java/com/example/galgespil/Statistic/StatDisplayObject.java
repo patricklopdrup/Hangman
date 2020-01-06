@@ -1,4 +1,4 @@
-package com.example.galgespil.GameStatistic;
+package com.example.galgespil.Statistic;
 
 
 public class StatDisplayObject {

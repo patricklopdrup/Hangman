@@ -1,6 +1,5 @@
-package com.example.galgespil.GameStatistic;
+package com.example.galgespil.Statistic;
 
-import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +12,10 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class StatisticsListAdapter extends RecyclerView.Adapter {
+public class StatAdapter extends RecyclerView.Adapter {
 
-    private GameStatLogic gameStatLogic = new GameStatLogic();
-    private List<StatDisplayObject> statObjectList = gameStatLogic.getStatNames();
+    private StatLogic statLogic = new StatLogic();
+    private List<StatDisplayObject> statObjectList = statLogic.getStatNames();
     private List<StatDisplayObject> statValues;
 
     private TextView statName, statInfo;
@@ -26,7 +25,7 @@ public class StatisticsListAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.statistics_item_element, parent, false);
 
-        //statObjectList = gameStatLogic.getStats(gameStatLogic.getGameStats(itemView.getContext()));
+        //statObjectList = statLogic.getStats(statLogic.getGameStats(itemView.getContext()));
 
         return new RecyclerView.ViewHolder(itemView) {};
     }
@@ -36,9 +35,9 @@ public class StatisticsListAdapter extends RecyclerView.Adapter {
         statName = holder.itemView.findViewById(R.id.stat_name);
         statInfo = holder.itemView.findViewById(R.id.stat_info);
 
-        GameStatObject obj = gameStatLogic.getGameStats(holder.itemView.getContext());
+        StatObject obj = statLogic.getGameStats(holder.itemView.getContext());
         //getting the values. Can't do it in global variable because I need context
-        statValues = gameStatLogic.getStatValues(holder.itemView.getContext());
+        statValues = statLogic.getStatValues(holder.itemView.getContext());
 
         //mergin the 2 Lists. We take the values and adding them to the global statObjectList
         for (int i = 0; i < statObjectList.size(); i++) {

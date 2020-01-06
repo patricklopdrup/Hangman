@@ -1,8 +1,7 @@
-package com.example.galgespil.GameStatistic;
+package com.example.galgespil.Statistic;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.preference.PreferenceManager;
 
 import com.google.gson.Gson;
@@ -10,38 +9,35 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-public class GameStatLogic {
+public class StatLogic {
     private List<StatDisplayObject> statObjectList = new ArrayList<>();
     private final String GAME_OBJECT_KEY = "myGameStatKey";
 
-    public GameStatObject getGameStats(Context context) {
+    public StatObject getGameStats(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String json = prefs.getString(GAME_OBJECT_KEY, "empty");
         System.out.println("json hentet: " + json);
         Gson gson = new Gson();
-        Type type = new TypeToken<GameStatObject>(){}.getType();
+        Type type = new TypeToken<StatObject>(){}.getType();
         if(json.equals("empty"))
-            return new GameStatObject();
+            return new StatObject();
         return gson.fromJson(json, type);
     }
 
-    public void updateStats(GameStatObject gameStatObject, String key, int wins, int losses, int rightGuesses, int wrongGuesses, long gameTime, int[] guessedLetters, Context context) {
+    public void updateStats(StatObject statObject, String key, int wins, int losses, int rightGuesses, int wrongGuesses, long gameTime, int[] guessedLetters, Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
-        setStats(gameStatObject, wins, losses, rightGuesses, wrongGuesses, gameTime, guessedLetters);
+        setStats(statObject, wins, losses, rightGuesses, wrongGuesses, gameTime, guessedLetters);
         Gson gson = new Gson();
-        String json = gson.toJson(gameStatObject);
+        String json = gson.toJson(statObject);
         System.out.println("json gem: " + json);
         editor.putString(key, json);
         editor.commit();
     }
 
-    private void setStats(GameStatObject gso, int wins, int losses, int rightGuesses, int wrongGuesses, long gameTime, int[] guessedLetters) {
+    private void setStats(StatObject gso, int wins, int losses, int rightGuesses, int wrongGuesses, long gameTime, int[] guessedLetters) {
         gso.setWins(gso.getWins() + wins);
         gso.setLosses(gso.getLosses() + losses);
         gso.setRightGuesses(gso.getRightGuesses() + rightGuesses);
@@ -50,27 +46,19 @@ public class GameStatLogic {
         gso.updateGuessedLetters(guessedLetters);
     }
 
-//    public List<StatDisplayObject> getStats(Context context) {
-//        GameStatObject obj = getGameStats(context);
-//        statObjectList.add(new StatDisplayObject("Tid spillet", totalGameTime(obj)));
-//
-//        statObjectList.add(new StatDisplayObject("Antal spil spillet", totalGames(obj)));
-//        statObjectList.add(new StatDisplayObject("Vind/tab forhold", winLossRatio(obj)));
-//        statObjectList.add(new StatDisplayObject("Top 3 mest brugte bogstaver", -1.0, mostUsedLetters(obj, 3)));
-//
-//        return statObjectList;
-//    }
-
     public List<StatDisplayObject> getStatNames() {
         statObjectList.add(new StatDisplayObject("Tid spillet"));
         statObjectList.add(new StatDisplayObject("Antal spil spillet"));
+        statObjectList.add(new StatDisplayObject("Spil vundet og tabt"));
         statObjectList.add(new StatDisplayObject("Vind/tab forhold"));
-        statObjectList.add(new StatDisplayObject("Top 3 mest brugte bogstaver"));
+        statObjectList.add(new StatDisplayObject("3 mest brugte bogstaver"));
         statObjectList.add(new StatDisplayObject("Antal gæt i alt"));
         statObjectList.add(new StatDisplayObject("Rigtige og forkerte gæt"));
         statObjectList.add(new StatDisplayObject("Rigtig/forkert gæt forhold"));
         statObjectList.add(new StatDisplayObject("Gennemsnitlige rigtige gæt"));
         statObjectList.add(new StatDisplayObject("Gennemsnitlige forkerte gæt"));
+        statObjectList.add(new StatDisplayObject("Spil pr. minut"));
+        statObjectList.add(new StatDisplayObject("Gæt pr. minut"));
 
 
         return statObjectList;
@@ -78,22 +66,25 @@ public class GameStatLogic {
 
     private List<StatDisplayObject> statValues = new ArrayList<>();
     public List<StatDisplayObject> getStatValues(Context context) {
-        GameStatObject obj = getGameStats(context);
+        StatObject obj = getGameStats(context);
 
-        statValues.add(new StatDisplayObject(-1.0, totalGameTime(obj)));
-        statValues.add(new StatDisplayObject(totalGames(obj), "spil"));
-        statValues.add(new StatDisplayObject(winLossRatio(obj), null));
-        statValues.add(new StatDisplayObject(-1.0, mostUsedLetters(obj, 3)));
-        statValues.add(new StatDisplayObject(totalGuesses(obj), "gæt"));
-        statValues.add(new StatDisplayObject(-1.0, rightAndWrongGuesses(obj)));
-        statValues.add(new StatDisplayObject(rightWrongRatio(obj), null));
-        statValues.add(new StatDisplayObject(avgRightGuesses(obj), "pr. spil"));
-        statValues.add(new StatDisplayObject(avgWrongGuesses(obj), "pr. spil"));
+        statValues.add(new StatDisplayObject(-1.0, totalGameTime(obj))); //tid spillet
+        statValues.add(new StatDisplayObject(-1.0, totalGames(obj))); //antal spil
+        statValues.add(new StatDisplayObject(-1.0, winsAndLoses(obj))); //spil vundet/tabt
+        statValues.add(new StatDisplayObject(winLossRatio(obj), null)); //vind/tab forhold
+        statValues.add(new StatDisplayObject(-1.0, mostUsedLetters(obj, 3))); //3 mest brugte
+        statValues.add(new StatDisplayObject(-1.0, totalGuesses(obj))); //gæt i alt
+        statValues.add(new StatDisplayObject(-1.0, rightAndWrongGuesses(obj))); //rigtige/forkerte gæt
+        statValues.add(new StatDisplayObject(rightWrongRatio(obj), null)); //rigtige/forkerte gæt forhold
+        statValues.add(new StatDisplayObject(avgRightGuesses(obj), "pr. spil")); //avg rigtige
+        statValues.add(new StatDisplayObject(avgWrongGuesses(obj), "pr. spil")); //avg forkerte
+        statValues.add(new StatDisplayObject(gamePerMin(obj), null)); //spil pr min
+        statValues.add(new StatDisplayObject(guessesPrMin(obj), null)); //gæt pr min
 
         return statValues;
     }
 
-    public String mostUsedLetters(GameStatObject obj, int numOfLetters) {
+    public String mostUsedLetters(StatObject obj, int numOfLetters) {
         int asciiOffset = 97;
         StringBuilder numList = new StringBuilder();
         int[] letters = obj.getGuessedLetters();
@@ -112,23 +103,52 @@ public class GameStatLogic {
             }
             //setting the letter we found to -1 so we don't find it again
             letters[tempIndex] = -1;
+
             //making a string of the numbers and values. Fx: "e: 41, r: 38, t: 38"
-            numList.append((char)(tempIndex + asciiOffset) + ": " + temp);
+            char letter;
+            System.out.println("tempIndex er: " + tempIndex);
+            switch (tempIndex) {
+                case 28: letter = 'å'; break;
+                case 27: letter = 'ø'; break;
+                case 26: letter = 'æ'; break;
+                default: letter = (char)(tempIndex + asciiOffset);
+            }
+            numList.append(letter + ": " + temp);
         }
         return numList.toString();
     }
 
-    public String rightAndWrongGuesses(GameStatObject obj) {
+    public String rightAndWrongGuesses(StatObject obj) {
         return obj.getRightGuesses() + " rigtige og " + obj.getWrongGuesses() + " forkerte";
     }
 
-    public double totalGames(GameStatObject obj) {
-        double wins = (double)obj.getWins();
-        double losses = (double)obj.getLosses();
-        return wins + losses;
+    public String winsAndLoses(StatObject obj) {
+        return String.format("%d vundet og %d tabt", obj.getWins(), obj.getLosses());
     }
 
-    public double winLossRatio(GameStatObject obj) {
+    public double guessesPrMin(StatObject obj) {
+        long time = obj.getGameTime();
+        int guesses = obj.getRightGuesses() + obj.getWrongGuesses();
+        double timeInMin = (double)time / 1000 / 60;
+
+        double ratio = (double)guesses / timeInMin;
+        return round2Decimal(ratio);
+    }
+
+    public double gamePerMin(StatObject obj) {
+        long time = obj.getGameTime();
+        int games = obj.getWins() + obj.getLosses();
+        double timeInMin = (double)time / 1000 / 60;
+
+        double ratio = (double)games / timeInMin;
+        return round2Decimal(ratio);
+    }
+
+    public String totalGames(StatObject obj) {
+        return (obj.getWins() + obj.getLosses()) + " spil";
+    }
+
+    public double winLossRatio(StatObject obj) {
         double wins = (double)obj.getWins();
         double losses = (double)obj.getLosses();
         double ratio = wins / losses;
@@ -143,11 +163,11 @@ public class GameStatLogic {
         return num / 100;
     }
 
-    public double totalGuesses(GameStatObject obj) {
-        return obj.getRightGuesses() + obj.getWrongGuesses();
+    public String totalGuesses(StatObject obj) {
+        return (obj.getRightGuesses() + obj.getWrongGuesses()) + " gæt";
     }
 
-    public String totalGameTime(GameStatObject obj) {
+    public String totalGameTime(StatObject obj) {
         long milliseconds = obj.getGameTime();
         int seconds = (int) (milliseconds / 1000) % 60 ;
         int minutes = (int) ((milliseconds / (1000*60)) % 60);
@@ -156,21 +176,21 @@ public class GameStatLogic {
         return hours + " timer " + minutes + " min " + seconds + " sek";
     }
 
-    public double rightWrongRatio(GameStatObject obj) {
+    public double rightWrongRatio(StatObject obj) {
         double right = (double)obj.getRightGuesses();
         double wrong = (double)obj.getWrongGuesses();
         double ratio = right / wrong;
         return round2Decimal(ratio);
     }
 
-    public double avgRightGuesses(GameStatObject obj) {
+    public double avgRightGuesses(StatObject obj) {
         double right = (double)obj.getRightGuesses();
         double games = (double)(obj.getWins() + obj.getLosses());
         double avg = right / games;
         return round2Decimal(avg);
     }
 
-    public double avgWrongGuesses(GameStatObject obj) {
+    public double avgWrongGuesses(StatObject obj) {
         double wrong = (double)obj.getWrongGuesses();
         double games = (double)(obj.getWins() + obj.getLosses());
         double avg = wrong / games;
