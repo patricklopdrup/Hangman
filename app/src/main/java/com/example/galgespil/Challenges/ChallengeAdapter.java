@@ -71,6 +71,11 @@ public class ChallengeAdapter extends RecyclerView.Adapter {
         challengeDesc.setText(curChallenge.getDesc());
         skinName.setText(holder.itemView.getResources().getString(R.string.unlock_skin, challenges.get(position).getSkinDesc()));
 
+        //setting the background color for every second one
+        if(position % 2 == 0) {
+            holder.itemView.setBackgroundColor(holder.itemView.getResources().getColor(R.color.default_btn));
+        }
+
         //setting text for checkbox
         if (progression >= limit) {
             checkBox.setText(holder.itemView.getResources().getString(R.string.skin_unlocked));

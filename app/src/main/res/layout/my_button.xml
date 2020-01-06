@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
 
-    <Button
-        android:layout_width="32dp"
-        android:layout_height="50dp"
-        android:textAlignment="center"
-        android:textSize="17sp"
-        android:text="q" />
-
-</LinearLayout>
+<Button android:layout_width="32dp"
+    android:layout_height="45dp"
+    android:textAlignment="center"
+    android:textSize="11sp"
+    android:text="w"
+    xmlns:android="http://schemas.android.com/apk/res/android" />

@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -98,12 +99,14 @@ public class GameAct extends AppCompatActivity implements View.OnClickListener {
         for (int i = 0; i < keyboard.getKeys(keyboardChoice).length; i++) {
             String buttonToFind = "button" + (i + 1);
             int buttonID = getResources().getIdentifier(buttonToFind, "id", getPackageName());
+            System.out.println("buttonID: " + buttonToFind + " ; " + (buttonID));
             String key = keyboard.getKeys(keyboardChoice)[i];
             keys[i] = findViewById(buttonID);
             keys[i].setText(key);
             keys[i].setOnClickListener(this);
             //start with keys unclickable
             keys[i].setClickable(false);
+            keys[i].setTextSize(12.0f);
 
             //setting the backgroundcolor (background tint)
             loadKeyboardSkin(skinList, keys[i]);
