@@ -34,13 +34,13 @@ public class GameFinishAct extends AppCompatActivity {
         bundle.putInt("guesses", guesses);
 
         //passing the data from the bundle to our fragment
-        GameWinner_loser gameWinner_loser = new GameWinner_loser();
-        gameWinner_loser.setArguments(bundle);
+        GameWinner_loserAct gameWinner_loserAct = new GameWinner_loserAct();
+        gameWinner_loserAct.setArguments(bundle);
         System.out.println("min bundle: "+bundle.toString());
 
         //go to the fragment
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.endGameFramelayout, new GameWinner_loser(winner))
+                .replace(R.id.endGameFramelayout, new GameWinner_loserAct(winner))
                 .commit();
     }
 }

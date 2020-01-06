@@ -17,7 +17,7 @@ import java.util.List;
 
 public class HighscoreAct extends AppCompatActivity {
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    //for this to work the "template" made in "list_element.xml" has to be "android:layout_height = "wrap_content"
+    //for this to work the "template" made in "highscore_list_elementst_element.xml" has to be "android:layout_height = "wrap_content"
     //"match_parent" does not work!
 
     private HighscoreLogic highscoreLogic = new HighscoreLogic();
@@ -43,7 +43,7 @@ public class HighscoreAct extends AppCompatActivity {
         //this inflate the "template" for how one element in the list looks like
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View itemView = getLayoutInflater().inflate(R.layout.list_element, parent, false);
+            View itemView = getLayoutInflater().inflate(R.layout.highscore_list_element, parent, false);
             return new RecyclerView.ViewHolder(itemView) {};
         }
 
@@ -56,6 +56,11 @@ public class HighscoreAct extends AppCompatActivity {
             ImageView image = holder.itemView.findViewById(R.id.image);
             TextView pos = holder.itemView.findViewById(R.id.placement);
             TextView guesses = holder.itemView.findViewById(R.id.guesses);
+
+            //setting the background color for every second one
+            if(position % 2 == 0) {
+                holder.itemView.setBackgroundColor(holder.itemView.getResources().getColor(R.color.default_btn));
+            }
 
             //switch for number 1,2 and 3. They have there own medal image.
             switch (position) {

@@ -1,8 +1,5 @@
 package com.example.galgespil.Challenges;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +7,9 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.example.galgespil.R;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,7 +33,7 @@ public class ChallengeAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.challenge_item_element, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.challenge_list_element, parent, false);
 
         int[] tempSkinList = challengeLogic.getChosenSkinList(itemView.getContext(), challengeLogic.getSKIN_KEY());
         if (tempSkinList.length == 0) {

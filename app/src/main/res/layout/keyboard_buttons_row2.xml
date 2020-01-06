@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/keyboardRow2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <include layout="@layout/my_button"
+            android:id="@+id/button12" />
+
+        <include layout="@layout/my_button"
+            android:id="@+id/button13" />
+
+        <include layout="@layout/my_button"
+            android:id="@+id/button14" />
+
+        <include layout="@layout/my_button"
+            android:id="@+id/button15" />
+
+        <include layout="@layout/my_button"
+            android:id="@+id/button16" />
+
+        <include layout="@layout/my_button"
+            android:id="@+id/button17" />
+
+        <include layout="@layout/my_button"
+            android:id="@+id/button18" />
+
+        <include layout="@layout/my_button"
+            android:id="@+id/button19" />
+
+        <include layout="@layout/my_button"
+            android:id="@+id/button20" />
+
+        <include layout="@layout/my_button"
+            android:id="@+id/button21" />
+
+        <include layout="@layout/my_button"
+            android:id="@+id/button22" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -23,7 +23,7 @@ public class StatAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.statistics_item_element, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.statistics_list_element, parent, false);
 
         //statObjectList = statLogic.getStats(statLogic.getGameStats(itemView.getContext()));
 
