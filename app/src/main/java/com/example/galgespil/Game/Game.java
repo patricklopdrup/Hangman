@@ -51,6 +51,8 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     private boolean isGameWon = false;
     private int[] guessedLetters = new int[keyboard.qwerty.length];
 
+    private boolean isGameCanceled = true;
+
     //two progressionbars. The right one is rotated 180 degrees
     private ProgressBar progressLeft, progressRight;
     private int highScoreMilisec;
@@ -61,8 +63,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     //skins
     private String manSkin = "";
     private int[] skinList;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +102,6 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
             keys[i].setClickable(false);
 
             //setting the backgroundcolor (background tint)
-            //keys[i].setBackgroundTintList(ColorStateList.valueOf(getColor(R.color.default_btn)));
             loadKeyboardSkin(skinList, keys[i]);
         }
 
@@ -266,22 +265,26 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     //if the game is started, but stopped mid-game the user lose and stats is counted
     protected void onPause() {
         super.onPause();
-        if(firstLetterGuessed) {
-            timePassed = SystemClock.elapsedRealtime() - timer.getBase();
-            int wins = 0;
-            int losses = 1;
+        //check if the user cancel the game. This is sat to false in "gameEnded" (that is the proper way to end the game)
+        if(isGameCanceled) {
+            if(firstLetterGuessed) {
+                timePassed = SystemClock.elapsedRealtime() - timer.getBase();
+                int wins = 0;
+                int losses = 1;
 
-            timer.stop();
-            System.out.println("on pause. Tid er: " + timePassed);
+                timer.stop();
+                System.out.println("on pause. Tid er: " + timePassed);
 
-            gameStatLogic.updateStats(gameStatLogic.getGameStats(this), gameStatLogic.getGAME_OBJECT_KEY(), wins, losses, rightGuesses, wrongGuesses, timePassed, guessedLetters, this);
+                gameStatLogic.updateStats(gameStatLogic.getGameStats(this), gameStatLogic.getGAME_OBJECT_KEY(), wins, losses, rightGuesses, wrongGuesses, timePassed, guessedLetters, this);
 
-            checkChallenges(this);
+                checkChallenges(this);
+            }
         }
     }
 
     public void gameEnded() {
         timer.stop();
+        isGameCanceled = false;
         for (Button b : keys) {
             b.setClickable(false);
         }
