@@ -1,5 +1,6 @@
 package com.example.galgespil.Statistic;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,8 @@ public class StatAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.statistics_list_element, parent, false);
 
-        //statObjectList = statLogic.getStats(statLogic.getGameStats(itemView.getContext()));
+        //getting the values. Can't do it in global variable because I need context
+        statValues = statLogic.getStatValues(parent.getContext());
 
         return new RecyclerView.ViewHolder(itemView) {};
     }
@@ -34,10 +36,6 @@ public class StatAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         statName = holder.itemView.findViewById(R.id.stat_name);
         statInfo = holder.itemView.findViewById(R.id.stat_info);
-
-        StatObject obj = statLogic.getGameStats(holder.itemView.getContext());
-        //getting the values. Can't do it in global variable because I need context
-        statValues = statLogic.getStatValues(holder.itemView.getContext());
 
         //mergin the 2 Lists. We take the values and adding them to the global statObjectList
         for (int i = 0; i < statObjectList.size(); i++) {
@@ -48,6 +46,8 @@ public class StatAdapter extends RecyclerView.Adapter {
         //setting the background color for every second one
         if(position % 2 == 0) {
             holder.itemView.setBackgroundColor(holder.itemView.getResources().getColor(R.color.default_btn));
+        } else {
+            holder.itemView.setBackgroundColor(Color.WHITE);
         }
 
         statName.setText(statObjectList.get(position).statName);
