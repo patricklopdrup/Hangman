@@ -22,14 +22,25 @@
     <TextView
         android:id="@+id/statistics_title"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginTop="20dp"
+
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit ="marquee_forever"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:scrollHorizontally="true"
+        android:scrollbars="horizontal"
+
+
         android:text="@string/statistics"
         android:textAlignment="center"
         android:textSize="45sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <!--android:text="@string/statistics"-->
 
     <FrameLayout
         android:id="@+id/statistics_frame"
