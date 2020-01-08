@@ -31,8 +31,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.final_keyboard:runner:1.1.1'
-    androidTestImplementation 'androidx.final_keyboard.espresso:espresso-core:3.1.1'
+
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.google.firebase:firebase-analytics:17.2.1'

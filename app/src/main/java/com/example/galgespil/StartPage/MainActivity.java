@@ -17,7 +17,7 @@ import com.example.galgespil.Statistic.StatLogic;
 import com.example.galgespil.Statistic.StatAct;
 import com.example.galgespil.Help;
 import com.example.galgespil.Highscore.HighscoreAct;
-import com.example.galgespil.Keyboard;
+import com.example.galgespil.MyKeyboard;
 import com.example.galgespil.R;
 
 import java.util.Arrays;
@@ -27,10 +27,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button startGame, highscore, challenge, statistics, help;
     private ImageView settings;
 
-    private final boolean IS_DEBUG = true;
     private StatLogic statLogic = new StatLogic();
-    private Keyboard keyboard = new Keyboard();
+    private MyKeyboard myKeyboard = new MyKeyboard();
 
+    private final boolean IS_DEBUG = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             int rightGuess = 20;
             int wrongGuess = 25;
             long time = 120000;
-            int[] letters = new int[keyboard.qwerty.length];
+            int[] letters = new int[myKeyboard.qwerty.length];
             for(int i = 0; i < letters.length; i++) {
                 letters[i] = i+5;
             }

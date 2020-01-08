@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#349CFF</color>
+    <color name="colorPrimaryDark">#194E80</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="wrong_guess_btn">#FF0000</color>
+    <color name="correct_guess_btn">#08A026</color>
 
     <color name="blue_link">#0064bd</color>
     <color name="purple_btn">#DCE174F8</color>

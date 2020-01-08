@@ -9,13 +9,14 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.galgespil.Game.GameAct;
+import com.example.galgespil.MyKeyboard;
 import com.example.galgespil.R;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 public class SettingsDialog extends AppCompatDialogFragment {
-    private GameAct gameAct = new GameAct();
+    private MyKeyboard myKeyboard= new MyKeyboard();
     private ToggleButton toggle;
 
     @Override
@@ -26,7 +27,7 @@ public class SettingsDialog extends AppCompatDialogFragment {
         View view = inflater.inflate(R.layout.frag_setting_dialog, null);
         toggle = view.findViewById(R.id.toggleButton);
 
-        final int keyboardChoise = gameAct.getKeyboardChoise(gameAct.getKeyboardKey(), getContext());
+        final int keyboardChoise = myKeyboard.getKeyboardChoise(myKeyboard.getKEYBOARD_KEY(), getContext());
         System.out.println("valgt: " + keyboardChoise);
         if(keyboardChoise == 0) {
             System.out.println("qwerty");
@@ -49,7 +50,7 @@ public class SettingsDialog extends AppCompatDialogFragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         int keyboard = toggle.isChecked() ? 0 : 1;
                         System.out.println("her er den: " + keyboard);
-                        gameAct.saveKeyboardChoise(gameAct.getKeyboardKey(), keyboard, getContext());
+                        myKeyboard.saveKeyboardChoise(myKeyboard.getKEYBOARD_KEY(), keyboard, getContext());
 
                         //give toast to the user of the choice
                         String keyboardName = "";
