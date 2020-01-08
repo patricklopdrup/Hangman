@@ -1,11 +1,8 @@
 package com.example.galgespil.Statistic;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,16 +14,16 @@ public class StatAct extends AppCompatActivity implements View.OnClickListener {
     private Button moreStats;
     private TextView title;
 
+    private boolean isShowingAllStats = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
 
-        StatListFrag fragment = new StatListFrag();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.statistics_frame, fragment);
-        fragmentTransaction.commit();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.statistics_frame, new StatListFrag())
+                .commit();
 
         title = findViewById(R.id.statistics_title);
         //used to getting the title to scroll by it self
@@ -39,7 +36,18 @@ public class StatAct extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if(v == moreStats) {
-
+            if(isShowingAllStats) {
+                //show the scroll view with barCharts
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.statistics_frame, new StatPressedKeysFrag())
+                        .commit();
+                isShowingAllStats = false;
+            } else {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.statistics_frame, new StatListFrag())
+                        .commit();
+                isShowingAllStats = true;
+            }
         }
     }
 }

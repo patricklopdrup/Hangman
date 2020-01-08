@@ -16,9 +16,14 @@
     <string name="showHelp_english">Click on \"START GAME\" and try to guess the word hidden in asterisk(stars).
             \n\nSee if you can beat the timer in the bottom of your screen and become number 1!!
             \n\nYou can also see your highscores in \"HIGHSCORE\"</string>
+
     <string name="showHelp_danish">Klik på \"START SPIL\" og gæt det hemmelige ord gemt i stjernerne.
-            \n\nSe om du kan være hurtigere end timeren i bunden af skærmen og bliv nummer 1!!
-            \n\nDu kan se din highscore i \"HIGHSCORE\"</string>
+            \n\nVær hurtigere end timeren i bunden af skærmen og bliv nummer 1!
+            \n\nTjek dine vundne spil ud i \"HIGHSCORE\"
+            \n\nLås op for fede skins ved at vinde! - følg med i \"UDFORDRINGER\"
+            \n\nTjek dine stats ud i \"STATISTIKKER\" og bliv bedre for hver dag!
+    </string>
+
     <string name="keyboard_layout">Tastatur</string>
     <string name="abc">ABC</string>
     <string name="qwerty">QWERTY</string>
@@ -56,5 +61,7 @@
     <string name="skin_locked">Lås</string>
     <string name="skin_unlocked">Åben</string>
     <string name="statistics">Statistikker</string>
-    <string name="more_stats">Flere stats</string>
+    <string name="different_stats">Andre stats</string>
+    <string name="letter_usage_title">Brugen af bogstaver</string>
+    <string name="help_title">Hjælp</string>
 </resources>

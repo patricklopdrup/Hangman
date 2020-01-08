@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.example.galgespil.R;
 
-public class Help extends AppCompatActivity {
+public class HelpAct extends AppCompatActivity {
 
     private TextView helpText;
 

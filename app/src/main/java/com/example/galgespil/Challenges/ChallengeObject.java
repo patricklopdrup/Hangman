@@ -1,14 +1,5 @@
 package com.example.galgespil.Challenges;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-
 import androidx.annotation.NonNull;
 
 public class ChallengeObject {

@@ -4,14 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
@@ -180,21 +176,24 @@ public class GameAct extends AppCompatActivity implements View.OnClickListener {
     }
 
     public void firstTimeClicked() {
+        //start the timer
         timer.setBase(SystemClock.elapsedRealtime());
         timer.start();
         //check if first letter is correct
         isFirstLetterCorrect = logik.erSidsteBogstavKorrekt();
         System.out.println("first letter: " + isFirstLetterCorrect);
         firstLetterGuessed = true;
-        //starting the progressbar in another thread
+        //starting the progressbars in another thread
         progressBarThread();
     }
 
     public void wrongGuess(Button btn) {
+        //finding the correct hangman image to show
         int resID = loadImg(IMG_NAME, logik.getAntalForkerteBogstaver(), gameSkin.manSkin);
         gameImg.setImageResource(resID);
         //setting the button to red and make it unclickable
         wrongGuesses++;
+        //setting button to red and unclickable
         btn.setTextColor(getColor(R.color.wrong_guess_btn));
         btn.setClickable(false);
     }
@@ -242,17 +241,17 @@ public class GameAct extends AppCompatActivity implements View.OnClickListener {
         //check if the user cancel the game. This is sat to false in "gameEnded" (which is the proper way to end the game)
         if (isGameCanceled) {
             if (firstLetterGuessed) {
-
                 System.out.println("bliver kaldt i pause");
 
                 timePassed = SystemClock.elapsedRealtime() - timer.getBase();
-                int wins = 0;
-                int losses = 1;
-
                 timer.stop();
                 System.out.println("on pause. Tid er: " + timePassed);
 
-                statLogic.updateStats(statLogic.getGameStats(this), statLogic.getGAME_OBJECT_KEY(), wins, losses, rightGuesses, wrongGuesses, timePassed, guessedLetters, this);
+                //always lose if the game is canceled
+                int wins = 0;
+                int losses = 1;
+
+                statLogic.updateStats(statLogic.getStats(this), statLogic.getGAME_OBJECT_KEY(), wins, losses, rightGuesses, wrongGuesses, timePassed, guessedLetters, this);
 
                 checkChallenges(this);
 
@@ -274,7 +273,7 @@ public class GameAct extends AppCompatActivity implements View.OnClickListener {
 
         if (isGameWon) wins++;
         else losses++;
-        statLogic.updateStats(statLogic.getGameStats(this), statLogic.getGAME_OBJECT_KEY(), wins, losses, rightGuesses, wrongGuesses, timePassed, guessedLetters, this);
+        statLogic.updateStats(statLogic.getStats(this), statLogic.getGAME_OBJECT_KEY(), wins, losses, rightGuesses, wrongGuesses, timePassed, guessedLetters, this);
 
         checkChallenges(this);
 
@@ -332,8 +331,6 @@ public class GameAct extends AppCompatActivity implements View.OnClickListener {
     public void getWordsFromDr() {
         //gets word from dr.dk. Uses the same Galgelogik logik as above (global variable)
         new AsyncTask() {
-
-            // TODO: 11-11-2019 lav en cache til ordene, så den ikke skal hente hver gang
             @Override
             protected Object doInBackground(Object[] objects) {
                 try {

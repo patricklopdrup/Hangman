@@ -15,7 +15,7 @@ public class StatLogic {
     private List<StatDisplayObject> statObjectList = new ArrayList<>();
     private final String GAME_OBJECT_KEY = "myGameStatKey";
 
-    public StatObject getGameStats(Context context) {
+    public StatObject getStats(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String json = prefs.getString(GAME_OBJECT_KEY, "empty");
         System.out.println("json hentet: " + json);
@@ -46,6 +46,7 @@ public class StatLogic {
         gso.updateGuessedLetters(guessedLetters);
     }
 
+    //the names of the stat
     public List<StatDisplayObject> getStatNames() {
         statObjectList.add(new StatDisplayObject("Tid spillet"));
         statObjectList.add(new StatDisplayObject("Antal spil spillet"));
@@ -64,8 +65,9 @@ public class StatLogic {
     }
 
     private List<StatDisplayObject> statValues = new ArrayList<>();
+    //the values for the stat (has to line up with the names)
     public List<StatDisplayObject> getStatValues(Context context) {
-        StatObject obj = getGameStats(context);
+        StatObject obj = getStats(context);
 
         statValues.add(new StatDisplayObject(-1.0, totalGameTime(obj))); //tid spillet
         statValues.add(new StatDisplayObject(-1.0, totalGames(obj))); //antal spil
@@ -155,7 +157,7 @@ public class StatLogic {
         return round2Decimal(ratio);
     }
 
-    //rounding to 2 decimal places and returning
+    //rounding double to 2 decimal places
     private double round2Decimal(double num) {
         num *= 100;
         num = Math.round(num);

@@ -43,7 +43,12 @@ dependencies {
     implementation 'com.daimajia.easing:library:2.0@aar'
     implementation 'com.daimajia.androidanimations:library:2.3@aar'
 
+    //progressbar in challenges
     implementation 'com.params.progressview:step-progress:1.0.2'
+
+    //bar chart in statistics
+    implementation 'me.ithebk:barchart:0.9'
+
     implementation "androidx.core:core-ktx:+"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }

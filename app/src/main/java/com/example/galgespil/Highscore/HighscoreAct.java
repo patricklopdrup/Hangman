@@ -58,13 +58,6 @@ public class HighscoreAct extends AppCompatActivity {
             TextView pos = holder.itemView.findViewById(R.id.placement);
             TextView guesses = holder.itemView.findViewById(R.id.guesses);
 
-            //setting the background color for every second one
-            if(position % 2 == 0) {
-                holder.itemView.setBackgroundColor(holder.itemView.getResources().getColor(R.color.default_btn));
-            } else {
-                holder.itemView.setBackgroundColor(Color.WHITE);
-            }
-
             //switch for number 1,2 and 3. They have there own medal image.
             switch (position) {
                 case 0:

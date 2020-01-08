@@ -13,7 +13,7 @@
         android:layout_marginStart="120dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="120dp"
-        android:text="@string/more_stats"
+        android:text="@string/different_stats"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

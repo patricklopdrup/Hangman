@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             System.out.println("Debug array: " + Arrays.toString(letters));
             System.out.println("debug array længde: " + letters.length);
-            statLogic.updateStats(statLogic.getGameStats(this), statLogic.getGAME_OBJECT_KEY(), wins, loses, rightGuess, wrongGuess, time, letters, this);
+            statLogic.updateStats(statLogic.getStats(this), statLogic.getGAME_OBJECT_KEY(), wins, loses, rightGuess, wrongGuess, time, letters, this);
         }
 
         startGame = findViewById(R.id.startGame);
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent i = new Intent(this, StatAct.class);
             startActivity(i);
         } else if(v == help) {
-            Intent i = new Intent(this, Help.class);
+            Intent i = new Intent(this, HelpAct.class);
             startActivity(i);
         } else if(v == settings) {
             SettingsDialog settingsDialog = new SettingsDialog();

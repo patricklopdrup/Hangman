@@ -2,10 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.galgespil">
 
-    <supports-screens
-        android:normalScreens="true"
-        android:smallScreens="true"/>
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_my_logo"
@@ -14,32 +10,46 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Statistic.StatAct"></activity>
-        <activity android:name=".Challenges.ChallengeAct" />
-        <activity
-            android:name=".Game.GameFinishAct"
+
+
+        <activity android:name=".Statistic.StatAct"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Challenges.ChallengeAct"
+            android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".StartPage.Help"
+            android:name=".Game.GameFinishAct"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".StartPage.HelpAct"
+            android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Highscore.HighscoreAct"
+            android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Game.GameAct"
+            android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
             android:name=".StartPage.MainActivity"
+            android:configChanges="orientation"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <supports-screens
+        android:normalScreens="true"
+        android:smallScreens="true" />
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>

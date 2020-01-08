@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class StatListFrag extends Fragment {
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -21,12 +22,12 @@ public class StatListFrag extends Fragment {
 
         RecyclerView recyclerView = layout.findViewById(R.id.recylerView_frag);
 
-        StatAdapter listAdapter = new StatAdapter();
+        //my adapter class
+        RecyclerView.Adapter listAdapter = new StatAdapter();
+
         recyclerView.setAdapter(listAdapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-
-
 
         return layout;
     }
