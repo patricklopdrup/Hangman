@@ -46,8 +46,9 @@ public class StatPressedKeysFrag extends Fragment {
                 mostPressedLetter = i;
             }
         }
-        //setting the barMaxValue 25% higher than mostPressedLetter
-        mostPressedLetter = (int)(mostPressedLetter * 1.25);
+        //setting the barMaxValue 25% higher than mostPressedLetter.
+        //Also plus 1 because when temp is low, fx 3 it will be: 3*1.2=3.6 and then cast to int is 3 and we can't see it on the screen
+        mostPressedLetter = 1 + (int)(mostPressedLetter * 1.25);
         barChart.setBarMaxValue(mostPressedLetter);
         System.out.println("temp er: " + mostPressedLetter);
 

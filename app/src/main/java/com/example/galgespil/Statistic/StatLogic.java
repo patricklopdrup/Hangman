@@ -152,6 +152,7 @@ public class StatLogic {
     public double winLossRatio(StatObject obj) {
         double wins = (double)obj.getWins();
         double losses = (double)obj.getLosses();
+        if(losses == 0.0) return wins;
         double ratio = wins / losses;
 
         return round2Decimal(ratio);
@@ -180,6 +181,7 @@ public class StatLogic {
     public double rightWrongRatio(StatObject obj) {
         double right = (double)obj.getRightGuesses();
         double wrong = (double)obj.getWrongGuesses();
+        if(wrong == 0.0) return right;
         double ratio = right / wrong;
         return round2Decimal(ratio);
     }
