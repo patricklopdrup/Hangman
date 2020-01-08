@@ -60,7 +60,6 @@ public class StatLogic {
         statObjectList.add(new StatDisplayObject("Spil pr. minut"));
         statObjectList.add(new StatDisplayObject("Gæt pr. minut"));
 
-
         return statObjectList;
     }
 

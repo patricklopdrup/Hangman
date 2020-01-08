@@ -1,5 +1,6 @@
 package com.example.galgespil.Challenges;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,12 +69,18 @@ public class ChallengeAdapter extends RecyclerView.Adapter {
 
         //setting text for textViews
         challengeName.setText(curChallenge.getName());
+        challengeName.setSelected(true);
+
         challengeDesc.setText(curChallenge.getDesc());
+        challengeDesc.setSelected(true);
+
         skinName.setText(holder.itemView.getResources().getString(R.string.unlock_skin, challenges.get(position).getSkinDesc()));
 
         //setting the background color for every second one
         if(position % 2 == 0) {
             holder.itemView.setBackgroundColor(holder.itemView.getResources().getColor(R.color.default_btn));
+        } else {
+            holder.itemView.setBackgroundColor(Color.WHITE);
         }
 
         //setting text for checkbox
