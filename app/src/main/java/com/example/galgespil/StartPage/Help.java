@@ -1,9 +1,11 @@
-package com.example.galgespil;
+package com.example.galgespil.StartPage;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.TextView;
+
+import com.example.galgespil.R;
 
 public class Help extends AppCompatActivity {
 

@@ -20,7 +20,7 @@
             android:name=".Game.GameFinishAct"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Help"
+            android:name=".StartPage.Help"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Highscore.HighscoreAct"

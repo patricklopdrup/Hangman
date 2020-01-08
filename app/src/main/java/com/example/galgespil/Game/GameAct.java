@@ -237,11 +237,14 @@ public class GameAct extends AppCompatActivity implements View.OnClickListener {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onPause() {
+        super.onPause();
         //check if the user cancel the game. This is sat to false in "gameEnded" (which is the proper way to end the game)
         if (isGameCanceled) {
             if (firstLetterGuessed) {
+
+                System.out.println("bliver kaldt i pause");
+
                 timePassed = SystemClock.elapsedRealtime() - timer.getBase();
                 int wins = 0;
                 int losses = 1;
@@ -252,6 +255,9 @@ public class GameAct extends AppCompatActivity implements View.OnClickListener {
                 statLogic.updateStats(statLogic.getGameStats(this), statLogic.getGAME_OBJECT_KEY(), wins, losses, rightGuesses, wrongGuesses, timePassed, guessedLetters, this);
 
                 checkChallenges(this);
+
+                //finish in onPause otherwise the stats are unreliable
+                finish();
             }
         }
     }

@@ -15,7 +15,6 @@ import com.example.galgespil.Challenges.ChallengeAct;
 import com.example.galgespil.Game.GameAct;
 import com.example.galgespil.Statistic.StatLogic;
 import com.example.galgespil.Statistic.StatAct;
-import com.example.galgespil.Help;
 import com.example.galgespil.Highscore.HighscoreAct;
 import com.example.galgespil.MyKeyboard;
 import com.example.galgespil.R;
@@ -30,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private StatLogic statLogic = new StatLogic();
     private MyKeyboard myKeyboard = new MyKeyboard();
 
-    private final boolean IS_DEBUG = true;
+    private final boolean IS_DEBUG = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

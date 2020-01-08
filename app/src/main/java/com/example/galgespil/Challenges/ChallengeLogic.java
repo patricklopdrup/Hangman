@@ -44,6 +44,7 @@ public class ChallengeLogic {
     public int checkInARow(Context context, boolean gameWon, int challengeLimit) {
         int inARow = getChallengeProgression(context).getInARow();
         if(inARow >= challengeLimit) return challengeLimit;
+        //if game won we add on to counter otherwise reset it
         if(gameWon) return inARow + 1;
         else return 0;
     }
@@ -51,7 +52,7 @@ public class ChallengeLogic {
     /**
      * no mistake
      */
-    private final int NO_MISTAKE_LIMIT = 3;
+    private final int NO_MISTAKE_LIMIT = 1;
     private final String NO_MISTAKE_NAME = "Fejlfri";
     private final String NO_MISTAKE_DESC = "Gæt " + NO_MISTAKE_LIMIT + " ord uden fejl";
     private final String NO_MISTAKE_SKIN_DESC = "Grøn mand";
