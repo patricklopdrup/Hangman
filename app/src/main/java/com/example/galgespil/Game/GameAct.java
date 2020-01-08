@@ -36,6 +36,7 @@ public class GameAct extends AppCompatActivity implements View.OnClickListener {
     private HighscoreLogic highscoreLogic = new HighscoreLogic();
     private StatLogic statLogic = new StatLogic();
     private ChallengeLogic challengeLogic = new ChallengeLogic();
+    private GameSkin gameSkin = new GameSkin();
 
     //views on screen
     private ImageView gameImg;
@@ -61,10 +62,6 @@ public class GameAct extends AppCompatActivity implements View.OnClickListener {
     private int[] guessedLetters = new int[myKeyboard.qwerty.length];
     private boolean isGameCanceled = true;
 
-    //skins
-    private String manSkin = "";
-    private int[] skinList;
-
     //for which keyboard is chosen
     private int keyboardChoice;
 
@@ -78,19 +75,19 @@ public class GameAct extends AppCompatActivity implements View.OnClickListener {
 
         keyboardChoice = myKeyboard.getKeyboardChoise(myKeyboard.getKEYBOARD_KEY(), this);
 
-        skinList = challengeLogic.getChosenSkinList(this, challengeLogic.getSKIN_KEY());
-        if (skinList.length == 0) {
+        gameSkin.skinList = challengeLogic.getChosenSkinList(this, challengeLogic.getSKIN_KEY());
+        if (gameSkin.skinList.length == 0) {
             //getting amount of skins from enum in ChallengeObject
             int amountOfSkins = ChallengeObject.SkinGroup.values().length;
 
-            skinList = new int[amountOfSkins];
+            gameSkin.skinList = new int[amountOfSkins];
             //setting default value of -1 at every index if it's the first time getting the list
             for (int i = 0; i < amountOfSkins; i++) {
-                skinList[i] = -1;
+                gameSkin.skinList[i] = -1;
             }
         }
-        System.out.println("her er listen: " + Arrays.toString(skinList));
-        manSkin = loadManSkin(skinList);
+        System.out.println("her er listen: " + Arrays.toString(gameSkin.skinList));
+        gameSkin.manSkin = gameSkin.loadManSkin(gameSkin.skinList);
 
         //if there is a highscore the timer is set to that time otherwise sat to 30sec
         List<HighscoreObject> temp = highscoreLogic.getSortedHighscoreList(highscoreLogic.getHighscoreKey(), this);
@@ -127,7 +124,7 @@ public class GameAct extends AppCompatActivity implements View.OnClickListener {
             keys[i].setClickable(false);
 
             //setting the backgroundcolor (background tint)
-            loadKeyboardSkin(skinList, keys[i]);
+            gameSkin.loadKeyboardSkin(gameSkin.skinList, keys[i], getBaseContext());
         }
     }
 
@@ -194,7 +191,7 @@ public class GameAct extends AppCompatActivity implements View.OnClickListener {
     }
 
     public void wrongGuess(Button btn) {
-        int resID = loadImg(IMG_NAME, logik.getAntalForkerteBogstaver(), manSkin);
+        int resID = loadImg(IMG_NAME, logik.getAntalForkerteBogstaver(), gameSkin.manSkin);
         gameImg.setImageResource(resID);
         //setting the button to red and make it unclickable
         wrongGuesses++;
@@ -209,68 +206,10 @@ public class GameAct extends AppCompatActivity implements View.OnClickListener {
         btn.setClickable(false);
     }
 
-    public void loadKeyboardSkin(int[] skinList, Button key) {
-        //find index in enum "array"
-        int keyboardSkinLookup = skinList[ChallengeObject.SkinGroup.KEYBOARD_SKIN.ordinal()];
-        //take the skin out of the specific challenge if it is -1, we set is as "default.
-        String keyboardSkinExtention = keyboardSkinLookup == -1 ? "default" : challengeLogic.getChallenges().get(keyboardSkinLookup).getSkin();
-        //if it's an img we have to set or just a color
-        if (keyboardSkinExtention.equals("rainbow")) {
-            loadKeyboardImg(key, keyboardSkinExtention);
-        } else {
-            loadKeyboardColor(key, keyboardSkinExtention);
-        }
-    }
-
-    public void loadKeyboardColor(Button key, String skinExtension) {
-        String keyboardSkin = skinExtension + "_" + "btn";
-        System.out.println("keyboardskin: " + keyboardSkin);
-        //finding the int for the specific keyboardSkin
-        int color = getResources().getIdentifier(keyboardSkin, "color", getPackageName());
-        key.setBackgroundTintList(ColorStateList.valueOf(getColor(color)));
-    }
-
-    public void loadKeyboardImg(Button key, String imgToFind) {
-        key.setBackgroundResource(getResources().getIdentifier(imgToFind, "drawable", getPackageName()));
-    }
-
-    public String loadManSkin(int[] skinList) {
-        //find index in enum "array"
-        int manSkinLookup = skinList[ChallengeObject.SkinGroup.MAN_SKIN.ordinal()];
-        System.out.println("manskinlookup: " + manSkinLookup);
-        if (manSkinLookup == -1) {
-            return "default";
-        }
-        //take the skin out of the specific challenge
-        System.out.println("få challenges: " + challengeLogic.getChallenges().get(manSkinLookup));
-        System.out.println("loadman: " + challengeLogic.getChallenges().get(manSkinLookup).getSkin());
-        return challengeLogic.getChallenges().get(manSkinLookup).getSkin();
-    }
-
     private int loadImg(String imgName, int imgNum, String skin) {
         String imgToShow = imgName + imgNum + "_" + skin;
         //gets the exact id for the img
         return getResources().getIdentifier(imgToShow, "drawable", getPackageName());
-    }
-
-    /**
-     * This filter the list of words in "muligeOrd" to be larger than minimumSize and less than maximumSize
-     *
-     * @param minimumSize the minimum length of a word
-     * @param maximumSize the maximum length of a word
-     */
-    private void filterWordFromDr(int minimumSize, int maximumSize) {
-        int arrSize = logik.muligeOrd.size();
-        //need to be called from the last element to the first because the size getting smaller when we remove
-        for (int i = arrSize - 1; i >= 0; i--) {
-            if (logik.muligeOrd.get(i).length() < minimumSize || logik.muligeOrd.get(i).length() > maximumSize) {
-                logik.muligeOrd.remove(i);
-            }
-        }
-        //we call "nulstil()" to get a word from our filtered list
-        logik.nulstil();
-        System.out.println("start str: " + arrSize + "\nsorteret str: " + logik.muligeOrd.size());
-        System.out.println("filtreret muligeord= " + logik.muligeOrd);
     }
 
     /**
@@ -412,9 +351,24 @@ public class GameAct extends AppCompatActivity implements View.OnClickListener {
         }.execute();
     }
 
-
-
-
-
+    /**
+     * This filter the list of words in "muligeOrd" to be larger than minimumSize and less than maximumSize
+     *
+     * @param minimumSize the minimum length of a word
+     * @param maximumSize the maximum length of a word
+     */
+    private void filterWordFromDr(int minimumSize, int maximumSize) {
+        int arrSize = logik.muligeOrd.size();
+        //need to be called from the last element to the first because the size getting smaller when we remove
+        for (int i = arrSize - 1; i >= 0; i--) {
+            if (logik.muligeOrd.get(i).length() < minimumSize || logik.muligeOrd.get(i).length() > maximumSize) {
+                logik.muligeOrd.remove(i);
+            }
+        }
+        //we call "nulstil()" to get a word from our filtered list
+        logik.nulstil();
+        System.out.println("start str: " + arrSize + "\nsorteret str: " + logik.muligeOrd.size());
+        System.out.println("filtreret muligeord= " + logik.muligeOrd);
+    }
 
 }
