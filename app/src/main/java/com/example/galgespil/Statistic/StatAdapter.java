@@ -51,10 +51,13 @@ public class StatAdapter extends RecyclerView.Adapter {
         }
 
         statName.setText(statObjectList.get(position).statName);
+        //if nothing in statInfo (-1.0) we show statHelpInfo
         if(statObjectList.get(position).statInfo == -1.0) {
             statInfo.setText(statObjectList.get(position).statHelpInfo);
+            //if nothing in statHelpInfo we show statInfo
         } else if(statObjectList.get(position).statHelpInfo == null) {
             statInfo.setText(Double.toString(statObjectList.get(position).statInfo));
+            //else we show both
         } else {
             statInfo.setText(statObjectList.get(position).statInfo + " " + statObjectList.get(position).statHelpInfo);
         }

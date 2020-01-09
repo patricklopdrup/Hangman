@@ -112,6 +112,7 @@ public class GameAct extends AppCompatActivity implements View.OnClickListener {
         for (int i = 0; i < myKeyboard.getKeys(keyboardChoice).length; i++) {
             String buttonToFind = "button" + (i + 1);
             int buttonID = getResources().getIdentifier(buttonToFind, "id", getPackageName());
+            //getting the letters
             String key = myKeyboard.getKeys(keyboardChoice)[i];
             keys[i] = findViewById(buttonID);
             keys[i].setText(key);
