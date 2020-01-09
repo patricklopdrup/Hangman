@@ -1,6 +1,10 @@
 # Hangman
 This is a Hangman <code>Android</code> app written in <code>Java</code> using <code>Android Studio</code>
 
+<h2>Start skærmen</h2>
+<img src="https://imgur.com/CicWoxU.jpg" alt="alt text" width="180" >
+
+
 <h2>Spillet</h2>
 <img src="https://imgur.com/QD0USLq.jpg" alt="alt text" width="180" > 
 
@@ -11,7 +15,6 @@ This is a Hangman <code>Android</code> app written in <code>Java</code> using <c
 <img src="https://imgur.com/JqVsoDL.jpg" alt="alt text" width="180" >
 
 <h2>Statistikker</h2>
-<img src="https://imgur.com/0SubacD.jpg" alt="alt text" width="180" >
+<img align="left" src="https://imgur.com/0SubacD.jpg" alt="alt text" width="180" >
 
-<h2>Statistik over brugen af bogstaver</h2>
 <img src="https://imgur.com/sKCdjgd.jpg" alt="alt text" width="180" >
