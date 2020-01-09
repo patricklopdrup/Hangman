@@ -1,9 +1,9 @@
 # Hangman
 This is a Hangman <code>Android</code> app written in <code>Java</code> using <code>Android Studio</code>
 
-<h2>Start skærmen</h2>
+<h2>Startskærmen</h2>
 <img src="https://imgur.com/CicWoxU.jpg" alt="alt text" width="180" >
-Her er start skærmen for spillet.
+Her er startskærmen for spillet.
 
 <h2>Spillet</h2>
 <img align="left" src="https://imgur.com/QD0USLq.jpg" alt="alt text" width="180" > 
