@@ -20,6 +20,8 @@ Trykkes på <code>HIGHSCORE</code> kommer du her hen. Her kan du se alle dine vu
 
 <h2>Udfordringer og valg af skins</h2>
 <img src="https://imgur.com/JqVsoDL.jpg" alt="alt text" width="180" >
+Trykkes på <code>UDFORDRINGER</code> kan du se hvilke skins, du har låst op for. Når disse er låst op, kan du vælge dem. Der kan kun vælges én af hver type skins. 
+<br>Fx kan du vælge <code>lilla knapper</code> og <code>grøn mand</code>, men <u>ikke</u> <code>lilla knapper</code> og <code>regnbueknapper</code>.
 
 <h2>Statistikker</h2>
 <img align="left" src="https://imgur.com/0SubacD.jpg" alt="alt text" width="180" >
