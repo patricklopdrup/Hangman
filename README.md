@@ -1,2 +1,2 @@
 # Hangman
-This is a Hangman Android app
+This is a Hangman <code>Android</code> app
