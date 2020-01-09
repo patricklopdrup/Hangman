@@ -1,4 +1,4 @@
-# Hangman
+# Hangman / Galgeleg
 Dette er en galgeleg <code>Android</code> app skrevet i <code>Java</code> og udviklings værktøjet <code>Android Studio</code> er brugt.
 
 <h2>Startskærmen</h2>
