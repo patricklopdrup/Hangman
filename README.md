@@ -1,5 +1,5 @@
 # Hangman
-This is a Hangman <code>Android</code> app written in <code>Java</code> using <code>Android Studio</code>
+Dette er en galgeleg <code>Android</code> app skrevet i <code>Java</code> og udviklings værktøjet <code>Android Studio</code> er brugt.
 
 <h2>Startskærmen</h2>
 <img src="https://imgur.com/CicWoxU.jpg" alt="alt text" width="180" >
