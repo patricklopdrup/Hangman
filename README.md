@@ -27,4 +27,4 @@ Trykkes på <code>UDFORDRINGER</code> kan du se hvilke skins, du har låst op fo
 <img align="left" src="https://imgur.com/0SubacD.jpg" alt="alt text" width="180" >
 <img src="https://imgur.com/sKCdjgd.jpg" alt="alt text" width="180" >
 Går du ind på <code>STATISTIKKER</code> kan du se forskellige statistikker for dine spil - tabte som vundne.
-<br>På det billede nummer 2, kan du se hvor mange gange, du har trykket på de forskellige bogstaver.
+<br>På billede nummer 2, kan du se hvor mange gange, du har trykket på de forskellige bogstaver.
