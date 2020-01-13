@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">s185092 Patricks Galgespil</string>
+    <string name="guess_word_field">Fetching words...</string>
+    <string name="guesses">guesses</string>
+    <string name="help_title">Help</string>
+    <string name="highscore">Highscore</string>
+    <string name="home">Home</string>
+    <string name="keyboard_layout">Keyboard</string>
+    <string name="letter_usage_title">Usage of letters</string>
+    <string name="loser">Loser</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="restart">Play again</string>
+    <string name="set_toast">Keyboard is: %s</string>
+    <string name="setting">Settings</string>
+    <string name="showTheWord">Word: %s</string>
+    <string name="show_guesses">%d guesses</string>
+    <string name="show_time_used">%.2 sec</string>
+    <string name="show_time_used_min">%d min %d sec</string>
+    <string name="show_word">Word: %s</string>
+    <string name="skin_locked">Locked</string>
+    <string name="skin_unlocked">Unlocked</string>
+    <string name="start_game">Start game</string>
+    <string name="statistics">statistics</string>
+    <string name="time_used">the time</string>
+    <string name="unlock_skin">Unlock skin: %s</string>
+    <string name="winner">Winner</string>
+    <string name="word">word</string>
+    <string name="word_to_guess">Word to guess</string>
+    <string name="challenges">Challenges</string>
+    <string name="cancel">Cancel</string>
+    <string name="choose_skins">Choose skins</string>
+    <string name="game_title">Hangman</string>
+    <string name="help">Help</string>
+</resources>

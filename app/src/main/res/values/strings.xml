@@ -9,7 +9,6 @@
     <string name="winner">Vinder</string>
     <string name="loser">Taber</string>
     <string name="showTheWord">Ordet var: %s</string>
-    <string name="help">Hjælp</string>
     <string name="game_title">Galgespil</string>
     <string name="highscore">Highscore</string>
     <string name="start_game">Start spil</string>
@@ -58,10 +57,11 @@
     <string name="challenges">Udfordringer</string>
     <string name="choose_skins">Vælg skins</string>
     <string name="unlock_skin">Åbner for skin: %s</string>
-    <string name="skin_locked">Lås</string>
-    <string name="skin_unlocked">Åben</string>
+    <string name="skin_locked">Låst</string>
+    <string name="skin_unlocked">Åbent</string>
     <string name="statistics">Statistikker</string>
     <string name="different_stats">Andre stats</string>
     <string name="letter_usage_title">Brugen af bogstaver</string>
     <string name="help_title">Hjælp</string>
+    <string name="help">Hjælp</string>
 </resources>
