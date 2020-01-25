@@ -11,8 +11,8 @@ Her er startskærmen for spillet.
 <img src="https://imgur.com/Hhjt3JE.jpg" alt="alt text" width="180" > 
 
 Når du trykker på <code>START SPIL</code> kommer du her ind og kan prøve at gætte ordet.
-Du kan ogås låse op for skins til <code>keyboardet</code> og <code>manden</code>.
-<br>I bunden ses en timer. Hvis du gætter ordet før timeren går ud, bliver du nummer 1 på highscore listen.
+Du kan også låse op for skins til <code>keyboardet</code> og <code>manden</code>.
+<br>I bunden ses en timer. Hvis du gætter ordet før timeren går ud, bliver du nummer 1 på highscorelisten.
 
 <h2>Highscore</h2>
 <img src="https://imgur.com/ade9QSD.jpg" alt="alt text" width="180" >
